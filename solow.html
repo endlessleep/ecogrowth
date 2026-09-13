@@ -963,10 +963,17 @@ body {
         In the baseline model, GDP per capita stops growing in the long run. To explain sustained long-term growth, we introduce technological progress:
       </p>
       <div class="math-display boxed-blue">$$Y = (AL)^{1-\alpha}K^\alpha$$</div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+
+      <div class="var-grid">
+        <div class="var-item"><strong>$L$</strong> — number of workers</div>
+        <div class="var-item"><strong>$A$</strong> — productivity of each worker</div>
+        <div class="var-item" style="grid-column: 1 / -1;"><strong>$AL$</strong> — effective amount of labour available in the economy</div>
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;margin-top:10px;">
         where $A$ represents Total Factor Productivity (technology level), which grows at the exogenous rate $g$:
       </p>
-      <div class="math-display">$$\frac{dA/dt}{A} = g$$</div>
+      <div class="math-display">$$\frac{1}{A}\frac{dA}{dt} = g$$</div>
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
         We now define capital per <em>efficient worker</em> as $k = \dfrac{K}{AL}$. The new law of motion is:
       </p>
@@ -985,7 +992,7 @@ body {
           <div class="step-num">2</div>
           <div class="step-body">
             <strong>Growth of effective labour $AL$:</strong> Since $A$ grows at rate $g$ and $L$ grows at rate $n$, effective labour grows at rate $n+g$:
-            $$\frac{\frac{d(AL)}{dt}}{AL} = \frac{1}{A}\frac{dA}{dt} + \frac{1}{L}\frac{dL}{dt} = g + n$$
+            $$\frac{1}{AL}\frac{d(AL)}{dt} = \frac{1}{A}\frac{dA}{dt} + \frac{1}{L}\frac{dL}{dt} = g + n$$
           </div>
         </div>
         <div class="demo-step">
@@ -1066,51 +1073,148 @@ body {
       <div class="collapsible" id="corr-tfp">
         <div class="corr-section">
 
+          <!-- QUESTION 1 -->
           <div class="corr-q">
-            <div class="corr-q-title">Intensive form $f(k)$</div>
+            <div class="corr-q-title">Question 1 — Intensive Form: $f(k) = k^\alpha$ with $k = \dfrac{K}{AL}$</div>
             <div class="corr-body">
-              <p>Divide $Y = (AL)^{1-\alpha}K^\alpha$ by $AL$:</p>
-              $$\tilde{y} = \frac{Y}{AL} = \frac{K^\alpha}{(AL)^\alpha} = \left(\frac{K}{AL}\right)^\alpha = k^\alpha \implies f(k) = k^\alpha$$
+              <p>The production function with labour-augmenting technological progress is:</p>
+              <div class="math-display">$$Y = (AL)^{1-\alpha} K^\alpha$$</div>
+              <p>Output per efficient worker is defined as $\tilde{y} = \dfrac{Y}{AL}$. Divide both sides by $AL$:</p>
+              <div class="math-display">$$\tilde{y} = \frac{(AL)^{1-\alpha} K^\alpha}{AL} = \frac{K^\alpha}{(AL)^\alpha} = \left(\frac{K}{AL}\right)^\alpha$$</div>
+              <p>Since capital per efficient worker is defined as $k = \dfrac{K}{AL}$, we obtain:</p>
+              <div class="math-display">$$\boxed{\tilde{y} = f(k) = k^\alpha}$$</div>
+              <p><strong>Interpretation:</strong> In intensive form, production per efficient worker depends entirely on capital per efficient worker $k$. The technological level $A$ scales effective labour proportionally, which keeps returns to scale constant across the expanded inputs.</p>
             </div>
           </div>
 
+          <!-- QUESTION 2 -->
           <div class="corr-q">
-            <div class="corr-q-title">Steady-state capital $k^*$</div>
+            <div class="corr-q-title">Question 2 — Steady-State Capital per Efficient Worker: $k^*$</div>
             <div class="corr-body">
-              <p>Set $dk/dt = 0 \implies s\,k^{*\alpha} = (\delta+n+g)k^*$. Solving for $k^*$ gives:</p>
-              $$\boxed{k^* = \left(\frac{s}{\delta+n+g}\right)^{\!\frac{1}{1-\alpha}}}$$
+              <p>The capital accumulation equation in intensive form is:</p>
+              <div class="math-display">$$\frac{dk}{dt} = s k^\alpha - (\delta + n + g)k$$</div>
+              <p>At the steady state, capital per efficient worker is constant, so $\boxed{\dfrac{dk}{dt} = 0}$:</p>
+              <div class="math-display">$$s k^{*\alpha} - (\delta + n + g)k^* = 0 \implies s k^{*\alpha} = (\delta + n + g)k^*$$</div>
+              <p>Divide both sides by $k^{*\alpha}$:</p>
+              <div class="math-display">$$k^{*\,1-\alpha} = \frac{s}{\delta + n + g}$$</div>
+              <p>Raise both sides to the power $\dfrac{1}{1-\alpha}$:</p>
+              <div class="math-display">$$\boxed{k^* = \left(\frac{s}{\delta + n + g}\right)^{\!\frac{1}{1-\alpha}}}$$</div>
+              <p><strong>Interpretation:</strong> $k^*$ is the long-run equilibrium level of capital per efficient worker. Investment per efficient worker $s f(k^*)$ balances not only physical depreciation ($\delta k^*$) and population expansion ($n k^*$), but also technological dilution ($g k^*$).</p>
             </div>
           </div>
 
+          <!-- QUESTION 3 -->
           <div class="corr-q">
-            <div class="corr-q-title">Growth rates at steady state</div>
+            <div class="corr-q-title">Question 3 — Growth Rate of GDP per Capita at $k^*$</div>
             <div class="corr-body">
-              <p>• <strong>Capital per efficient worker:</strong> $k = K/(AL)$ is constant (growth rate = 0).</p>
-              <p>• <strong>GDP per capita:</strong> $y = Y/L = A \cdot \tilde{y} = A \cdot f(k^*)$. Because $f(k^*)$ is constant, $y$ grows at the rate of technology: <strong>$g$</strong>.</p>
-              <p>• <strong>Total GDP:</strong> $Y = y \cdot L$. Since $y$ grows at $g$ and $L$ grows at $n$, total GDP grows at: <strong>$n + g$</strong>.</p>
+              <p>Output per worker (GDP per capita) is $y = \dfrac{Y}{L}$. Using $Y = (AL) \cdot f(k)$, we have:</p>
+              <div class="math-display">$$y = \frac{A L \cdot f(k)}{L} = A \cdot f(k) = A \cdot k^\alpha$$</div>
+              <p>At the steady state, $k = k^*$ is constant, so $f(k^*) = (k^*)^\alpha$ is also constant. Therefore, $y(t) = A(t) \cdot (k^*)^\alpha$.</p>
+              <p>Differentiate with respect to time:</p>
+              <div class="math-display">$$\frac{dy}{dt} = \frac{dA}{dt} \cdot (k^*)^\alpha$$</div>
+              <p>Divide by $y = A \cdot (k^*)^\alpha$ to obtain the proportional growth rate:</p>
+              <div class="math-display">$$\frac{1}{y}\frac{dy}{dt} = \frac{\frac{dA}{dt}(k^*)^\alpha}{A(k^*)^\alpha} = \frac{1}{A}\frac{dA}{dt}$$</div>
+              <p>Since technology grows at the exogenous rate $g$, i.e. $\dfrac{1}{A}\dfrac{dA}{dt} = g$:</p>
+              <div class="math-display">$$\boxed{\frac{1}{y}\frac{dy}{dt} = g}$$</div>
+              <p><strong>Interpretation:</strong> This is the central breakthrough of the Solow model with technological progress! Unlike the baseline model where living standards stagnate in the long run ($\frac{1}{y}\frac{dy}{dt} = 0$), GDP per capita now grows continuously at rate $g$. Sustained growth in living standards is entirely driven by technological innovation.</p>
             </div>
           </div>
 
+          <!-- QUESTION 4 -->
           <div class="corr-q">
-            <div class="corr-q-title">Saving rate $s$</div>
+            <div class="corr-q-title">Question 4 — Growth Rate of Total GDP at $k^*$</div>
             <div class="corr-body">
-              $$\boxed{s = (\delta+n+g)\,k^{*\,1-\alpha}}$$
+              <p>Total GDP is output per worker multiplied by total labour: $Y = y \cdot L$.</p>
+              <p>Differentiate with respect to time using the product rule:</p>
+              <div class="math-display">$$\frac{dY}{dt} = L \frac{dy}{dt} + y \frac{dL}{dt}$$</div>
+              <p>Divide both sides by $Y = yL$:</p>
+              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = \frac{1}{y}\frac{dy}{dt} + \frac{1}{L}\frac{dL}{dt}}$$</div>
+              <p>At the steady state, GDP per capita grows at rate $g$ ($\frac{1}{y}\frac{dy}{dt} = g$), and population grows at rate $n$ ($\frac{1}{L}\frac{dL}{dt} = n$). Therefore:</p>
+              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = n + g}$$</div>
+              <p><strong>Interpretation:</strong> Total GDP grows at the combined rate of population growth and technological progress ($n + g$). Total output expands both because there are more workers ($n$) and because each worker becomes more productive over time ($g$).</p>
             </div>
           </div>
 
+          <!-- QUESTION 5 -->
           <div class="corr-q">
-            <div class="corr-q-title">Growth rate of $k$</div>
+            <div class="corr-q-title">Question 5 — Expressing $s$ in Terms of $k^*$, $n$, $g$, and $\delta$</div>
             <div class="corr-body">
-              $$\boxed{\frac{1}{k}\frac{dk}{dt} = (\delta+n+g)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$
+              <p>At the steady state, $\dfrac{dk}{dt} = 0 \implies s k^{*\alpha} = (\delta + n + g)k^*$.</p>
+              <p>Divide both sides by $k^{*\alpha}$:</p>
+              <div class="math-display">$$\boxed{s = (\delta + n + g)k^{*\,1-\alpha}}$$</div>
+              <p>This links the saving rate directly to the steady-state capital stock per efficient worker and the effective depreciation rate $(\delta + n + g)$.</p>
             </div>
           </div>
 
+          <!-- QUESTION 6 -->
           <div class="corr-q">
-            <div class="corr-q-title">Growth rates out of steady state</div>
+            <div class="corr-q-title">Question 6 — Growth Rate of $k$ in Terms of $k/k^*$</div>
             <div class="corr-body">
-              <p>• Growth rate of GDP per capita: $\dfrac{1}{y}\dfrac{dy}{dt} = g + \alpha(\delta+n+g)\left[\left(\dfrac{k^*}{k}\right)^{\!1-\alpha} - 1\right]$</p>
-              <p>• Growth rate of total GDP: $\dfrac{1}{Y}\dfrac{dY}{dt} = \dfrac{1}{y}\dfrac{dy}{dt} + n$</p>
+              <p>Start from the capital accumulation equation: $\dfrac{dk}{dt} = s k^\alpha - (\delta + n + g)k$.</p>
+              <p>Divide by $k$ to obtain the proportional growth rate of capital per efficient worker:</p>
+              <div class="math-display">$$\frac{1}{k}\frac{dk}{dt} = s k^{\alpha-1} - (\delta + n + g)$$</div>
+              <p>Substitute $s = (\delta + n + g)k^{*\,1-\alpha}$ from Question 5:</p>
+              <div class="math-display">$$\frac{1}{k}\frac{dk}{dt} = (\delta + n + g)k^{*\,1-\alpha}k^{\alpha-1} - (\delta + n + g) = (\delta + n + g)\left[k^{*\,1-\alpha}k^{\alpha-1} - 1\right]$$</div>
+              <p>Since $k^{*\,1-\alpha}k^{\alpha-1} = \dfrac{k^{*\,1-\alpha}}{k^{1-\alpha}} = \left(\dfrac{k^*}{k}\right)^{1-\alpha}$, we obtain:</p>
+              <div class="math-display">$$\boxed{\frac{1}{k}\frac{dk}{dt} = (\delta + n + g)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$</div>
+              <p>Equivalently, written in terms of $k/k^*$:</p>
+              <div class="math-display">$$\boxed{\frac{1}{k}\frac{dk}{dt} = (\delta + n + g)\left[\left(\frac{k}{k^*}\right)^{\!\alpha-1} - 1\right]}$$</div>
+
+              <p><strong>Interpretation &amp; Convergence Dynamics:</strong></p>
+              <p>Because $\delta + n + g > 0$ and $1-\alpha > 0$:</p>
+              <ul style="margin-left:18px;display:flex;flex-direction:column;gap:5px;">
+                <li><strong>If $k < k^*$:</strong> then $\dfrac{k^*}{k} > 1 \implies \left(\dfrac{k^*}{k}\right)^{1-\alpha} > 1 \implies \boxed{\dfrac{1}{k}\dfrac{dk}{dt} > 0}$ (capital per efficient worker increases).</li>
+                <li><strong>If $k = k^*$:</strong> then $\dfrac{k^*}{k} = 1 \implies \boxed{\dfrac{1}{k}\dfrac{dk}{dt} = 0}$ (steady-state equilibrium is maintained).</li>
+                <li><strong>If $k > k^*$:</strong> then $\dfrac{k^*}{k} < 1 \implies \left(\dfrac{k^*}{k}\right)^{1-\alpha} < 1 \implies \boxed{\dfrac{1}{k}\dfrac{dk}{dt} < 0}$ (capital per efficient worker decreases).</li>
+              </ul>
+              <p>This proves that $k^*$ is a stable equilibrium: whether an economy starts below or above $k^*$, capital per efficient worker converges to $k^*$.</p>
             </div>
+          </div>
+
+          <!-- QUESTION 7 -->
+          <div class="corr-q">
+            <div class="corr-q-title">Question 7 — Growth Rate of GDP per Capita Outside the Steady State</div>
+            <div class="corr-body">
+              <p>Recall that GDP per capita is $y = A \cdot k^\alpha$.</p>
+              <p>Differentiate with respect to time using the product rule:</p>
+              <div class="math-display">$$\frac{dy}{dt} = \frac{dA}{dt} k^\alpha + A \cdot \alpha k^{\alpha-1} \frac{dk}{dt}$$</div>
+              <p>Divide both sides by $y = A k^\alpha$:</p>
+              <div class="math-display">$$\frac{1}{y}\frac{dy}{dt} = \frac{\frac{dA}{dt} k^\alpha}{A k^\alpha} + \frac{A \alpha k^{\alpha-1}\frac{dk}{dt}}{A k^\alpha} = \frac{1}{A}\frac{dA}{dt} + \alpha \frac{1}{k}\frac{dk}{dt}$$</div>
+              <p>Substitute $\dfrac{1}{A}\dfrac{dA}{dt} = g$ and the result for $\dfrac{1}{k}\dfrac{dk}{dt}$ from Question 6:</p>
+              <div class="math-display">$$\boxed{\frac{1}{y}\frac{dy}{dt} = g + \alpha(\delta + n + g)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$</div>
+
+              <p><strong>Interpretation:</strong></p>
+              <p>The growth rate of GDP per capita is the sum of two components:</p>
+              <ul style="margin-left:18px;display:flex;flex-direction:column;gap:5px;">
+                <li><strong>The permanent technology trend $g$:</strong> represents ongoing innovations and efficiency improvements.</li>
+                <li><strong>The transitional capital dynamics:</strong> proportional to $\left[\left(\frac{k^*}{k}\right)^{1-\alpha} - 1\right]$.</li>
+              </ul>
+              <p>When an economy is developing ($k < k^*$), it benefits from <em>catch-up growth</em>: it accumulates capital rapidly, so GDP per capita grows faster than $g$ ($\frac{1}{y}\frac{dy}{dt} > g$). As $k \to k^*$, this transitional boost vanishes, and per-capita growth converges to $g$.</p>
+            </div>
+          </div>
+
+          <!-- QUESTION 8 -->
+          <div class="corr-q">
+            <div class="corr-q-title">Question 8 — Growth Rate of Total GDP Outside the Steady State</div>
+            <div class="corr-body">
+              <p>From the relationship $Y = y \cdot L$, the growth rate of total GDP is:</p>
+              <div class="math-display">$$\frac{1}{Y}\frac{dY}{dt} = \frac{1}{y}\frac{dy}{dt} + \frac{1}{L}\frac{dL}{dt}$$</div>
+              <p>Substitute $\dfrac{1}{L}\dfrac{dL}{dt} = n$ and the growth rate of GDP per capita from Question 7:</p>
+              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = g + n + \alpha(\delta + n + g)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$</div>
+
+              <p><strong>Interpretation:</strong></p>
+              <p>If $k < k^*$, total GDP grows at a rate strictly higher than $n + g$. As the capital stock per efficient worker approaches its steady state ($k \to k^*$), the transitional term goes to zero, and total GDP growth converges smoothly to its balanced growth rate:</p>
+              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} \longrightarrow n + g}$$</div>
+            </div>
+          </div>
+
+          <!-- FINAL CONCLUSION -->
+          <div class="key-note" style="margin-top:6px;">
+            <strong>Core Takeaway — The Solow Model with Technological Progress:</strong>
+            <p style="margin-top:6px;">• <strong>Capital per efficient worker ($k$):</strong> converges to a stationary level $k^*$, where its growth rate is $0$.</p>
+            <p>• <strong>Living standards / GDP per capita ($y$):</strong> grows continuously at the rate of technological progress $g$ in the long run.</p>
+            <p>• <strong>Total economy / GDP ($Y$):</strong> expands at rate $n + g$ in the long run.</p>
+            <p>• <strong>Policy implication:</strong> Capital accumulation (higher saving rate $s$) creates a <em>level effect</em> (higher $k^*$ and higher $y^*$) and temporarily speeds up growth during transition, but <strong>only technological progress ($g$) can sustain long-term growth in per-capita income</strong>.</p>
           </div>
 
         </div>
