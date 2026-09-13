@@ -843,14 +843,21 @@ body {
           <div class="corr-q">
             <div class="corr-q-title">Question 4 — Growth Rate of GDP per Capita at $k^*$</div>
             <div class="corr-body">
-              <p>Output per worker depends on capital per worker: $y(t) = [k(t)]^\alpha$.</p>
-              <p>Differentiate with respect to time using the chain rule:</p>
+              <p>Output per worker depends on capital per worker: $y = k^\alpha$.</p>
+
+              <p><strong>Step 1 — Full time derivative:</strong> Differentiate with respect to time using the chain rule:</p>
               <div class="math-display">$$\frac{dy}{dt} = \alpha k^{\alpha-1} \frac{dk}{dt}$$</div>
-              <p>The growth rate of GDP per capita is $\dfrac{1}{y}\dfrac{dy}{dt}$:</p>
-              <div class="math-display">$$\frac{1}{y}\frac{dy}{dt} = \frac{1}{k^\alpha} \cdot \alpha k^{\alpha-1} \frac{dk}{dt} = \alpha \frac{k^{\alpha-1}}{k^\alpha}\frac{dk}{dt} = \alpha \frac{1}{k}\frac{dk}{dt}$$</div>
+
+              <p>Divide by $y = k^\alpha$ to obtain the general growth rate of GDP per capita:</p>
+              <div class="math-display">$$\frac{1}{y}\frac{dy}{dt} = \frac{1}{k^\alpha} \cdot \alpha k^{\alpha-1} \frac{dk}{dt} = \alpha \frac{1}{k}\frac{dk}{dt}$$</div>
               <div class="math-display">$$\boxed{\frac{1}{y}\frac{dy}{dt} = \alpha \frac{1}{k}\frac{dk}{dt}}$$</div>
-              <p>At the steady state, $\dfrac{dk}{dt} = 0$, which immediately gives:</p>
-              <div class="math-display">$$\boxed{\frac{1}{y}\frac{dy}{dt} = 0}$$</div>
+
+              <p><strong>Step 2 — At the steady state ($k = k^*$):</strong> By definition, capital per worker is constant, so $\dfrac{dk}{dt} = 0$. Writing the full derivative explicitly:</p>
+              <div class="math-display">$$\frac{dy}{dt} = \alpha (k^*)^{\alpha-1} \underbrace{\frac{dk}{dt}}_{=0} = 0$$</div>
+
+              <p>Therefore, the growth rate of GDP per capita at the steady state is:</p>
+              <div class="math-display">$$\boxed{\frac{1}{y}\frac{dy}{dt} = \alpha \frac{1}{k^*} \underbrace{\frac{dk}{dt}}_{=0} = 0}$$</div>
+
               <p><strong>Interpretation:</strong> GDP per capita does <em>not</em> equal zero; rather, its <strong>growth rate is zero</strong>. Output per worker settles at a constant level: $y^* = (k^*)^\alpha$.</p>
             </div>
           </div>
@@ -864,8 +871,8 @@ body {
               <div class="math-display">$$\frac{dY}{dt} = L \frac{dy}{dt} + y \frac{dL}{dt}$$</div>
               <p>Divide the entire equation by $Y = yL$:</p>
               <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = \frac{1}{y}\frac{dy}{dt} + \frac{1}{L}\frac{dL}{dt}}$$</div>
-              <p>By assumption, population grows at rate $n$, so $\dfrac{1}{L}\dfrac{dL}{dt} = n$. At the steady state, $\dfrac{1}{y}\dfrac{dy}{dt} = 0$. Therefore:</p>
-              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = n}$$</div>
+              <p>By assumption, population grows at rate $n$, so $\dfrac{1}{L}\dfrac{dL}{dt} = n$. At the steady state, substitute the steady-state result $\dfrac{1}{y}\dfrac{dy}{dt} = 0$ from Question 4:</p>
+              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = \underbrace{\frac{1}{y}\frac{dy}{dt}}_{=0} + \frac{1}{L}\frac{dL}{dt} = 0 + n = n}$$</div>
               <p><strong>Interpretation:</strong> While living standards per person are constant in the steady state, the total economy grows at rate $n$ because the labour force is expanding at rate $n$ (extensive growth only).</p>
             </div>
           </div>
@@ -1107,15 +1114,24 @@ body {
           <div class="corr-q">
             <div class="corr-q-title">Question 3 — Growth Rate of GDP per Capita at $k^*$</div>
             <div class="corr-body">
-              <p>Output per worker (GDP per capita) is $y = \dfrac{Y}{L}$. Using $Y = (AL) \cdot f(k)$, we have:</p>
-              <div class="math-display">$$y = \frac{A L \cdot f(k)}{L} = A \cdot f(k) = A \cdot k^\alpha$$</div>
-              <p>At the steady state, $k = k^*$ is constant, so $f(k^*) = (k^*)^\alpha$ is also constant. Therefore, $y(t) = A(t) \cdot (k^*)^\alpha$.</p>
-              <p>Differentiate with respect to time:</p>
-              <div class="math-display">$$\frac{dy}{dt} = \frac{dA}{dt} \cdot (k^*)^\alpha$$</div>
-              <p>Divide by $y = A \cdot (k^*)^\alpha$ to obtain the proportional growth rate:</p>
-              <div class="math-display">$$\frac{1}{y}\frac{dy}{dt} = \frac{\frac{dA}{dt}(k^*)^\alpha}{A(k^*)^\alpha} = \frac{1}{A}\frac{dA}{dt}$$</div>
+              <p>Output per worker (GDP per capita) is defined as $y = \dfrac{Y}{L}$. Using the production function $Y = (AL)^{1-\alpha}K^\alpha = (AL)\cdot k^\alpha$:</p>
+              <div class="math-display">$$y = \frac{A L \cdot k^\alpha}{L} = A k^\alpha$$</div>
+
+              <p><strong>Step 1 — Full time derivative:</strong> Differentiate $y = A k^\alpha$ with respect to time using the product rule and chain rule:</p>
+              <div class="math-display">$$\frac{dy}{dt} = \frac{dA}{dt}k^\alpha + A\alpha k^{\alpha-1}\frac{dk}{dt}$$</div>
+
+              <p>Divide both sides by $y = A k^\alpha$ to obtain the general growth rate of GDP per capita:</p>
+              <div class="math-display">$$\frac{1}{y}\frac{dy}{dt} = \frac{\frac{dA}{dt}k^\alpha}{A k^\alpha} + \frac{A\alpha k^{\alpha-1}\frac{dk}{dt}}{A k^\alpha} = \frac{1}{A}\frac{dA}{dt} + \alpha \frac{1}{k}\frac{dk}{dt}$$</div>
+
+              <p><strong>Step 2 — At the steady state ($k = k^*$):</strong> By definition of the steady state, capital per efficient worker is constant, so $\dfrac{dk}{dt} = 0$. Writing the full derivative explicitly:</p>
+              <div class="math-display">$$\frac{dy}{dt} = \frac{dA}{dt}(k^*)^\alpha + A\alpha(k^*)^{\alpha-1} \underbrace{\frac{dk}{dt}}_{=0} = \frac{dA}{dt}(k^*)^\alpha$$</div>
+
+              <p>Dividing by $y^* = A(k^*)^\alpha$ (or in terms of the growth rate formula):</p>
+              <div class="math-display">$$\frac{1}{y}\frac{dy}{dt} = \frac{1}{A}\frac{dA}{dt} + \alpha \frac{1}{k^*} \underbrace{\frac{dk}{dt}}_{=0} = \frac{1}{A}\frac{dA}{dt}$$</div>
+
               <p>Since technology grows at the exogenous rate $g$, i.e. $\dfrac{1}{A}\dfrac{dA}{dt} = g$:</p>
               <div class="math-display">$$\boxed{\frac{1}{y}\frac{dy}{dt} = g}$$</div>
+
               <p><strong>Interpretation:</strong> This is the central breakthrough of the Solow model with technological progress! Unlike the baseline model where living standards stagnate in the long run ($\frac{1}{y}\frac{dy}{dt} = 0$), GDP per capita now grows continuously at rate $g$. Sustained growth in living standards is entirely driven by technological innovation.</p>
             </div>
           </div>
@@ -1126,11 +1142,12 @@ body {
             <div class="corr-body">
               <p>Total GDP is output per worker multiplied by total labour: $Y = y \cdot L$.</p>
               <p>Differentiate with respect to time using the product rule:</p>
-              <div class="math-display">$$\frac{dY}{dt} = L \frac{dy}{dt} + y \frac{dL}{dt}$$</div>
-              <p>Divide both sides by $Y = yL$:</p>
+              <div class="math-display">$$\frac{dY}{dt} = \frac{dy}{dt}L + y\frac{dL}{dt}$$</div>
+              <p>Divide both sides by $Y = yL$ to obtain the general growth rate:</p>
               <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = \frac{1}{y}\frac{dy}{dt} + \frac{1}{L}\frac{dL}{dt}}$$</div>
-              <p>At the steady state, GDP per capita grows at rate $g$ ($\frac{1}{y}\frac{dy}{dt} = g$), and population grows at rate $n$ ($\frac{1}{L}\frac{dL}{dt} = n$). Therefore:</p>
-              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = n + g}$$</div>
+              <p>At the steady state, substitute the steady-state growth rate of GDP per capita ($\frac{1}{y}\frac{dy}{dt} = g$) and the population growth rate ($\frac{1}{L}\frac{dL}{dt} = n$):</p>
+              <div class="math-display">$$\frac{1}{Y}\frac{dY}{dt} = \underbrace{\frac{1}{y}\frac{dy}{dt}}_{=g} + \underbrace{\frac{1}{L}\frac{dL}{dt}}_{=n} = g + n$$</div>
+              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = g + n}$$</div>
               <p><strong>Interpretation:</strong> Total GDP grows at the combined rate of population growth and technological progress ($n + g$). Total output expands both because there are more workers ($n$) and because each worker becomes more productive over time ($g$).</p>
             </div>
           </div>
@@ -1175,12 +1192,9 @@ body {
           <div class="corr-q">
             <div class="corr-q-title">Question 7 — Growth Rate of GDP per Capita Outside the Steady State</div>
             <div class="corr-body">
-              <p>Recall that GDP per capita is $y = A \cdot k^\alpha$.</p>
-              <p>Differentiate with respect to time using the product rule:</p>
-              <div class="math-display">$$\frac{dy}{dt} = \frac{dA}{dt} k^\alpha + A \cdot \alpha k^{\alpha-1} \frac{dk}{dt}$$</div>
-              <p>Divide both sides by $y = A k^\alpha$:</p>
-              <div class="math-display">$$\frac{1}{y}\frac{dy}{dt} = \frac{\frac{dA}{dt} k^\alpha}{A k^\alpha} + \frac{A \alpha k^{\alpha-1}\frac{dk}{dt}}{A k^\alpha} = \frac{1}{A}\frac{dA}{dt} + \alpha \frac{1}{k}\frac{dk}{dt}$$</div>
-              <p>Substitute $\dfrac{1}{A}\dfrac{dA}{dt} = g$ and the result for $\dfrac{1}{k}\dfrac{dk}{dt}$ from Question 6:</p>
+              <p>Recall from Question 3 (Step 1) that the full time derivative of $y = A k^\alpha$ gives the general growth rate of GDP per capita:</p>
+              <div class="math-display">$$\frac{1}{y}\frac{dy}{dt} = \frac{1}{A}\frac{dA}{dt} + \alpha \frac{1}{k}\frac{dk}{dt}$$</div>
+              <p>Outside the steady state, $\dfrac{dk}{dt} \neq 0$. Substitute the exogenous rate of technological progress $\dfrac{1}{A}\dfrac{dA}{dt} = g$ and the transitional growth rate of capital per efficient worker $\dfrac{1}{k}\dfrac{dk}{dt}$ from Question 6:</p>
               <div class="math-display">$$\boxed{\frac{1}{y}\frac{dy}{dt} = g + \alpha(\delta + n + g)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$</div>
 
               <p><strong>Interpretation:</strong></p>
