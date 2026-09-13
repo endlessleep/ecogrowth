@@ -612,7 +612,7 @@ body {
       <div class="var-grid">
         <div class="var-item"><strong>$s$</strong> — saving rate</div>
         <div class="var-item"><strong>$\delta$</strong> — capital depreciation rate</div>
-        <div class="var-item"><strong>$n$</strong> — population growth rate ($\dot{L}/L = n$)</div>
+        <div class="var-item"><strong>$n$</strong> — population growth rate ($\frac{1}{L}\frac{dL}{dt} = n$)</div>
         <div class="var-item"><strong>$k = K/L$</strong> — capital per worker</div>
       </div>
 
@@ -845,10 +845,10 @@ body {
             <div class="corr-q-title">Question 7 — Growth rate of $k$ in terms of $k/k^*$</div>
             <div class="corr-body">
               <p>The growth rate of $k$ is:</p>
-              $$\frac{\dot{k}}{k} = \frac{s f(k) - (\delta+n)k}{k} = s k^{\alpha-1} - (\delta+n)$$
+              $$\frac{1}{k}\frac{dk}{dt} = \frac{s f(k) - (\delta+n)k}{k} = s k^{\alpha-1} - (\delta+n)$$
               <p>Substitute $s = (\delta+n)k^{*\,1-\alpha}$:</p>
-              $$\frac{\dot{k}}{k} = (\delta+n)k^{*\,1-\alpha}\,k^{\alpha-1} - (\delta+n) = (\delta+n)\left[\frac{k^{*\,1-\alpha}}{k^{1-\alpha}} - 1\right]$$
-              $$\boxed{\frac{\dot{k}}{k} = (\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$
+              $$\frac{1}{k}\frac{dk}{dt} = (\delta+n)k^{*\,1-\alpha}\,k^{\alpha-1} - (\delta+n) = (\delta+n)\left[\frac{k^{*\,1-\alpha}}{k^{1-\alpha}} - 1\right]$$
+              $$\boxed{\frac{1}{k}\frac{dk}{dt} = (\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$
             </div>
           </div>
 
@@ -856,8 +856,8 @@ body {
             <div class="corr-q-title">Question 8 — Growth rate of GDP per capita (out of steady state)</div>
             <div class="corr-body">
               <p>Since $y = k^\alpha$, take logs and differentiate with respect to time:</p>
-              $$\ln y = \alpha \ln k \implies \frac{\dot{y}}{y} = \alpha \frac{\dot{k}}{k}$$
-              $$\boxed{\frac{\dot{y}}{y} = \alpha(\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$
+              $$\ln y = \alpha \ln k \implies \frac{1}{y}\frac{dy}{dt} = \alpha \frac{1}{k}\frac{dk}{dt}$$
+              $$\boxed{\frac{1}{y}\frac{dy}{dt} = \alpha(\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$
             </div>
           </div>
 
@@ -865,7 +865,7 @@ body {
             <div class="corr-q-title">Question 9 — Growth rate of GDP (out of steady state)</div>
             <div class="corr-body">
               <p>Total GDP is $Y = y \cdot L$. The growth rate of a product is the sum of growth rates:</p>
-              $$\boxed{\frac{\dot{Y}}{Y} = \frac{\dot{y}}{y} + n = \alpha(\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right] + n}$$
+              $$\boxed{\frac{1}{Y}\frac{dY}{dt} = \frac{1}{y}\frac{dy}{dt} + n = \alpha(\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right] + n}$$
             </div>
           </div>
 
@@ -898,20 +898,20 @@ body {
           <div class="step-num">1</div>
           <div class="step-body">
             <strong>Differentiate $k = \dfrac{K}{AL}$ with respect to time:</strong>
-            $$\frac{dk}{dt} = \frac{\dot{K}(AL) - K \frac{d(AL)}{dt}}{(AL)^2} = \frac{\dot{K}}{AL} - k\,\frac{\frac{d(AL)}{dt}}{AL}$$
+            $$\frac{dk}{dt} = \frac{\frac{dK}{dt}(AL) - K \frac{d(AL)}{dt}}{(AL)^2} = \frac{1}{AL}\frac{dK}{dt} - k\,\frac{\frac{d(AL)}{dt}}{AL}$$
           </div>
         </div>
         <div class="demo-step">
           <div class="step-num">2</div>
           <div class="step-body">
             <strong>Growth of effective labour $AL$:</strong> Since $A$ grows at rate $g$ and $L$ grows at rate $n$, effective labour grows at rate $n+g$:
-            $$\frac{\frac{d(AL)}{dt}}{AL} = \frac{\dot{A}}{A} + \frac{\dot{L}}{L} = g + n$$
+            $$\frac{\frac{d(AL)}{dt}}{AL} = \frac{1}{A}\frac{dA}{dt} + \frac{1}{L}\frac{dL}{dt} = g + n$$
           </div>
         </div>
         <div class="demo-step">
           <div class="step-num">3</div>
           <div class="step-body">
-            <strong>Substitute $\dot{K} = sY - \delta K$:</strong>
+            <strong>Substitute $\frac{dK}{dt} = sY - \delta K$:</strong>
             $$\frac{dk}{dt} = \frac{sY - \delta K}{AL} - (n+g)k = s\,\frac{Y}{AL} - \delta k - (n+g)k$$
             <p>Since $\dfrac{Y}{AL} = f(k)$:</p>
             $$\boxed{\frac{dk}{dt} = sf(k) - (\delta + n + g)k}$$
@@ -1021,15 +1021,15 @@ body {
           <div class="corr-q">
             <div class="corr-q-title">Growth rate of $k$</div>
             <div class="corr-body">
-              $$\boxed{\frac{\dot{k}}{k} = (\delta+n+g)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$
+              $$\boxed{\frac{1}{k}\frac{dk}{dt} = (\delta+n+g)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$
             </div>
           </div>
 
           <div class="corr-q">
             <div class="corr-q-title">Growth rates out of steady state</div>
             <div class="corr-body">
-              <p>• Growth rate of GDP per capita: $\dfrac{\dot{y}}{y} = g + \alpha(\delta+n+g)\left[\left(\dfrac{k^*}{k}\right)^{\!1-\alpha} - 1\right]$</p>
-              <p>• Growth rate of total GDP: $\dfrac{\dot{Y}}{Y} = \dfrac{\dot{y}}{y} + n$</p>
+              <p>• Growth rate of GDP per capita: $\dfrac{1}{y}\dfrac{dy}{dt} = g + \alpha(\delta+n+g)\left[\left(\dfrac{k^*}{k}\right)^{\!1-\alpha} - 1\right]$</p>
+              <p>• Growth rate of total GDP: $\dfrac{1}{Y}\dfrac{dY}{dt} = \dfrac{1}{y}\dfrac{dy}{dt} + n$</p>
             </div>
           </div>
 
