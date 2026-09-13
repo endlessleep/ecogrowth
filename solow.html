@@ -7,136 +7,158 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
   MathJax = {
-    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+    tex: { inlineMath: [['$','$'],['\\(','\\)']] },
     options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
   };
 </script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
 <style>
 :root {
-  --sidebar-bg: #07130c;
-  --sidebar-width: 280px;
-  --bg: #0b0f0d;
-  --bg-card: #121a15;
-  --bg-card-hover: #18231d;
-  --bg-deep: #060907;
-  --green: #10b981;
-  --green-bright: #34d399;
-  --green-muted: rgba(16,185,129,0.1);
-  --green-border: rgba(16,185,129,0.3);
-  --green-glow: rgba(16,185,129,0.15);
-  --green-gradient: linear-gradient(135deg, #10b981 0%, #047857 100%);
-  --blue-bright: #60a5fa;
-  --blue-muted: rgba(59,130,246,0.1);
-  --blue-border: rgba(59,130,246,0.3);
-  --purple-bright: #c084fc;
-  --purple-muted: rgba(168,85,247,0.1);
-  --purple-border: rgba(168,85,247,0.3);
-  --amber-bright: #fbbf24;
-  --amber-muted: rgba(251,191,36,0.08);
-  --amber-border: rgba(251,191,36,0.3);
-  --text: #f8fafc;
-  --text-2: #cbd5e1;
-  --text-3: #94a3b8;
-  --text-muted: #64748b;
-  --border: rgba(255,255,255,0.07);
-  --radius: 10px;
-  --radius-lg: 16px;
-  --font: 'Outfit', sans-serif;
+  --sidebar-bg:#07130c; --sidebar-width:280px;
+  --bg:#0b0f0d; --bg-card:#121a15; --bg-deep:#060907;
+  --green:#10b981; --green-bright:#34d399;
+  --green-muted:rgba(16,185,129,0.1); --green-border:rgba(16,185,129,0.3);
+  --green-gradient:linear-gradient(135deg,#10b981 0%,#047857 100%);
+  --blue-bright:#60a5fa; --blue-muted:rgba(59,130,246,0.1); --blue-border:rgba(59,130,246,0.3);
+  --amber-bright:#fbbf24; --amber-muted:rgba(251,191,36,0.08); --amber-border:rgba(251,191,36,0.3);
+  --purple-bright:#c084fc; --purple-muted:rgba(168,85,247,0.1); --purple-border:rgba(168,85,247,0.3);
+  --text:#f8fafc; --text-2:#cbd5e1; --text-3:#94a3b8; --text-muted:#64748b;
+  --border:rgba(255,255,255,0.07); --radius:10px; --radius-lg:16px; --font:'Outfit',sans-serif;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: var(--font); background: var(--bg); color: var(--text); display: flex; min-height: 100vh; -webkit-font-smoothing: antialiased; }
-.sidebar { width: var(--sidebar-width); background: var(--sidebar-bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top:0; left:0; bottom:0; z-index: 200; transition: transform .3s ease; overflow: hidden; }
-.sidebar:not(.open) { transform: translateX(-100%); }
-.sidebar-brand { padding: 22px 20px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.sidebar-brand h1 { font-size: 1.25rem; font-weight: 800; letter-spacing: 1px; }
-.sidebar-brand h1 span { color: var(--green); }
-.sidebar-close { background:none; border:none; color:var(--text-3); font-size:1.4rem; cursor:pointer; }
-.sidebar-close:hover { color: var(--green); }
-.sidebar-nav { flex:1; overflow-y:auto; padding:12px 0; }
-.sidebar-link { display: flex; align-items: center; gap: 10px; padding: 11px 22px; color: var(--text-3); text-decoration: none; font-size: 0.88rem; font-weight: 700; transition: all .2s; border-left: 3px solid transparent; }
-.sidebar-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
-.sidebar-link.active { color: var(--green-bright); border-left-color: var(--green); background: var(--green-muted); }
-.sidebar-group { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
-.sidebar-group-title { padding: 10px 22px 4px; font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-3); }
-.sidebar-sublink { display: flex; align-items: center; gap: 10px; padding: 9px 22px 9px 36px; color: var(--text-3); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all .2s; border-left: 3px solid transparent; }
-.sidebar-sublink:hover { color: var(--text); background: rgba(255,255,255,0.04); }
-.sidebar-sublink.active { color: var(--green-bright); border-left-color: var(--green); background: var(--green-muted); }
-.sidebar-footer { padding: 14px 16px; border-top: 1px solid var(--border); }
-.sidebar-user { display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:var(--radius); padding:10px 12px; }
-.user-avatar { width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; }
-.user-dot { width:8px; height:8px; background:var(--green); border-radius:50%; border:2px solid var(--sidebar-bg); position:absolute; bottom:-2px; right:-2px; box-shadow:0 0 6px var(--green); }
-.user-info { overflow:hidden; }
-.user-name { font-size:0.82rem; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.user-role { font-size:0.7rem; color:var(--text-muted); }
-.topbar { height: 64px; background: rgba(11,15,13,0.9); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); position:sticky; top:0; z-index:100; display:flex; align-items:center; padding:0 28px; gap:16px; }
-.topbar-toggle { background:rgba(255,255,255,0.06); border:1px solid var(--border); color:var(--text); width:38px; height:38px; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; flex-shrink:0; transition:.2s; }
-.topbar-toggle:hover { border-color: var(--green-border); color: var(--green); }
-.topbar-breadcrumb { color:var(--text-3); font-size:0.88rem; display:flex; align-items:center; gap:6px; }
-.topbar-breadcrumb .sep { opacity:.4; }
-.topbar-breadcrumb strong { color:var(--text); font-weight:700; }
-.topbar-pill { margin-left:auto; background:var(--green-muted); border:1px solid var(--green-border); color:var(--green-bright); padding:5px 14px; border-radius:999px; font-size:0.78rem; font-weight:700; display:flex; align-items:center; gap:7px; }
-.topbar-dot { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 7px var(--green); }
-.main-wrap { margin-left: var(--sidebar-width); flex:1; display:flex; flex-direction:column; transition:margin-left .3s; min-width:0; }
-.main-wrap.expanded { margin-left:0; }
-.main-content { padding:40px 44px 70px; max-width:880px; width:100%; margin:0 auto; display:flex; flex-direction:column; gap:32px; }
-.page-title-block { border-bottom: 1px solid var(--border); padding-bottom: 24px; }
-.page-label { font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--green); margin-bottom:8px; }
-.page-title-block h1 { font-size:2rem; font-weight:800; letter-spacing:-0.5px; line-height:1.15; }
-.page-title-block p { color:var(--text-3); font-size:0.95rem; margin-top:7px; }
-.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
-.section-num { background: var(--green-muted); border: 1px solid var(--green-border); color: var(--green-bright); font-size: 0.72rem; font-weight: 800; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
-.section-header h3 { font-size: 1.05rem; font-weight: 800; color: var(--text); }
-.concept-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; gap: 14px; position: relative; transition: transform .2s ease, border-color .2s ease; }
-.concept-card:hover { transform: translateY(-2px); border-color: var(--green-border); }
-.concept-card.green-top { border-top: 3px solid var(--green); }
-.concept-card.blue-top  { border-top: 3px solid var(--blue-bright); }
-.concept-card.purple-top { border-top: 3px solid var(--purple-bright); }
-.concept-card.amber-top  { border-top: 3px solid var(--amber-bright); }
-.key-note { font-size: 0.9rem; color: var(--text-2); line-height: 1.65; border-left: 3px solid var(--green); padding: 12px 18px; background: var(--green-muted); border-radius: 0 var(--radius) var(--radius) 0; }
-.key-note strong { color: var(--text); font-weight: 800; }
-.key-note.blue { border-left-color: var(--blue-bright); background: var(--blue-muted); }
-.key-note.purple { border-left-color: var(--purple-bright); background: var(--purple-muted); }
-.key-note.amber { border-left-color: var(--amber-bright); background: var(--amber-muted); }
-.math-display { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; text-align: center; margin: 4px 0; overflow-x: auto; font-size: 1.05rem; }
-.math-display.boxed { border-color: var(--green-border); background: var(--green-muted); }
-.math-display.boxed-blue { border-color: var(--blue-border); background: var(--blue-muted); }
-.math-display.boxed-purple { border-color: var(--purple-border); background: var(--purple-muted); }
-.var-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.var-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; font-size: 0.88rem; color: var(--text-2); }
-.var-item strong { color: var(--green-bright); }
-.toggle-btn { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--text-2); font-family: var(--font); font-size: 0.82rem; font-weight: 700; padding: 8px 16px; border-radius: 999px; cursor: pointer; transition: all .2s ease; width: fit-content; }
-.toggle-btn:hover { border-color: var(--green-border); color: var(--green-bright); background: var(--green-muted); }
-.toggle-btn .arrow { font-size: 0.65rem; transition: transform .25s ease; display: inline-block; }
-.toggle-btn.open .arrow { transform: rotate(180deg); }
-.collapsible { display: none; margin-top: 10px; background: rgba(6,9,7,0.75); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; font-size: 0.9rem; color: var(--text-2); line-height: 1.65; }
-.collapsible.open { display: block; animation: fadeDown .2s ease; }
-.collapsible strong { color: var(--text); font-weight: 700; }
-.collapsible p { margin-bottom: 8px; }
-.collapsible p:last-child { margin-bottom: 0; }
-@keyframes fadeDown { from {opacity:0;transform:translateY(-6px);} to {opacity:1;transform:translateY(0);} }
-.assumption-list { display: flex; flex-direction: column; gap: 10px; }
-.assumption-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius); }
-.assumption-badge { background: var(--green-gradient); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 3px 9px; border-radius: 999px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
-.assumption-text { font-size: 0.9rem; color: var(--text-2); line-height: 1.55; }
-.assumption-text strong { color: var(--text); }
-.diagram-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.diagram-caption { font-size: 0.82rem; color: var(--text-3); text-align: center; font-style: italic; }
-.chain-wrap { display: flex; flex-direction: column; align-items: center; gap: 0; }
-.chain-box { background: var(--bg-card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 12px 20px; text-align: center; font-size: 0.92rem; color: var(--text); width: 100%; max-width: 520px; font-weight: 700; }
-.chain-box.highlight { background: var(--green-muted); border-color: var(--green); color: var(--green-bright); }
-.chain-arrow { font-size: 1.3rem; color: var(--green); line-height: 1; padding: 3px 0; }
-@media (max-width:900px) {
-  .sidebar { transform:translateX(-100%); }
-  .sidebar.open { transform:translateX(0); }
-  .main-wrap { margin-left:0 !important; }
-  .main-content { padding:24px 20px 40px; }
-  .var-grid { grid-template-columns: 1fr; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex;min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-width);background:var(--sidebar-bg);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;transition:transform .3s ease;overflow:hidden;}
+.sidebar:not(.open){transform:translateX(-100%);}
+.sidebar-brand{padding:22px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.sidebar-brand h1{font-size:1.25rem;font-weight:800;letter-spacing:1px;}
+.sidebar-brand h1 span{color:var(--green);}
+.sidebar-close{background:none;border:none;color:var(--text-3);font-size:1.4rem;cursor:pointer;}
+.sidebar-close:hover{color:var(--green);}
+.sidebar-nav{flex:1;overflow-y:auto;padding:12px 0;}
+.sidebar-link{display:flex;align-items:center;gap:10px;padding:11px 22px;color:var(--text-3);text-decoration:none;font-size:0.88rem;font-weight:700;transition:all .2s;border-left:3px solid transparent;}
+.sidebar-link:hover{color:var(--text);background:rgba(255,255,255,0.04);}
+.sidebar-link.active{color:var(--green-bright);border-left-color:var(--green);background:var(--green-muted);}
+.sidebar-group{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
+.sidebar-group-title{padding:10px 22px 4px;font-size:0.82rem;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-3);}
+.sidebar-sublink{display:flex;align-items:center;gap:10px;padding:9px 22px 9px 36px;color:var(--text-3);text-decoration:none;font-size:0.85rem;font-weight:600;transition:all .2s;border-left:3px solid transparent;}
+.sidebar-sublink:hover{color:var(--text);background:rgba(255,255,255,0.04);}
+.sidebar-sublink.active{color:var(--green-bright);border-left-color:var(--green);background:var(--green-muted);}
+.sidebar-footer{padding:14px 16px;border-top:1px solid var(--border);}
+.sidebar-user{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;}
+.user-avatar{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;}
+.user-dot{width:8px;height:8px;background:var(--green);border-radius:50%;border:2px solid var(--sidebar-bg);position:absolute;bottom:-2px;right:-2px;box-shadow:0 0 6px var(--green);}
+.user-info{overflow:hidden;}
+.user-name{font-size:0.82rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.user-role{font-size:0.7rem;color:var(--text-muted);}
+
+/* TOPBAR */
+.topbar{height:64px;background:rgba(11,15,13,0.9);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;display:flex;align-items:center;padding:0 28px;gap:16px;}
+.topbar-toggle{background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text);width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;flex-shrink:0;transition:.2s;}
+.topbar-toggle:hover{border-color:var(--green-border);color:var(--green);}
+.topbar-breadcrumb{color:var(--text-3);font-size:0.88rem;display:flex;align-items:center;gap:6px;}
+.topbar-breadcrumb .sep{opacity:.4;}
+.topbar-breadcrumb strong{color:var(--text);font-weight:700;}
+.topbar-pill{margin-left:auto;background:var(--green-muted);border:1px solid var(--green-border);color:var(--green-bright);padding:5px 14px;border-radius:999px;font-size:0.78rem;font-weight:700;display:flex;align-items:center;gap:7px;}
+.topbar-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 7px var(--green);}
+
+/* LAYOUT */
+.main-wrap{margin-left:var(--sidebar-width);flex:1;display:flex;flex-direction:column;transition:margin-left .3s;min-width:0;}
+.main-wrap.expanded{margin-left:0;}
+.main-content{padding:40px 44px 70px;max-width:880px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:28px;}
+
+/* PAGE TITLE */
+.page-title-block{border-bottom:1px solid var(--border);padding-bottom:24px;}
+.page-label{font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:8px;}
+.page-title-block h1{font-size:2rem;font-weight:800;letter-spacing:-0.5px;line-height:1.15;}
+.page-title-block p{color:var(--text-3);font-size:0.95rem;margin-top:7px;}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+.section-label{background:var(--green-muted);border:1px solid var(--green-border);color:var(--green-bright);font-size:0.72rem;font-weight:800;padding:3px 11px;border-radius:999px;white-space:nowrap;}
+.section-header h3{font-size:1.05rem;font-weight:800;color:var(--text);}
+
+/* CARDS */
+.concept-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column;gap:14px;transition:transform .2s,border-color .2s;}
+.concept-card:hover{transform:translateY(-2px);border-color:var(--green-border);}
+.concept-card.green-top{border-top:3px solid var(--green);}
+.concept-card.blue-top{border-top:3px solid var(--blue-bright);}
+.concept-card.amber-top{border-top:3px solid var(--amber-bright);}
+.concept-card.purple-top{border-top:3px solid var(--purple-bright);}
+
+/* KEY NOTE */
+.key-note{font-size:0.9rem;color:var(--text-2);line-height:1.65;border-left:3px solid var(--green);padding:12px 18px;background:var(--green-muted);border-radius:0 var(--radius) var(--radius) 0;}
+.key-note strong{color:var(--text);font-weight:800;}
+.key-note.amber{border-left-color:var(--amber-bright);background:var(--amber-muted);}
+.key-note.blue{border-left-color:var(--blue-bright);background:var(--blue-muted);}
+
+/* MATH */
+.math-display{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;text-align:center;margin:4px 0;overflow-x:auto;}
+.math-display.boxed{border-color:var(--green-border);background:var(--green-muted);}
+
+/* ASSUMPTION LIST */
+.assump-list{display:flex;flex-direction:column;gap:10px;}
+.assump-item{display:flex;align-items:flex-start;gap:12px;padding:11px 16px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius);}
+.assump-badge{background:var(--green-gradient);color:#fff;font-size:0.7rem;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.assump-badge.key{background:linear-gradient(135deg,#10b981,#065f46);box-shadow:0 0 10px rgba(16,185,129,0.35);}
+.assump-text{font-size:0.9rem;color:var(--text-2);line-height:1.55;}
+.assump-text strong{color:var(--text);}
+
+/* BULLETS */
+.msg-list{display:flex;flex-direction:column;gap:8px;}
+.msg-item{display:flex;align-items:flex-start;gap:10px;font-size:0.92rem;color:var(--text-2);line-height:1.6;}
+.msg-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:7px;}
+
+/* TOGGLE */
+.toggle-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-2);font-family:var(--font);font-size:0.82rem;font-weight:700;padding:8px 16px;border-radius:999px;cursor:pointer;transition:all .2s;width:fit-content;}
+.toggle-btn:hover{border-color:var(--green-border);color:var(--green-bright);background:var(--green-muted);}
+.toggle-btn .arrow{font-size:0.65rem;transition:transform .25s;display:inline-block;}
+.toggle-btn.open .arrow{transform:rotate(180deg);}
+.collapsible{display:none;margin-top:10px;background:rgba(6,9,7,0.8);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;font-size:0.9rem;color:var(--text-2);line-height:1.7;}
+.collapsible.open{display:block;animation:fadeDown .2s ease;}
+.collapsible strong{color:var(--text);font-weight:700;}
+.collapsible p{margin-bottom:10px;}
+.collapsible p:last-child{margin-bottom:0;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+
+/* EXERCISE BLOCK */
+.exo-card{background:#0a1610;border:1px solid rgba(251,191,36,0.3);border-top:3px solid var(--amber-bright);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column;gap:16px;}
+.exo-label{display:inline-flex;align-items:center;gap:8px;background:var(--amber-muted);border:1px solid var(--amber-border);color:var(--amber-bright);font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;padding:4px 12px;border-radius:999px;width:fit-content;}
+.exo-title{font-size:1.05rem;font-weight:800;color:var(--text);}
+.exo-q-list{display:flex;flex-direction:column;gap:8px;padding-left:4px;}
+.exo-q{display:flex;align-items:flex-start;gap:10px;font-size:0.92rem;color:var(--text-2);line-height:1.6;}
+.exo-num{color:var(--amber-bright);font-weight:800;min-width:20px;flex-shrink:0;margin-top:1px;}
+
+/* CORRECTION INNER */
+.corr-section{display:flex;flex-direction:column;gap:14px;}
+.corr-q{border-left:2px solid var(--green-border);padding:10px 14px;display:flex;flex-direction:column;gap:6px;}
+.corr-q-title{font-size:0.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--green-bright);}
+.corr-body{font-size:0.9rem;color:var(--text-2);line-height:1.65;}
+.corr-body p{margin-bottom:8px;}
+.corr-body p:last-child{margin-bottom:0;}
+
+/* DIAGRAM */
+.diagram-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.diagram-caption{font-size:0.82rem;color:var(--text-3);text-align:center;font-style:italic;}
+
+/* VAR GRID */
+.var-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.var-item{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius);padding:9px 13px;font-size:0.88rem;color:var(--text-2);}
+.var-item strong{color:var(--green-bright);}
+
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%);}
+  .sidebar.open{transform:translateX(0);}
+  .main-wrap{margin-left:0!important;}
+  .main-content{padding:24px 20px 40px;}
+  .var-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
+<!-- SIDEBAR -->
 <aside class="sidebar open" id="sidebar">
   <div class="sidebar-brand">
     <h1>ECOGROWTH<span>.</span></h1>
@@ -151,8 +173,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); disp
   </nav>
   <div class="sidebar-footer">
     <div class="sidebar-user">
-      <div class="user-avatar" style="background: transparent;">
-        <img src="images/avatar.png" alt="STAR NOVA" style="width: 100%; height: 100%; border-radius: 8px; object-fit: cover;">
+      <div class="user-avatar" style="background:transparent;">
+        <img src="images/avatar.png" alt="STAR NOVA" style="width:100%;height:100%;border-radius:8px;object-fit:cover;">
         <span class="user-dot"></span>
       </div>
       <div class="user-info">
@@ -163,6 +185,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); disp
   </div>
 </aside>
 
+<!-- MAIN -->
 <div class="main-wrap" id="main-wrap">
   <div class="topbar">
     <button class="topbar-toggle" onclick="toggleSidebar()">&#9776;</button>
@@ -174,327 +197,361 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); disp
 
   <div class="main-content">
 
+    <!-- PAGE TITLE -->
     <div class="page-title-block">
-      <div class="page-label">Chapter 1 &mdash; Neoclassical Growth Model</div>
+      <div class="page-label">Chapter 1 &mdash; The Neoclassical Growth Model</div>
       <h1>The Solow Model</h1>
-      <p>A foundational framework for understanding long-run capital accumulation and steady-state growth.</p>
+      <p>Capital accumulation, steady states, and long-run growth dynamics.</p>
     </div>
 
-    <!-- S1 -->
+    <!-- STRONG ASSUMPTIONS -->
     <div class="concept-card green-top">
       <div class="section-header">
-        <span class="section-num">&sect;1</span>
+        <span class="section-label">Assumptions</span>
+        <h3>Strong Assumptions</h3>
+      </div>
+      <div class="assump-list">
+        <div class="assump-item">
+          <span class="assump-badge">1</span>
+          <div class="assump-text"><strong>Constant returns to scale</strong></div>
+        </div>
+        <div class="assump-item">
+          <span class="assump-badge key">2 ★</span>
+          <div class="assump-text"><strong>Decreasing marginal returns of inputs</strong> &mdash; the most important assumption.</div>
+        </div>
+        <div class="assump-item">
+          <span class="assump-badge">3</span>
+          <div class="assump-text"><strong>Constant and exogenous saving rate</strong> in the economy</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN MESSAGES -->
+    <div class="concept-card">
+      <div class="section-header">
+        <span class="section-label">Key Results</span>
+        <h3>Main Messages</h3>
+      </div>
+      <div class="msg-list">
+        <div class="msg-item"><span class="msg-dot"></span>Each economy converges toward a long-term steady-state path.</div>
+        <div class="msg-item"><span class="msg-dot"></span>The steady states can be different from one country to another.</div>
+        <div class="msg-item"><span class="msg-dot"></span>The further away the economy is from its steady state, the higher its growth rate.</div>
+      </div>
+    </div>
+
+    <!-- PRODUCTION FUNCTION -->
+    <div class="concept-card green-top">
+      <div class="section-header">
+        <span class="section-label">Equation</span>
         <h3>Production Function</h3>
       </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">The economy produces a single good using two inputs:</p>
-      <div class="math-display boxed">$$Y = F(K,\, L)$$</div>
+      <div class="math-display boxed">$$Y = F(K, L)$$</div>
       <div class="var-grid">
-        <div class="var-item"><strong>$Y$</strong> &mdash; total output / GDP</div>
-        <div class="var-item"><strong>$K$</strong> &mdash; stock of physical capital</div>
+        <div class="var-item"><strong>$Y$</strong> &mdash; GDP</div>
+        <div class="var-item"><strong>$K$</strong> &mdash; stock of capital</div>
         <div class="var-item"><strong>$L$</strong> &mdash; labour</div>
-        <div class="var-item"><strong>$F$</strong> &mdash; production technology</div>
       </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:4px;">Constant returns to scale</p>
+      <div class="math-display">$$F(\lambda K, \lambda L) = \lambda F(K, L) \qquad \text{for } \lambda > 0$$</div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;">Positive and decreasing marginal returns</p>
+      <div class="math-display">$$F_K > 0,\quad F_{KK} < 0,\quad F_L > 0,\quad F_{LL} < 0$$</div>
+      <div class="math-display">$$\lim_{K\to\infty} F_K = 0, \qquad \lim_{K\to 0} F_K = \infty, \qquad \lim_{L\to\infty} F_L = 0, \qquad \lim_{L\to 0} F_L = \infty$$</div>
     </div>
 
-    <!-- S2 -->
-    <div class="concept-card">
-      <div class="section-header">
-        <span class="section-num">&sect;2</span>
-        <h3>Three Core Assumptions</h3>
-      </div>
-      <div class="assumption-list">
-        <div class="assumption-item">
-          <span class="assumption-badge">A1</span>
-          <div class="assumption-text">
-            <strong>Constant Returns to Scale (CRS).</strong> Doubling all inputs exactly doubles output.
-            $$F(\lambda K,\, \lambda L) = \lambda\, F(K,L) \qquad \forall\,\lambda > 0$$
-          </div>
-        </div>
-        <div class="assumption-item">
-          <span class="assumption-badge">A2</span>
-          <div class="assumption-text">
-            <strong>Positive and diminishing marginal products.</strong>
-            $F_K > 0$, $F_L > 0$, $F_{KK} < 0$, $F_{LL} < 0$ &mdash; each additional unit of input adds less and less.
-          </div>
-        </div>
-        <div class="assumption-item">
-          <span class="assumption-badge">A3</span>
-          <div class="assumption-text">
-            <strong>Inada conditions.</strong>
-            $\lim_{K\to 0} F_K = +\infty$, $\lim_{K\to\infty} F_K = 0$ &mdash; the marginal product of capital starts infinite and vanishes. Same for labour.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- S3 -->
+    <!-- CAPITAL ACCUMULATION -->
     <div class="concept-card green-top">
       <div class="section-header">
-        <span class="section-num">&sect;3</span>
-        <h3>Production Per Worker</h3>
-      </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Divide everything by $L$ to work in per-worker terms:</p>
-      <div class="math-display boxed">$$k = \frac{K}{L}, \qquad y = \frac{Y}{L}, \qquad y = f(k)$$</div>
-      <p style="color:var(--text-3);font-size:0.88rem;">By CRS, the intensive form $f(k)$ is concave: $f(0)=0$, $f'(k)&gt;0$, $f''(k)&lt;0$.</p>
-      <button class="toggle-btn" onclick="toggle(this,'demo-per-worker')">Show demonstration <span class="arrow">&#9660;</span></button>
-      <div class="collapsible" id="demo-per-worker">
-        <p>Start from CRS: $F(\lambda K,\lambda L)=\lambda F(K,L)$. Set $\lambda = 1/L$:</p>
-        $$F\!\left(\frac{K}{L},1\right) = \frac{1}{L}\,F(K,L) = \frac{Y}{L} = y$$
-        <p>Define $f(k) \equiv F(k,1)$. Then $\boxed{y = f(k)}$.</p>
-      </div>
-    </div>
-
-    <!-- S4 -->
-    <div class="concept-card">
-      <div class="section-header">
-        <span class="section-num">&sect;4</span>
-        <h3>Goods Market Clearing</h3>
-      </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Output is either consumed or invested. With a constant saving rate $s \in (0,1)$:</p>
-      <div class="var-grid">
-        <div class="var-item"><strong>$sY$</strong> &mdash; savings = investment</div>
-        <div class="var-item"><strong>$(1{-}s)Y$</strong> &mdash; consumption</div>
-      </div>
-      <div class="math-display boxed">$$Y = C + I, \qquad I = sY$$</div>
-      <p style="color:var(--text-3);font-size:0.88rem;">In per-worker terms: $i = sy = sf(k)$.</p>
-      <button class="toggle-btn" onclick="toggle(this,'demo-goods-market')">Show demonstration <span class="arrow">&#9660;</span></button>
-      <div class="collapsible" id="demo-goods-market">
-        <p>Households save fraction $s$ of income: $S = sY$. In a closed economy, $S = I$, so $I = sY$.</p>
-        <p>Consumption: $C = Y - I = (1-s)Y$. Dividing by $L$: $i = I/L = sy = sf(k)$.</p>
-      </div>
-    </div>
-
-    <!-- S5 -->
-    <div class="concept-card">
-      <div class="section-header">
-        <span class="section-num">&sect;5</span>
-        <h3>Labour Market</h3>
-      </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Labour grows at an exogenous rate $n \geq 0$:</p>
-      <div class="math-display boxed">$$\dot{L} = nL \implies L(t) = L(0)\,e^{nt}$$</div>
-      <div class="key-note">
-        <strong>Exogenous:</strong> Population growth is taken as given &mdash; the model does not explain it.
-      </div>
-    </div>
-
-    <!-- S6 -->
-    <div class="concept-card green-top">
-      <div class="section-header">
-        <span class="section-num">&sect;6</span>
+        <span class="section-label">Equation</span>
         <h3>Capital Accumulation</h3>
       </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Capital evolves as gross investment minus depreciation:</p>
-      <div class="math-display boxed">$$\dot{K} = I - \delta K = sY - \delta K$$</div>
+
+      <div class="math-display">$$Y = C + I \qquad I = S$$</div>
+      <p style="color:var(--text-2);font-size:0.9rem;line-height:1.65;">$I$ is the gross investment; $\dfrac{dK}{dt}$ is the net investment (net of capital depreciation).</p>
+
+      <div class="math-display boxed">$$\frac{dK}{dt} = sF(K,L) - \delta K$$</div>
       <div class="var-grid">
-        <div class="var-item"><strong>$\delta$</strong> &mdash; depreciation rate $(0 &lt; \delta &lt; 1)$</div>
-        <div class="var-item"><strong>$\delta K$</strong> &mdash; capital that wears out each period</div>
+        <div class="var-item"><strong>$s$</strong> &mdash; saving rate (= net investment rate)</div>
+        <div class="var-item"><strong>$\delta$</strong> &mdash; capital depreciation rate</div>
+        <div class="var-item"><strong>$n$</strong> &mdash; population growth rate</div>
       </div>
+
+      <p style="color:var(--text-2);font-size:0.9rem;line-height:1.65;">In per-worker terms, letting $k = K/L$:</p>
+      <div class="math-display boxed">$$\frac{dk}{dt} = sf(k) - (\delta + n)k$$</div>
     </div>
 
-    <!-- S7 -->
-    <div class="concept-card green-top">
-      <div class="section-header">
-        <span class="section-num">&sect;7</span>
-        <h3>Law of Motion of Capital Per Worker</h3>
-      </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">The central equation of the model:</p>
-      <div class="math-display boxed">$$\dot{k} = sf(k) - (\delta + n)k$$</div>
-      <div class="key-note">
-        <strong>Interpretation:</strong> $k$ rises when investment $sf(k)$ exceeds break-even investment $(\delta+n)k$, i.e.\ what is needed to replace depreciated capital and equip new workers.
-      </div>
-      <button class="toggle-btn" onclick="toggle(this,'demo-cap-per-worker')">Show demonstration <span class="arrow">&#9660;</span></button>
-      <div class="collapsible" id="demo-cap-per-worker">
-        <p>Recall $k = K/L$. Differentiate with respect to time:</p>
-        $$\dot{k} = \frac{\dot{K}}{L} - \frac{K\dot{L}}{L^2} = \frac{\dot{K}}{L} - k\frac{\dot{L}}{L}$$
-        <p>Substitute $\dot{K} = sY - \delta K$ and $\dot{L}/L = n$:</p>
-        $$\dot{k} = \frac{sY - \delta K}{L} - nk = sy - \delta k - nk$$
-        <p>Since $y = f(k)$:</p>
-        $$\boxed{\dot{k} = sf(k) - (\delta + n)k}$$
-        <p>The term $(\delta + n)k$ is <strong>break-even investment</strong> &mdash; what is needed just to keep $k$ constant.</p>
-      </div>
-    </div>
-
-    <!-- S8 -->
-    <div class="concept-card blue-top">
-      <div class="section-header">
-        <span class="section-num">&sect;8</span>
-        <h3>Steady State</h3>
-      </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">The steady state $k^*$ is the long-run equilibrium where $\dot{k} = 0$:</p>
-      <div class="math-display boxed-blue">$$sf(k^*) = (\delta + n)k^*$$</div>
-      <p style="color:var(--text-2);font-size:0.9rem;line-height:1.6;">At $k^*$, investment exactly covers break-even needs. Capital per worker, output per worker, and consumption per worker are all constant.</p>
-      <button class="toggle-btn" onclick="toggle(this,'demo-steady-state')">Show existence &amp; uniqueness <span class="arrow">&#9660;</span></button>
-      <div class="collapsible" id="demo-steady-state">
-        <p>Define $g(k) = sf(k) - (\delta+n)k$.</p>
-        <p><strong>At $k=0$:</strong> $g(0)=0$. Inada gives $f'(0)=+\infty$, so $g'(0) = +\infty$. The curve starts steep.</p>
-        <p><strong>For large $k$:</strong> Inada gives $f'(k)\to 0$, so $g'(k) = sf'(k)-(\delta+n) &lt; 0$ eventually.</p>
-        <p>By continuity and strict concavity of $f$, there is a <strong>unique</strong> interior crossing $k^*&gt;0$ where $g(k^*)=0$.</p>
-      </div>
-    </div>
-
-    <!-- S9 — Solow Diagram -->
+    <!-- SOLOW DIAGRAM -->
     <div class="concept-card">
       <div class="section-header">
-        <span class="section-num">&sect;9</span>
+        <span class="section-label">Graph</span>
         <h3>The Solow Diagram</h3>
       </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;margin-bottom:8px;">The diagram plots $sf(k)$ and $(\delta+n)k$ against $k$. Their intersection defines $k^*$.</p>
       <div class="diagram-wrap">
-        <svg viewBox="0 0 520 320" width="100%" style="max-width:520px;display:block;">
-          <rect width="520" height="320" fill="#121a15" rx="10"/>
+        <svg viewBox="0 0 520 310" width="100%" style="max-width:520px;display:block;">
+          <rect width="520" height="310" fill="#0a1610" rx="10"/>
           <!-- Axes -->
-          <line x1="60" y1="270" x2="470" y2="270" stroke="#94a3b8" stroke-width="1.8"/>
-          <line x1="60" y1="40" x2="60" y2="270" stroke="#94a3b8" stroke-width="1.8"/>
-          <!-- Arrowheads -->
-          <polygon points="470,266 470,274 480,270" fill="#94a3b8"/>
-          <polygon points="56,40 64,40 60,30" fill="#94a3b8"/>
-          <!-- Axis labels -->
-          <text x="484" y="274" fill="#94a3b8" font-size="13" font-family="Outfit,sans-serif" font-weight="600">k</text>
-          <text x="28" y="36" fill="#94a3b8" font-size="11" font-family="Outfit,sans-serif" font-weight="600">invest.</text>
-          <text x="46" y="284" fill="#64748b" font-size="11" font-family="Outfit,sans-serif">0</text>
-          <!-- sf(k) concave curve through origin -->
-          <path d="M 60 270 C 100 225, 160 183, 240 160 S 370 138, 455 126" stroke="#10b981" stroke-width="2.8" fill="none"/>
-          <!-- (d+n)k linear from origin — crosses sf(k) at approx x=305, y=155 -->
-          <!-- slope: from (60,270) to cross at (305,155): slope=(270-155)/(305-60)=115/245=0.469 -->
-          <!-- at x=455: y=270-0.469*(455-60)=270-185=85 -->
-          <line x1="60" y1="270" x2="455" y2="85" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,4"/>
-          <!-- k* dashed vertical -->
-          <line x1="305" y1="155" x2="305" y2="270" stroke="rgba(16,185,129,0.45)" stroke-width="1.5" stroke-dasharray="4,4"/>
-          <!-- k* dot -->
-          <circle cx="305" cy="155" r="5.5" fill="#10b981" stroke="#121a15" stroke-width="2"/>
-          <!-- k* label -->
-          <text x="298" y="288" fill="#10b981" font-size="13" font-family="Outfit,sans-serif" font-weight="700">k*</text>
-          <!-- Convergence arrows -->
-          <polygon points="200,266 200,274 212,270" fill="#34d399"/>
-          <polygon points="395,266 395,274 383,270" fill="#f87171"/>
-          <!-- Curve labels -->
-          <text x="458" y="124" fill="#10b981" font-size="12" font-family="Outfit,sans-serif" font-weight="700">sf(k)</text>
-          <text x="456" y="83" fill="#94a3b8" font-size="11" font-family="Outfit,sans-serif" font-weight="600">(&delta;+n)k</text>
-          <!-- Region labels -->
-          <text x="150" y="258" fill="#34d399" font-size="10" font-family="Outfit,sans-serif" font-weight="600">k&#775; &gt; 0</text>
-          <text x="340" y="258" fill="#f87171" font-size="10" font-family="Outfit,sans-serif" font-weight="600">k&#775; &lt; 0</text>
+          <line x1="60" y1="260" x2="470" y2="260" stroke="#94a3b8" stroke-width="1.8"/>
+          <line x1="60" y1="35" x2="60" y2="260" stroke="#94a3b8" stroke-width="1.8"/>
+          <polygon points="470,256 470,264 480,260" fill="#94a3b8"/>
+          <polygon points="56,35 64,35 60,25" fill="#94a3b8"/>
+          <text x="484" y="264" fill="#94a3b8" font-size="13" font-family="Outfit,sans-serif" font-weight="600">k</text>
+          <text x="26" y="31" fill="#94a3b8" font-size="10" font-family="Outfit,sans-serif" font-weight="600">invest.</text>
+          <text x="46" y="274" fill="#64748b" font-size="11" font-family="Outfit,sans-serif">0</text>
+          <!-- sf(k) concave curve -->
+          <path d="M 60 260 C 105 215, 165 172, 245 150 S 375 130, 460 120" stroke="#10b981" stroke-width="2.8" fill="none"/>
+          <!-- (d+n)k line: from (60,260) crossing sf(k) at ~(305,148) -->
+          <!-- slope = (260-148)/(305-60) = 112/245 = 0.457 -->
+          <!-- at x=460: y=260-0.457*400=260-183=77 -->
+          <line x1="60" y1="260" x2="460" y2="77" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,4"/>
+          <!-- k* vertical -->
+          <line x1="305" y1="148" x2="305" y2="260" stroke="rgba(16,185,129,0.4)" stroke-width="1.5" stroke-dasharray="4,4"/>
+          <circle cx="305" cy="148" r="5.5" fill="#10b981" stroke="#0a1610" stroke-width="2"/>
+          <text x="298" y="278" fill="#10b981" font-size="13" font-family="Outfit,sans-serif" font-weight="700">k*</text>
+          <!-- Convergence arrows on x-axis -->
+          <polygon points="200,256 200,264 212,260" fill="#34d399"/>
+          <polygon points="395,256 395,264 383,260" fill="#f87171"/>
+          <!-- Labels -->
+          <text x="462" y="118" fill="#10b981" font-size="12" font-family="Outfit,sans-serif" font-weight="700">sf(k)</text>
+          <text x="455" y="75" fill="#94a3b8" font-size="11" font-family="Outfit,sans-serif" font-weight="600">(&delta;+n)k</text>
+          <text x="148" y="250" fill="#34d399" font-size="10" font-family="Outfit,sans-serif" font-weight="600">dk/dt &gt; 0</text>
+          <text x="340" y="250" fill="#f87171" font-size="10" font-family="Outfit,sans-serif" font-weight="600">dk/dt &lt; 0</text>
+          <!-- equation label top-left -->
+          <text x="70" y="55" fill="#34d399" font-size="11" font-family="Outfit,sans-serif" font-weight="600">dk/dt = sf(k) &minus; (&delta;+n)k</text>
         </svg>
         <div class="diagram-caption">
-          The Solow diagram. $sf(k)$ (concave, green) meets the break-even line $(\delta+n)k$ at the unique steady state $k^*$. Arrows indicate convergence from any initial $k &gt; 0$.
+          $sf(k)$ (concave) intersects $(\delta+n)k$ (linear) at the unique steady state $k^*$. Arrows show global convergence.
         </div>
       </div>
     </div>
 
-    <!-- S10 -->
-    <div class="concept-card">
-      <div class="section-header">
-        <span class="section-num">&sect;10</span>
-        <h3>Convergence Dynamics</h3>
+    <!-- EXERCISE 1: COBB-DOUGLAS -->
+    <div class="exo-card">
+      <div class="exo-label">&#9998; Exercise 1</div>
+      <div class="exo-title">The Cobb-Douglas Case</div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">In the case where $Y = K^\alpha L^{1-\alpha}$:</p>
+      <div class="exo-q-list">
+        <div class="exo-q"><span class="exo-num">1.</span>Show that when production factors are paid at their marginal returns, $\alpha$ is the share of capital income in GDP, and $1-\alpha$ the share of labour income.</div>
+        <div class="exo-q"><span class="exo-num">2.</span>Show that $f(k) = k^\alpha$ (where $k = K/L$).</div>
+        <div class="exo-q"><span class="exo-num">3.</span>What is the value of $k^*$ at which $dk/dt = 0$ ?</div>
+        <div class="exo-q"><span class="exo-num">4.</span>For this $k^*$, what is the growth rate of GDP per capita ?</div>
+        <div class="exo-q"><span class="exo-num">5.</span>For this $k^*$, what is the growth rate of GDP ?</div>
+        <div class="exo-q"><span class="exo-num">6.</span>Show that $s$ can be expressed in terms of $k^*$, $n$ and $\delta$.</div>
+        <div class="exo-q"><span class="exo-num">7.</span>Show that the growth rate of $k$ can be expressed in terms of $k/k^*$.</div>
+        <div class="exo-q"><span class="exo-num">8.</span>What is the growth rate of GDP per capita (out of steady state) ?</div>
+        <div class="exo-q"><span class="exo-num">9.</span>What is the growth rate of GDP (out of steady state) ?</div>
       </div>
-      <div class="assumption-list">
-        <div class="assumption-item">
-          <span class="assumption-badge" style="background:linear-gradient(135deg,#10b981,#059669);">k &lt; k*</span>
-          <div class="assumption-text">$sf(k) &gt; (\delta+n)k \implies \dot{k} &gt; 0$ &mdash; capital per worker <strong>rises</strong> toward $k^*$.</div>
+
+      <button class="toggle-btn" onclick="toggle(this,'corr-cd')">Show correction <span class="arrow">&#9660;</span></button>
+      <div class="collapsible" id="corr-cd">
+        <div class="corr-section">
+
+          <div class="corr-q">
+            <div class="corr-q-title">1 — Capital and labour shares</div>
+            <div class="corr-body">
+              <p>The marginal product of capital is $F_K = \alpha K^{\alpha-1}L^{1-\alpha} = \alpha\,\dfrac{Y}{K}$.</p>
+              <p>Capital income $= F_K \cdot K = \alpha Y$, so its share in GDP is $\alpha$. Similarly, $F_L \cdot L = (1-\alpha)Y$, so labour's share is $1-\alpha$.</p>
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">2 — Intensive form $f(k)$</div>
+            <div class="corr-body">
+              <p>Divide $Y = K^\alpha L^{1-\alpha}$ by $L$:</p>
+              $$y = \frac{Y}{L} = \frac{K^\alpha L^{1-\alpha}}{L} = \left(\frac{K}{L}\right)^\alpha = k^\alpha$$
+              <p>So $f(k) = k^\alpha$.</p>
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">3 — Steady-state capital $k^*$</div>
+            <div class="corr-body">
+              <p>At $dk/dt = 0$: $s\,k^{*\alpha} = (\delta+n)k^*$, hence $k^{*\,\alpha-1} = \dfrac{\delta+n}{s}$, so:</p>
+              $$k^* = \left(\frac{s}{\delta+n}\right)^{\!1/(1-\alpha)}$$
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">4 — Growth rate of GDP per capita at $k^*$</div>
+            <div class="corr-body">
+              <p>At the steady state, $k$ is constant, so $y^* = k^{*\alpha}$ is constant. The growth rate of GDP per capita is <strong>0</strong>.</p>
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">5 — Growth rate of GDP at $k^*$</div>
+            <div class="corr-body">
+              <p>$Y = yL$. Since $y$ is constant and $L$ grows at rate $n$, aggregate GDP grows at rate <strong>$n$</strong>.</p>
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">6 — Saving rate in terms of $k^*$, $n$, $\delta$</div>
+            <div class="corr-body">
+              <p>From $s\,k^{*\alpha} = (\delta+n)k^*$:</p>
+              $$s = (\delta+n)\,k^{*\,1-\alpha}$$
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">7 — Growth rate of $k$ in terms of $k/k^*$</div>
+            <div class="corr-body">
+              <p>The growth rate of $k$ is $\hat{k} \equiv \dfrac{\dot{k}}{k} = s k^{\alpha-1} - (\delta+n)$.</p>
+              <p>Substituting $s = (\delta+n)k^{*\,1-\alpha}$:</p>
+              $$\hat{k} = (\delta+n)k^{*\,1-\alpha}\,k^{\alpha-1} - (\delta+n) = (\delta+n)\!\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]$$
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">8 — Growth rate of GDP per capita (out of steady state)</div>
+            <div class="corr-body">
+              <p>$y = k^\alpha$, so $\hat{y} = \alpha\,\hat{k}$:</p>
+              $$\hat{y} = \alpha(\delta+n)\!\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]$$
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">9 — Growth rate of GDP (out of steady state)</div>
+            <div class="corr-body">
+              <p>$Y = yL$, so $g_Y = \hat{y} + n$:</p>
+              $$g_Y = \alpha(\delta+n)\!\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right] + n$$
+            </div>
+          </div>
+
         </div>
-        <div class="assumption-item">
-          <span class="assumption-badge" style="background:linear-gradient(135deg,#f87171,#dc2626);">k &gt; k*</span>
-          <div class="assumption-text">$sf(k) &lt; (\delta+n)k \implies \dot{k} &lt; 0$ &mdash; capital per worker <strong>falls</strong> toward $k^*$.</div>
+      </div>
+    </div>
+
+    <!-- ADDING TFP -->
+    <div class="concept-card blue-top">
+      <div class="section-header">
+        <span class="section-label">Extension</span>
+        <h3>Adding Total Factor Productivity</h3>
+      </div>
+      <div class="math-display boxed">$$Y = (AL)^{1-\alpha}K^\alpha$$</div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        where $A$ is Total Factor Productivity, growing at rate $g$:
+        $$\frac{dA/dt}{A} = g$$
+      </p>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Redefine $k = K/(AL)$ (capital per <em>efficient</em> worker). The law of motion becomes:</p>
+      <div class="math-display boxed" style="border-color:var(--blue-border);background:var(--blue-muted);">$$\frac{dk}{dt} = sf(k) - (\delta + n + g)k$$</div>
+      <div class="key-note blue">
+        Population growth $n$ and TFP growth $g$ both dilute capital per efficient worker &mdash; hence $(\delta+n+g)$ replaces $(\delta+n)$.
+      </div>
+    </div>
+
+    <!-- EXERCISE 2: TFP CASE -->
+    <div class="exo-card">
+      <div class="exo-label">&#9998; Exercise 2</div>
+      <div class="exo-title">The Cobb-Douglas Case with TFP</div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Answer the same questions as in Exercise&nbsp;1 in this specific case, with $k = K/(AL)$ and $(\delta+n+g)$ replacing $(\delta+n)$.</p>
+
+      <button class="toggle-btn" onclick="toggle(this,'corr-tfp')">Show correction <span class="arrow">&#9660;</span></button>
+      <div class="collapsible" id="corr-tfp">
+        <div class="corr-section">
+
+          <div class="corr-q">
+            <div class="corr-q-title">2 — Intensive form</div>
+            <div class="corr-body">
+              <p>$Y = (AL)^{1-\alpha}K^\alpha$. Divide by $AL$:</p>
+              $$\tilde{y} = \frac{Y}{AL} = \left(\frac{K}{AL}\right)^\alpha = k^\alpha \implies f(k)=k^\alpha$$
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">3 — Steady-state $k^*$</div>
+            <div class="corr-body">
+              <p>At $dk/dt=0$: $sk^{*\alpha} = (\delta+n+g)k^*$, so:</p>
+              $$k^* = \left(\frac{s}{\delta+n+g}\right)^{\!1/(1-\alpha)}$$
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">4 &amp; 5 — Growth rates at steady state</div>
+            <div class="corr-body">
+              <p>At $k^*$, $k = K/(AL)$ is constant. Since $A$ grows at $g$, $K/L$ grows at $g$, and $y = Y/L$ grows at $g$. So: growth rate of GDP per capita $= g$, growth rate of GDP $= n + g$.</p>
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">6 — Saving rate in terms of $k^*$</div>
+            <div class="corr-body">$$s = (\delta+n+g)\,k^{*\,1-\alpha}$$</div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">7 — Growth rate of $k$ in terms of $k/k^*$</div>
+            <div class="corr-body">
+              $$\hat{k} = (\delta+n+g)\!\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]$$
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">8 &amp; 9 — Growth rates out of steady state</div>
+            <div class="corr-body">
+              <p>Growth rate of GDP per capita: $\hat{y} = g + \alpha\,\hat{k} = g + \alpha(\delta+n+g)\!\left[\left(\dfrac{k^*}{k}\right)^{\!1-\alpha}-1\right]$</p>
+              <p>Growth rate of GDP: $g_Y = \hat{y} + n$</p>
+            </div>
+          </div>
+
         </div>
       </div>
-      <div class="key-note" style="margin-top:4px;">
-        The Solow model exhibits <strong>global stability</strong>: regardless of the starting point $k(0)&gt;0$, the economy converges to $k^*$.
-      </div>
     </div>
 
-    <!-- S11 -->
-    <div class="concept-card">
-      <div class="section-header">
-        <span class="section-num">&sect;11</span>
-        <h3>Steady-State Output and Consumption</h3>
-      </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Once $k^*$ is determined, all quantities follow:</p>
-      <div class="var-grid">
-        <div class="var-item"><strong>$y^* = f(k^*)$</strong> &mdash; output per worker</div>
-        <div class="var-item"><strong>$c^* = (1{-}s)f(k^*)$</strong> &mdash; consumption per worker</div>
-        <div class="var-item"><strong>$i^* = sf(k^*)$</strong> &mdash; investment per worker</div>
-        <div class="var-item"><strong>$\dot{k}=0$</strong> &mdash; no net change in $k$</div>
-      </div>
-      <div class="key-note">
-        In steady state, <strong>aggregate</strong> $Y$, $K$, $C$ grow at rate $n$ &mdash; only per-worker quantities are constant.
-      </div>
-    </div>
-
-    <!-- S12 -->
-    <div class="concept-card">
-      <div class="section-header">
-        <span class="section-num">&sect;12</span>
-        <h3>Comparative Statics &mdash; Saving Rate</h3>
-      </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">A rise in $s$ shifts $sf(k)$ <strong>upward</strong>:</p>
-      <div class="math-display boxed">$$s' &gt; s \implies k^{**} &gt; k^*$$</div>
-      <div class="key-note">
-        <strong>Higher saving &rarr; higher $k^*$ &rarr; higher $y^*$.</strong> But the long-run <em>growth rate</em> remains zero &mdash; only the income <em>level</em> changes. Saving cannot sustain permanent growth.
-      </div>
-    </div>
-
-    <!-- S13 -->
-    <div class="concept-card">
-      <div class="section-header">
-        <span class="section-num">&sect;13</span>
-        <h3>Comparative Statics &mdash; Population Growth</h3>
-      </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Higher $n$ steepens the break-even line:</p>
-      <div class="math-display boxed">$$n' &gt; n \implies k^{**} &lt; k^*$$</div>
-      <div class="key-note amber">
-        <strong>Higher population growth &rarr; lower $k^*$ &rarr; lower $y^*$.</strong> Faster-growing populations have less capital per worker in steady state. Consistent with cross-country evidence.
-      </div>
-    </div>
-
-    <!-- S14 -->
-    <div class="concept-card purple-top">
-      <div class="section-header">
-        <span class="section-num">&sect;14</span>
-        <h3>The Golden Rule</h3>
-      </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Which saving rate $s$ maximises steady-state consumption per worker?</p>
-      <p style="color:var(--text-2);font-size:0.9rem;line-height:1.6;">Steady-state consumption: $c^* = f(k^*) - (\delta+n)k^*$. Maximise over $k^*$:</p>
-      <div class="math-display boxed-purple">$$f'(k^*_{\text{GR}}) = \delta + n$$</div>
-      <div class="key-note purple">
-        <strong>Golden Rule:</strong> Optimal steady state has $MPK = \delta + n$. The corresponding saving rate $s_{GR}$ satisfies $s_{GR}\,f(k^*_{GR}) = (\delta+n)k^*_{GR}$.
-      </div>
-    </div>
-
-    <!-- S15 — Essential Chain -->
+    <!-- GOLDEN RULE 1/2 -->
     <div class="concept-card amber-top">
       <div class="section-header">
-        <span class="section-num">&sect;15</span>
-        <h3>Essential Chain to Remember</h3>
+        <span class="section-label">Golden Rule 1/2</span>
+        <h3>The Saving Rate that Maximises Consumption</h3>
       </div>
-      <p style="color:var(--text-3);font-size:0.88rem;margin-bottom:12px;">The complete logical flow of the Solow model.</p>
-      <div class="chain-wrap">
-        <div class="chain-box">
-          <span style="color:var(--text-3);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Primitives</span><br>
-          $F(K,L)$ with CRS &nbsp;&middot;&nbsp; saving rate $s$ &nbsp;&middot;&nbsp; depreciation $\delta$ &nbsp;&middot;&nbsp; population growth $n$
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Is there a saving rate $s$ that maximises consumption per <em>efficient worker</em> at the steady state?
+      </p>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">$s$ can be expressed in terms of $k^*$:</p>
+      <div class="math-display">$$s = (\delta+n+g)\,k^{*\,1-\alpha}$$</div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Consumption per efficient worker at steady state:</p>
+      <div class="math-display">$$c = (1-s)\,k^{*\alpha} = k^{*\alpha} - (\delta+n+g)\,k^*$$</div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Maximising over $k^*$, this is maximum for:</p>
+      <div class="math-display boxed" style="border-color:var(--amber-border);background:var(--amber-muted);">$$k^{**} = \left(\frac{\alpha}{\delta+n+g}\right)^{\!1/(1-\alpha)} \qquad \text{which is the case if } s = \alpha$$</div>
+      <div class="key-note amber">
+        <strong>The Golden Rule:</strong> When the saving rate equals the share of capital income in GDP ($s = \alpha$), the steady state is the one where consumption per efficient worker is maximum.
+      </div>
+    </div>
+
+    <!-- GOLDEN RULE 2/2 -->
+    <div class="exo-card" style="border-color:rgba(251,191,36,0.25);border-top-color:var(--amber-bright);">
+      <div class="exo-label">&#9998; Golden Rule 2/2 &mdash; Questions</div>
+      <div class="exo-title">A higher saving rate is not necessarily better</div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;margin-top:2px;">Note that a higher saving rate is not necessarily better for the economy. Consider:</p>
+      <div class="exo-q-list">
+        <div class="exo-q">
+          <span class="exo-num">1.</span>
+          An economy where the golden rule is not respected and $s > \alpha$. What would happen to the per capita consumption of <em>all</em> generations if this economy enforced the golden rule saving rate?
         </div>
-        <div class="chain-arrow">&#8595;</div>
-        <div class="chain-box">
-          <span style="color:var(--text-3);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Intensive form</span><br>
-          $y = f(k)$, concave &nbsp;&middot;&nbsp; $i = sf(k)$
+        <div class="exo-q">
+          <span class="exo-num">2.</span>
+          What if, on the opposite, the saving rate is $s < \alpha$?
         </div>
-        <div class="chain-arrow">&#8595;</div>
-        <div class="chain-box highlight">
-          <span style="font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;">Law of Motion</span><br>
-          $\dot{k} = sf(k) - (\delta + n)k$
-        </div>
-        <div class="chain-arrow">&#8595;</div>
-        <div class="chain-box">
-          <span style="color:var(--text-3);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Steady State &mdash; $\dot{k}=0$</span><br>
-          $sf(k^*) = (\delta+n)k^*$
-        </div>
-        <div class="chain-arrow">&#8595;</div>
-        <div class="chain-box">
-          <span style="color:var(--text-3);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Long-Run Values</span><br>
-          $y^* = f(k^*)$ &nbsp;&middot;&nbsp; $c^* = (1-s)f(k^*)$ &nbsp;&middot;&nbsp; $g_y = 0$
-        </div>
-        <div class="chain-arrow">&#8595;</div>
-        <div class="chain-box">
-          <span style="color:var(--text-3);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Comparative Statics</span><br>
-          $\uparrow s \Rightarrow \uparrow k^*$ &nbsp;&middot;&nbsp; $\uparrow n \Rightarrow \downarrow k^*$ &nbsp;&middot;&nbsp; Golden Rule: $f'(k_{GR}^*) = \delta+n$
+      </div>
+
+      <button class="toggle-btn" onclick="toggle(this,'corr-gr')">Show correction <span class="arrow">&#9660;</span></button>
+      <div class="collapsible" id="corr-gr">
+        <div class="corr-section">
+
+          <div class="corr-q">
+            <div class="corr-q-title">1 — Case $s > \alpha$ (over-saving)</div>
+            <div class="corr-body">
+              <p>If $s > \alpha$, the economy is at a steady state $k^*$ that is <strong>above</strong> the golden rule level $k^{**}$. Consumption per efficient worker is below its maximum.</p>
+              <p>Enforcing $s = \alpha$ reduces saving, which increases consumption <strong>immediately</strong> (since less is saved) and also raises steady-state consumption. Every generation benefits: current consumption rises on impact and the new steady-state consumption is higher. This transition is <strong>Pareto improving</strong>.</p>
+            </div>
+          </div>
+
+          <div class="corr-q">
+            <div class="corr-q-title">2 — Case $s < \alpha$ (under-saving)</div>
+            <div class="corr-body">
+              <p>If $s < \alpha$, the economy is below the golden rule: $k^* < k^{**}$. Enforcing $s = \alpha$ requires <strong>increasing</strong> saving, which <strong>reduces</strong> current consumption on impact. Although the long-run consumption is higher, current and near-term generations must sacrifice. This is <strong>not</strong> Pareto improving &mdash; there is a trade-off between generations.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -503,16 +560,16 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); disp
 </div>
 
 <script>
-function toggleSidebar() {
+function toggleSidebar(){
   document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('main-wrap').classList.toggle('expanded');
 }
-function toggle(btn, id) {
-  var box = document.getElementById(id);
-  var isOpen = box.classList.contains('open');
-  box.classList.toggle('open', !isOpen);
-  btn.classList.toggle('open', !isOpen);
-  if (!isOpen && window.MathJax) { MathJax.typesetPromise([box]); }
+function toggle(btn,id){
+  var box=document.getElementById(id);
+  var isOpen=box.classList.contains('open');
+  box.classList.toggle('open',!isOpen);
+  btn.classList.toggle('open',!isOpen);
+  if(!isOpen&&window.MathJax){MathJax.typesetPromise([box]);}
 }
 </script>
 </body>
