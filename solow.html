@@ -75,12 +75,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
 .page-title-block p{color:var(--text-3);font-size:0.95rem;margin-top:7px;}
 
 /* SECTION HEADER */
-.section-header{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
 .section-label{background:var(--green-muted);border:1px solid var(--green-border);color:var(--green-bright);font-size:0.72rem;font-weight:800;padding:3px 11px;border-radius:999px;white-space:nowrap;}
 .section-header h3{font-size:1.05rem;font-weight:800;color:var(--text);}
 
 /* CARDS */
-.concept-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column;gap:14px;transition:transform .2s,border-color .2s;}
+.concept-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column;gap:16px;transition:transform .2s,border-color .2s;}
 .concept-card:hover{transform:translateY(-2px);border-color:var(--green-border);}
 .concept-card.green-top{border-top:3px solid var(--green);}
 .concept-card.blue-top{border-top:3px solid var(--blue-bright);}
@@ -92,48 +92,75 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
 .key-note strong{color:var(--text);font-weight:800;}
 .key-note.amber{border-left-color:var(--amber-bright);background:var(--amber-muted);}
 .key-note.blue{border-left-color:var(--blue-bright);background:var(--blue-muted);}
+.key-note.purple{border-left-color:var(--purple-bright);background:var(--purple-muted);}
 
 /* MATH */
 .math-display{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;text-align:center;margin:4px 0;overflow-x:auto;}
 .math-display.boxed{border-color:var(--green-border);background:var(--green-muted);}
+.math-display.boxed-blue{border-color:var(--blue-border);background:var(--blue-muted);}
+.math-display.boxed-amber{border-color:var(--amber-border);background:var(--amber-muted);}
+.math-display.boxed-purple{border-color:var(--purple-border);background:var(--purple-muted);}
 
-/* ASSUMPTION LIST */
-.assump-list{display:flex;flex-direction:column;gap:10px;}
-.assump-item{display:flex;align-items:flex-start;gap:12px;padding:11px 16px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius);}
-.assump-badge{background:var(--green-gradient);color:#fff;font-size:0.7rem;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
-.assump-badge.key{background:linear-gradient(135deg,#10b981,#065f46);box-shadow:0 0 10px rgba(16,185,129,0.35);}
-.assump-text{font-size:0.9rem;color:var(--text-2);line-height:1.55;}
-.assump-text strong{color:var(--text);}
+/* ASSUMPTION CARDS (big improved layout) */
+.assump-grid{display:flex;flex-direction:column;gap:12px;}
+.assump-card{border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;background:rgba(255,255,255,0.015);display:flex;flex-direction:column;gap:10px;transition:border-color .2s;}
+.assump-card:hover{border-color:var(--green-border);}
+.assump-card.key-assump{border-color:rgba(16,185,129,0.25);background:rgba(16,185,129,0.04);}
+.assump-header{display:flex;align-items:center;gap:12px;}
+.assump-num{width:34px;height:34px;border-radius:10px;background:var(--green-gradient);display:flex;align-items:center;justify-content:center;font-size:0.88rem;font-weight:800;color:#fff;flex-shrink:0;}
+.assump-num.key{background:linear-gradient(135deg,#10b981,#065f46);box-shadow:0 0 14px rgba(16,185,129,0.35);}
+.assump-title{font-size:1rem;font-weight:800;color:var(--text);}
+.assump-badge-key{font-size:0.7rem;font-weight:800;background:var(--green-muted);border:1px solid var(--green-border);color:var(--green-bright);padding:2px 9px;border-radius:999px;margin-left:auto;white-space:nowrap;}
+.assump-body{font-size:0.9rem;color:var(--text-2);line-height:1.65;padding-left:46px;}
+.assump-body strong{color:var(--text);}
+.assump-math{padding-left:46px;}
 
-/* BULLETS */
-.msg-list{display:flex;flex-direction:column;gap:8px;}
-.msg-item{display:flex;align-items:flex-start;gap:10px;font-size:0.92rem;color:var(--text-2);line-height:1.6;}
-.msg-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:7px;}
+/* MAIN MESSAGES (improved) */
+.msg-grid{display:flex;flex-direction:column;gap:14px;}
+.msg-card{display:flex;gap:16px;padding:16px 18px;border:1px solid var(--border);border-radius:var(--radius-lg);background:rgba(255,255,255,0.015);transition:border-color .2s;}
+.msg-card:hover{border-color:var(--green-border);}
+.msg-icon{width:36px;height:36px;border-radius:10px;background:var(--green-muted);border:1px solid var(--green-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;}
+.msg-content{display:flex;flex-direction:column;gap:5px;}
+.msg-title{font-size:0.95rem;font-weight:800;color:var(--text);}
+.msg-desc{font-size:0.88rem;color:var(--text-3);line-height:1.6;}
+
+/* VAR GRID */
+.var-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.var-item{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius);padding:9px 13px;font-size:0.88rem;color:var(--text-2);}
+.var-item strong{color:var(--green-bright);}
 
 /* TOGGLE */
 .toggle-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-2);font-family:var(--font);font-size:0.82rem;font-weight:700;padding:8px 16px;border-radius:999px;cursor:pointer;transition:all .2s;width:fit-content;}
 .toggle-btn:hover{border-color:var(--green-border);color:var(--green-bright);background:var(--green-muted);}
 .toggle-btn .arrow{font-size:0.65rem;transition:transform .25s;display:inline-block;}
 .toggle-btn.open .arrow{transform:rotate(180deg);}
-.collapsible{display:none;margin-top:10px;background:rgba(6,9,7,0.8);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;font-size:0.9rem;color:var(--text-2);line-height:1.7;}
+.collapsible{display:none;margin-top:10px;background:rgba(6,9,7,0.85);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;font-size:0.9rem;color:var(--text-2);line-height:1.7;}
 .collapsible.open{display:block;animation:fadeDown .2s ease;}
 .collapsible strong{color:var(--text);font-weight:700;}
 .collapsible p{margin-bottom:10px;}
 .collapsible p:last-child{margin-bottom:0;}
+/* Steps inside collapsible */
+.demo-step{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;}
+.demo-step:last-child{margin-bottom:0;}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--green-muted);border:1px solid var(--green-border);color:var(--green-bright);font-size:0.72rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-body{font-size:0.9rem;color:var(--text-2);line-height:1.65;flex:1;}
+.step-body strong{color:var(--text);}
+.step-body p{margin-bottom:6px;}
+.step-body p:last-child{margin-bottom:0;}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
 
 /* EXERCISE BLOCK */
-.exo-card{background:#0a1610;border:1px solid rgba(251,191,36,0.3);border-top:3px solid var(--amber-bright);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column;gap:16px;}
+.exo-card{background:#080f0b;border:1px solid rgba(251,191,36,0.28);border-top:3px solid var(--amber-bright);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column;gap:16px;}
 .exo-label{display:inline-flex;align-items:center;gap:8px;background:var(--amber-muted);border:1px solid var(--amber-border);color:var(--amber-bright);font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;padding:4px 12px;border-radius:999px;width:fit-content;}
 .exo-title{font-size:1.05rem;font-weight:800;color:var(--text);}
-.exo-q-list{display:flex;flex-direction:column;gap:8px;padding-left:4px;}
+.exo-q-list{display:flex;flex-direction:column;gap:9px;padding-left:4px;}
 .exo-q{display:flex;align-items:flex-start;gap:10px;font-size:0.92rem;color:var(--text-2);line-height:1.6;}
-.exo-num{color:var(--amber-bright);font-weight:800;min-width:20px;flex-shrink:0;margin-top:1px;}
+.exo-num{color:var(--amber-bright);font-weight:800;min-width:22px;flex-shrink:0;margin-top:1px;}
 
 /* CORRECTION INNER */
-.corr-section{display:flex;flex-direction:column;gap:14px;}
-.corr-q{border-left:2px solid var(--green-border);padding:10px 14px;display:flex;flex-direction:column;gap:6px;}
-.corr-q-title{font-size:0.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--green-bright);}
+.corr-section{display:flex;flex-direction:column;gap:16px;}
+.corr-q{border-left:2px solid var(--green-border);padding:10px 16px;display:flex;flex-direction:column;gap:7px;}
+.corr-q-title{font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--green-bright);}
 .corr-body{font-size:0.9rem;color:var(--text-2);line-height:1.65;}
 .corr-body p{margin-bottom:8px;}
 .corr-body p:last-child{margin-bottom:0;}
@@ -142,17 +169,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
 .diagram-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;}
 .diagram-caption{font-size:0.82rem;color:var(--text-3);text-align:center;font-style:italic;}
 
-/* VAR GRID */
-.var-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.var-item{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius);padding:9px 13px;font-size:0.88rem;color:var(--text-2);}
-.var-item strong{color:var(--green-bright);}
-
 @media(max-width:900px){
   .sidebar{transform:translateX(-100%);}
   .sidebar.open{transform:translateX(0);}
   .main-wrap{margin-left:0!important;}
   .main-content{padding:24px 20px 40px;}
   .var-grid{grid-template-columns:1fr;}
+  .assump-body,.assump-math{padding-left:0;}
 }
 </style>
 </head>
@@ -204,42 +227,109 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
       <p>Capital accumulation, steady states, and long-run growth dynamics.</p>
     </div>
 
-    <!-- STRONG ASSUMPTIONS -->
+    <!-- ═══ STRONG ASSUMPTIONS ═══ -->
     <div class="concept-card green-top">
       <div class="section-header">
-        <span class="section-label">Assumptions</span>
+        <span class="section-label">Foundation</span>
         <h3>Strong Assumptions</h3>
       </div>
-      <div class="assump-list">
-        <div class="assump-item">
-          <span class="assump-badge">1</span>
-          <div class="assump-text"><strong>Constant returns to scale</strong></div>
+      <p style="color:var(--text-3);font-size:0.88rem;line-height:1.6;">The Solow model is built on three strong simplifying assumptions. They make the model tractable and generate clean predictions &mdash; but at the cost of realism.</p>
+
+      <div class="assump-grid">
+
+        <!-- A1 -->
+        <div class="assump-card">
+          <div class="assump-header">
+            <div class="assump-num">1</div>
+            <div class="assump-title">Constant Returns to Scale</div>
+          </div>
+          <div class="assump-body">
+            If you double all inputs (capital <em>and</em> labour), you exactly double output. Formally: $F(\lambda K, \lambda L) = \lambda F(K,L)$ for any $\lambda > 0$.
+          </div>
+          <div class="assump-body" style="margin-top:2px;">
+            <strong>Why it matters:</strong> CRS allows us to reduce the two-variable problem to a single variable by working in <em>per-worker</em> terms &mdash; dividing everything by $L$ to get $y = f(k)$.
+          </div>
         </div>
-        <div class="assump-item">
-          <span class="assump-badge key">2 ★</span>
-          <div class="assump-text"><strong>Decreasing marginal returns of inputs</strong> &mdash; the most important assumption.</div>
+
+        <!-- A2 -->
+        <div class="assump-card key-assump">
+          <div class="assump-header">
+            <div class="assump-num key">2</div>
+            <div class="assump-title">Decreasing Marginal Returns of Inputs</div>
+            <span class="assump-badge-key">&#9733; Most important</span>
+          </div>
+          <div class="assump-body">
+            Each additional unit of capital (holding labour fixed) adds <em>less and less</em> to output: $F_K > 0$ but $F_{KK} < 0$. Same for labour.
+          </div>
+          <div class="assump-body" style="margin-top:2px;">
+            <strong>Why it&rsquo;s the most important:</strong> Diminishing returns is the engine of convergence. When capital is scarce, its return is high &rarr; investment is profitable &rarr; capital accumulates fast. As capital grows, its return falls &rarr; growth slows down &rarr; the economy converges to a steady state. <em>Without this assumption, there is no steady state.</em>
+          </div>
+          <div class="assump-body" style="margin-top:2px;">
+            The Inada conditions formalise the extremes: $\lim_{K\to 0}F_K = \infty$ and $\lim_{K\to\infty}F_K = 0$, ensuring $k^*$ always exists and is unique.
+          </div>
         </div>
-        <div class="assump-item">
-          <span class="assump-badge">3</span>
-          <div class="assump-text"><strong>Constant and exogenous saving rate</strong> in the economy</div>
+
+        <!-- A3 -->
+        <div class="assump-card">
+          <div class="assump-header">
+            <div class="assump-num">3</div>
+            <div class="assump-title">Constant and Exogenous Saving Rate</div>
+          </div>
+          <div class="assump-body">
+            Households save a fixed fraction $s \in (0,1)$ of their income, regardless of the interest rate or their wealth. $s$ is set externally &mdash; the model does not explain why people save.
+          </div>
+          <div class="assump-body" style="margin-top:2px;">
+            <strong>Why it&rsquo;s strong:</strong> In reality, households optimise intertemporally (Ramsey model). Here, $s = \text{const}$ is a major simplification that rules out optimising behaviour, but it keeps the model analytically clean.
+          </div>
         </div>
+
       </div>
     </div>
 
-    <!-- MAIN MESSAGES -->
+    <!-- ═══ MAIN MESSAGES ═══ -->
     <div class="concept-card">
       <div class="section-header">
-        <span class="section-label">Key Results</span>
+        <span class="section-label">Big Picture</span>
         <h3>Main Messages</h3>
       </div>
-      <div class="msg-list">
-        <div class="msg-item"><span class="msg-dot"></span>Each economy converges toward a long-term steady-state path.</div>
-        <div class="msg-item"><span class="msg-dot"></span>The steady states can be different from one country to another.</div>
-        <div class="msg-item"><span class="msg-dot"></span>The further away the economy is from its steady state, the higher its growth rate.</div>
+      <p style="color:var(--text-3);font-size:0.88rem;line-height:1.6;">Three core predictions that follow directly from the model&rsquo;s structure.</p>
+
+      <div class="msg-grid">
+
+        <div class="msg-card">
+          <div class="msg-icon">&#8594;</div>
+          <div class="msg-content">
+            <div class="msg-title">Each economy converges to a long-term steady state</div>
+            <div class="msg-desc">
+              Because of diminishing returns (A2), the marginal product of capital falls as $k$ rises. At some point, new investment only compensates for depreciation and population dilution &mdash; net growth of $k$ hits zero. This long-run equilibrium $k^*$ is <em>globally stable</em>: the economy always ends up there regardless of where it starts.
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-card">
+          <div class="msg-icon">&#127758;</div>
+          <div class="msg-content">
+            <div class="msg-title">Steady states differ across countries</div>
+            <div class="msg-desc">
+              Countries differ in their saving rate $s$, population growth $n$, and depreciation $\delta$. Since $k^* = \left(\tfrac{s}{\delta+n}\right)^{1/(1-\alpha)}$ (Cobb-Douglas case), a country that saves more or grows more slowly will have a higher $k^*$ &mdash; and therefore higher income per capita in the long run. The model thus rationalises persistent income differences across countries.
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-card">
+          <div class="msg-icon">&#9889;</div>
+          <div class="msg-content">
+            <div class="msg-title">The further from the steady state, the faster the growth</div>
+            <div class="msg-desc">
+              When $k \ll k^*$, capital is scarce, its marginal product is very high, and investment is very profitable &rarr; $k$ grows rapidly. As $k \to k^*$, the marginal product falls and growth slows. This predicts <em>conditional convergence</em>: poor countries should grow faster than rich ones &mdash; conditional on having the same steady state. This is broadly supported by data.
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- PRODUCTION FUNCTION -->
+    <!-- ═══ PRODUCTION FUNCTION ═══ -->
     <div class="concept-card green-top">
       <div class="section-header">
         <span class="section-label">Equation</span>
@@ -253,35 +343,120 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
       </div>
 
       <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:4px;">Constant returns to scale</p>
-      <div class="math-display">$$F(\lambda K, \lambda L) = \lambda F(K, L) \qquad \text{for } \lambda > 0$$</div>
+      <div class="math-display">$$F(\lambda K, \lambda L) = \lambda F(K, L) \qquad \text{for all } \lambda > 0$$</div>
 
       <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;">Positive and decreasing marginal returns</p>
       <div class="math-display">$$F_K > 0,\quad F_{KK} < 0,\quad F_L > 0,\quad F_{LL} < 0$$</div>
-      <div class="math-display">$$\lim_{K\to\infty} F_K = 0, \qquad \lim_{K\to 0} F_K = \infty, \qquad \lim_{L\to\infty} F_L = 0, \qquad \lim_{L\to 0} F_L = \infty$$</div>
+      <div class="math-display">$$\lim_{K\to 0}F_K = \infty, \quad \lim_{K\to\infty}F_K = 0, \quad \lim_{L\to 0}F_L = \infty, \quad \lim_{L\to\infty}F_L = 0$$</div>
+
+      <button class="toggle-btn" onclick="toggle(this,'demo-intensive')">Show: intensive form $y = f(k)$ <span class="arrow">&#9660;</span></button>
+      <div class="collapsible" id="demo-intensive">
+        <div class="demo-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Apply CRS with $\lambda = 1/L$.</strong>
+            $$F\!\left(\frac{K}{L},\; \frac{L}{L}\right) = \frac{1}{L}\,F(K,L) \implies F\!\left(\frac{K}{L},\,1\right) = \frac{Y}{L}$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Define the intensive-form function</strong> $f(k) \equiv F(k,\,1)$ and per-worker quantities $k = K/L$, $y = Y/L$:
+            $$\boxed{y = f(k)}$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Properties of $f$.</strong> Because $F$ is concave, $f$ inherits $f(0)=0$, $f'(k)>0$, $f''(k)&lt;0$. The Inada conditions carry over: $f'(0)=+\infty$ and $f'(\infty)=0$, which guarantee a unique interior steady state.
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- CAPITAL ACCUMULATION -->
+    <!-- ═══ CAPITAL ACCUMULATION ═══ -->
     <div class="concept-card green-top">
       <div class="section-header">
         <span class="section-label">Equation</span>
         <h3>Capital Accumulation</h3>
       </div>
 
-      <div class="math-display">$$Y = C + I \qquad I = S$$</div>
-      <p style="color:var(--text-2);font-size:0.9rem;line-height:1.65;">$I$ is the gross investment; $\dfrac{dK}{dt}$ is the net investment (net of capital depreciation).</p>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Output is split between consumption and investment. In a closed economy without government, savings equal investment:</p>
+      <div class="math-display">$$Y = C + I, \qquad I = S = sY$$</div>
 
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Capital evolves as gross investment minus depreciation:</p>
       <div class="math-display boxed">$$\frac{dK}{dt} = sF(K,L) - \delta K$$</div>
       <div class="var-grid">
         <div class="var-item"><strong>$s$</strong> &mdash; saving rate (= net investment rate)</div>
         <div class="var-item"><strong>$\delta$</strong> &mdash; capital depreciation rate</div>
-        <div class="var-item"><strong>$n$</strong> &mdash; population growth rate</div>
+        <div class="var-item"><strong>$n$</strong> &mdash; population growth rate ($\dot{L}/L = n$)</div>
       </div>
 
-      <p style="color:var(--text-2);font-size:0.9rem;line-height:1.65;">In per-worker terms, letting $k = K/L$:</p>
+      <button class="toggle-btn" onclick="toggle(this,'demo-dKdt')">Show demonstration: $\tfrac{dK}{dt} = sF(K,L) - \delta K$ <span class="arrow">&#9660;</span></button>
+      <div class="collapsible" id="demo-dKdt">
+        <div class="demo-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Goods market.</strong> All output is either consumed or invested: $Y = C + I$.
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Saving = Investment.</strong> In a closed economy without government, $S = I$. Households save a fixed fraction $s$ of income: $S = sY$. Therefore $I = sY = sF(K,L)$.
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Gross vs. net investment.</strong> $I$ is <em>gross</em> investment (total new capital installed). But capital also depreciates at rate $\delta$: each period, $\delta K$ units wear out. Net investment = gross investment $-$ depreciation:
+            $$\frac{dK}{dt} = I - \delta K = sF(K,L) - \delta K$$
+          </div>
+        </div>
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;margin-top:4px;">Converting to per-worker terms (the key equation of the model):</p>
       <div class="math-display boxed">$$\frac{dk}{dt} = sf(k) - (\delta + n)k$$</div>
+
+      <button class="toggle-btn" onclick="toggle(this,'demo-dkdt')">Show demonstration: $\tfrac{dk}{dt} = sf(k) - (\delta+n)k$ <span class="arrow">&#9660;</span></button>
+      <div class="collapsible" id="demo-dkdt">
+        <div class="demo-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Differentiate $k = K/L$ with respect to time</strong> using the quotient rule:
+            $$\dot{k} = \frac{\dot{K}}{L} - \frac{K\,\dot{L}}{L^2} = \frac{\dot{K}}{L} - k\,\frac{\dot{L}}{L}$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Substitute known expressions.</strong> We have $\dot{K} = sF(K,L) - \delta K$ and $\dot{L}/L = n$:
+            $$\dot{k} = \frac{sF(K,L) - \delta K}{L} - nk$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Simplify.</strong> $F(K,L)/L = f(k)$ (intensive form) and $K/L = k$:
+            $$\dot{k} = sf(k) - \delta k - nk$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <strong>Collect terms:</strong>
+            $$\boxed{\dot{k} = sf(k) - (\delta + n)k}$$
+            <p style="margin-top:8px;">$sf(k)$ is investment per worker. $(\delta+n)k$ is <strong>break-even investment</strong>: $\delta k$ replaces depreciated capital, $nk$ equips new workers so $k$ stays constant.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="key-note" style="margin-top:4px;">
+        <strong>Intuition:</strong> $k$ grows if and only if investment per worker exceeds break-even investment. The $nk$ term appears because a growing population <em>dilutes</em> capital &mdash; you need to give new workers capital just to keep $k$ constant.
+      </div>
     </div>
 
-    <!-- SOLOW DIAGRAM -->
+    <!-- ═══ SOLOW DIAGRAM ═══ -->
     <div class="concept-card">
       <div class="section-header">
         <span class="section-label">Graph</span>
@@ -289,8 +464,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
       </div>
       <div class="diagram-wrap">
         <svg viewBox="0 0 520 310" width="100%" style="max-width:520px;display:block;">
-          <rect width="520" height="310" fill="#0a1610" rx="10"/>
-          <!-- Axes -->
+          <rect width="520" height="310" fill="#080f0b" rx="10"/>
           <line x1="60" y1="260" x2="470" y2="260" stroke="#94a3b8" stroke-width="1.8"/>
           <line x1="60" y1="35" x2="60" y2="260" stroke="#94a3b8" stroke-width="1.8"/>
           <polygon points="470,256 470,264 480,260" fill="#94a3b8"/>
@@ -298,48 +472,40 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
           <text x="484" y="264" fill="#94a3b8" font-size="13" font-family="Outfit,sans-serif" font-weight="600">k</text>
           <text x="26" y="31" fill="#94a3b8" font-size="10" font-family="Outfit,sans-serif" font-weight="600">invest.</text>
           <text x="46" y="274" fill="#64748b" font-size="11" font-family="Outfit,sans-serif">0</text>
-          <!-- sf(k) concave curve -->
           <path d="M 60 260 C 105 215, 165 172, 245 150 S 375 130, 460 120" stroke="#10b981" stroke-width="2.8" fill="none"/>
-          <!-- (d+n)k line: from (60,260) crossing sf(k) at ~(305,148) -->
-          <!-- slope = (260-148)/(305-60) = 112/245 = 0.457 -->
-          <!-- at x=460: y=260-0.457*400=260-183=77 -->
           <line x1="60" y1="260" x2="460" y2="77" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7,4"/>
-          <!-- k* vertical -->
           <line x1="305" y1="148" x2="305" y2="260" stroke="rgba(16,185,129,0.4)" stroke-width="1.5" stroke-dasharray="4,4"/>
-          <circle cx="305" cy="148" r="5.5" fill="#10b981" stroke="#0a1610" stroke-width="2"/>
+          <circle cx="305" cy="148" r="5.5" fill="#10b981" stroke="#080f0b" stroke-width="2"/>
           <text x="298" y="278" fill="#10b981" font-size="13" font-family="Outfit,sans-serif" font-weight="700">k*</text>
-          <!-- Convergence arrows on x-axis -->
           <polygon points="200,256 200,264 212,260" fill="#34d399"/>
           <polygon points="395,256 395,264 383,260" fill="#f87171"/>
-          <!-- Labels -->
           <text x="462" y="118" fill="#10b981" font-size="12" font-family="Outfit,sans-serif" font-weight="700">sf(k)</text>
           <text x="455" y="75" fill="#94a3b8" font-size="11" font-family="Outfit,sans-serif" font-weight="600">(&delta;+n)k</text>
           <text x="148" y="250" fill="#34d399" font-size="10" font-family="Outfit,sans-serif" font-weight="600">dk/dt &gt; 0</text>
           <text x="340" y="250" fill="#f87171" font-size="10" font-family="Outfit,sans-serif" font-weight="600">dk/dt &lt; 0</text>
-          <!-- equation label top-left -->
-          <text x="70" y="55" fill="#34d399" font-size="11" font-family="Outfit,sans-serif" font-weight="600">dk/dt = sf(k) &minus; (&delta;+n)k</text>
+          <text x="70" y="52" fill="#34d399" font-size="11" font-family="Outfit,sans-serif" font-weight="600">dk/dt = sf(k) &minus; (&delta;+n)k</text>
         </svg>
         <div class="diagram-caption">
-          $sf(k)$ (concave) intersects $(\delta+n)k$ (linear) at the unique steady state $k^*$. Arrows show global convergence.
+          $sf(k)$ (concave, green) intersects $(\delta+n)k$ (dashed) at the unique steady state $k^*$. Below $k^*$: investment exceeds break-even &rarr; $k$ rises. Above $k^*$: the reverse. Arrows show global convergence.
         </div>
       </div>
     </div>
 
-    <!-- EXERCISE 1: COBB-DOUGLAS -->
+    <!-- ═══ EXERCISE 1: COBB-DOUGLAS ═══ -->
     <div class="exo-card">
       <div class="exo-label">&#9998; Exercise 1</div>
       <div class="exo-title">The Cobb-Douglas Case</div>
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">In the case where $Y = K^\alpha L^{1-\alpha}$:</p>
       <div class="exo-q-list">
         <div class="exo-q"><span class="exo-num">1.</span>Show that when production factors are paid at their marginal returns, $\alpha$ is the share of capital income in GDP, and $1-\alpha$ the share of labour income.</div>
-        <div class="exo-q"><span class="exo-num">2.</span>Show that $f(k) = k^\alpha$ (where $k = K/L$).</div>
-        <div class="exo-q"><span class="exo-num">3.</span>What is the value of $k^*$ at which $dk/dt = 0$ ?</div>
-        <div class="exo-q"><span class="exo-num">4.</span>For this $k^*$, what is the growth rate of GDP per capita ?</div>
-        <div class="exo-q"><span class="exo-num">5.</span>For this $k^*$, what is the growth rate of GDP ?</div>
+        <div class="exo-q"><span class="exo-num">2.</span>Show that $f(k) = k^\alpha$ where $k = K/L$.</div>
+        <div class="exo-q"><span class="exo-num">3.</span>What is the value of $k^*$ at which $dk/dt = 0$?</div>
+        <div class="exo-q"><span class="exo-num">4.</span>For this $k^*$, what is the growth rate of GDP per capita?</div>
+        <div class="exo-q"><span class="exo-num">5.</span>For this $k^*$, what is the growth rate of GDP?</div>
         <div class="exo-q"><span class="exo-num">6.</span>Show that $s$ can be expressed in terms of $k^*$, $n$ and $\delta$.</div>
         <div class="exo-q"><span class="exo-num">7.</span>Show that the growth rate of $k$ can be expressed in terms of $k/k^*$.</div>
-        <div class="exo-q"><span class="exo-num">8.</span>What is the growth rate of GDP per capita (out of steady state) ?</div>
-        <div class="exo-q"><span class="exo-num">9.</span>What is the growth rate of GDP (out of steady state) ?</div>
+        <div class="exo-q"><span class="exo-num">8.</span>What is the growth rate of GDP per capita (out of steady state)?</div>
+        <div class="exo-q"><span class="exo-num">9.</span>What is the growth rate of GDP (out of steady state)?</div>
       </div>
 
       <button class="toggle-btn" onclick="toggle(this,'corr-cd')">Show correction <span class="arrow">&#9660;</span></button>
@@ -347,74 +513,78 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
         <div class="corr-section">
 
           <div class="corr-q">
-            <div class="corr-q-title">1 — Capital and labour shares</div>
+            <div class="corr-q-title">1 &mdash; Capital and labour shares</div>
             <div class="corr-body">
-              <p>The marginal product of capital is $F_K = \alpha K^{\alpha-1}L^{1-\alpha} = \alpha\,\dfrac{Y}{K}$.</p>
-              <p>Capital income $= F_K \cdot K = \alpha Y$, so its share in GDP is $\alpha$. Similarly, $F_L \cdot L = (1-\alpha)Y$, so labour's share is $1-\alpha$.</p>
+              <p>Compute the marginal product of capital: $F_K = \alpha K^{\alpha-1}L^{1-\alpha} = \alpha\,\dfrac{Y}{K}$.</p>
+              <p>If capital is paid its marginal product, capital income $= F_K \cdot K = \alpha Y$. Its share in GDP is therefore $\alpha$.</p>
+              <p>Similarly, $F_L = (1-\alpha)K^\alpha L^{-\alpha} = (1-\alpha)\dfrac{Y}{L}$, so labour income $= F_L \cdot L = (1-\alpha)Y$ and labour&rsquo;s share is $1-\alpha$.</p>
+              <p><strong>Check:</strong> $\alpha + (1-\alpha) = 1$ &mdash; consistent with CRS (Euler&rsquo;s theorem: $F_K K + F_L L = Y$). &#10003;</p>
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">2 — Intensive form $f(k)$</div>
+            <div class="corr-q-title">2 &mdash; Intensive form $f(k)$</div>
             <div class="corr-body">
-              <p>Divide $Y = K^\alpha L^{1-\alpha}$ by $L$:</p>
-              $$y = \frac{Y}{L} = \frac{K^\alpha L^{1-\alpha}}{L} = \left(\frac{K}{L}\right)^\alpha = k^\alpha$$
-              <p>So $f(k) = k^\alpha$.</p>
+              <p>Divide $Y = K^\alpha L^{1-\alpha}$ by $L$:
+              $$y = \frac{Y}{L} = \frac{K^\alpha L^{1-\alpha}}{L} = \left(\frac{K}{L}\right)^\alpha L^{1-\alpha-1} \cdot L^0 = k^\alpha$$</p>
+              <p>So $f(k) = k^\alpha$. Note $f''(k) = \alpha(\alpha-1)k^{\alpha-2} &lt; 0$ since $0 &lt; \alpha &lt; 1$ &mdash; confirms diminishing returns. &#10003;</p>
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">3 — Steady-state capital $k^*$</div>
+            <div class="corr-q-title">3 &mdash; Steady-state capital $k^*$</div>
             <div class="corr-body">
-              <p>At $dk/dt = 0$: $s\,k^{*\alpha} = (\delta+n)k^*$, hence $k^{*\,\alpha-1} = \dfrac{\delta+n}{s}$, so:</p>
-              $$k^* = \left(\frac{s}{\delta+n}\right)^{\!1/(1-\alpha)}$$
+              <p>At $dk/dt = 0$: $s\,k^{*\,\alpha} = (\delta+n)k^*$, i.e. $k^{*\,\alpha-1} = \dfrac{\delta+n}{s}$.</p>
+              $$\boxed{k^* = \left(\frac{s}{\delta+n}\right)^{\!1/(1-\alpha)}}$$
+              <p>As expected: higher $s$ or lower $n$, $\delta$ raises $k^*$.</p>
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">4 — Growth rate of GDP per capita at $k^*$</div>
+            <div class="corr-q-title">4 &mdash; Growth rate of GDP per capita at $k^*$</div>
             <div class="corr-body">
-              <p>At the steady state, $k$ is constant, so $y^* = k^{*\alpha}$ is constant. The growth rate of GDP per capita is <strong>0</strong>.</p>
+              <p>At the steady state, $k$ is constant by definition. Since $y^* = k^{*\alpha}$, $y$ is also constant. The growth rate of GDP per capita is <strong>0</strong>.</p>
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">5 — Growth rate of GDP at $k^*$</div>
+            <div class="corr-q-title">5 &mdash; Growth rate of GDP at $k^*$</div>
             <div class="corr-body">
-              <p>$Y = yL$. Since $y$ is constant and $L$ grows at rate $n$, aggregate GDP grows at rate <strong>$n$</strong>.</p>
+              <p>$Y = yL$. With $\dot{y}/y = 0$ and $\dot{L}/L = n$, we get $\dot{Y}/Y = n$. Aggregate GDP grows at rate <strong>$n$</strong> (extensive growth only).</p>
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">6 — Saving rate in terms of $k^*$, $n$, $\delta$</div>
+            <div class="corr-q-title">6 &mdash; Saving rate in terms of $k^*$, $n$, $\delta$</div>
             <div class="corr-body">
-              <p>From $s\,k^{*\alpha} = (\delta+n)k^*$:</p>
-              $$s = (\delta+n)\,k^{*\,1-\alpha}$$
+              <p>From the steady-state condition $s k^{*\alpha} = (\delta+n)k^*$:</p>
+              $$\boxed{s = (\delta+n)\,k^{*\,1-\alpha}}$$
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">7 — Growth rate of $k$ in terms of $k/k^*$</div>
+            <div class="corr-q-title">7 &mdash; Growth rate of $k$ as a function of $k/k^*$</div>
             <div class="corr-body">
-              <p>The growth rate of $k$ is $\hat{k} \equiv \dfrac{\dot{k}}{k} = s k^{\alpha-1} - (\delta+n)$.</p>
-              <p>Substituting $s = (\delta+n)k^{*\,1-\alpha}$:</p>
-              $$\hat{k} = (\delta+n)k^{*\,1-\alpha}\,k^{\alpha-1} - (\delta+n) = (\delta+n)\!\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]$$
+              <p>The growth rate of $k$ is $\hat{k} \equiv \dot{k}/k = sk^{\alpha-1} - (\delta+n)$.</p>
+              <p>Substitute $s = (\delta+n)k^{*\,1-\alpha}$:</p>
+              $$\hat{k} = (\delta+n)\,k^{*\,1-\alpha}\,k^{\alpha-1} - (\delta+n) = (\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]$$
+              <p><strong>Interpretation:</strong> when $k &lt; k^*$, the bracket is positive $\Rightarrow$ $k$ grows. When $k = k^*$, bracket $= 0$ $\Rightarrow$ steady state. The further $k$ is below $k^*$, the faster the growth.</p>
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">8 — Growth rate of GDP per capita (out of steady state)</div>
+            <div class="corr-q-title">8 &mdash; Growth rate of GDP per capita (out of steady state)</div>
             <div class="corr-body">
-              <p>$y = k^\alpha$, so $\hat{y} = \alpha\,\hat{k}$:</p>
-              $$\hat{y} = \alpha(\delta+n)\!\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]$$
+              <p>$y = k^\alpha \Rightarrow \hat{y} = \dot{y}/y = \alpha\,\hat{k}$:
+              $$\boxed{\hat{y} = \alpha(\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$</p>
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">9 — Growth rate of GDP (out of steady state)</div>
+            <div class="corr-q-title">9 &mdash; Growth rate of GDP (out of steady state)</div>
             <div class="corr-body">
-              <p>$Y = yL$, so $g_Y = \hat{y} + n$:</p>
-              $$g_Y = \alpha(\delta+n)\!\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right] + n$$
+              <p>$Y = yL \Rightarrow g_Y = \hat{y} + n$:
+              $$\boxed{g_Y = \alpha(\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right] + n}$$</p>
             </div>
           </div>
 
@@ -422,74 +592,101 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
       </div>
     </div>
 
-    <!-- ADDING TFP -->
+    <!-- ═══ TFP ═══ -->
     <div class="concept-card blue-top">
       <div class="section-header">
         <span class="section-label">Extension</span>
         <h3>Adding Total Factor Productivity</h3>
       </div>
-      <div class="math-display boxed">$$Y = (AL)^{1-\alpha}K^\alpha$$</div>
+      <div class="math-display boxed-blue">$$Y = (AL)^{1-\alpha}K^\alpha$$</div>
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        where $A$ is Total Factor Productivity, growing at rate $g$:
-        $$\frac{dA/dt}{A} = g$$
+        $A$ is Total Factor Productivity (TFP), growing at exogenous rate $g$:
       </p>
+      <div class="math-display">$$\frac{\dot{A}}{A} = g$$</div>
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Redefine $k = K/(AL)$ (capital per <em>efficient</em> worker). The law of motion becomes:</p>
-      <div class="math-display boxed" style="border-color:var(--blue-border);background:var(--blue-muted);">$$\frac{dk}{dt} = sf(k) - (\delta + n + g)k$$</div>
-      <div class="key-note blue">
-        Population growth $n$ and TFP growth $g$ both dilute capital per efficient worker &mdash; hence $(\delta+n+g)$ replaces $(\delta+n)$.
+      <div class="math-display boxed-blue">$$\frac{dk}{dt} = sf(k) - (\delta + n + g)k$$</div>
+
+      <button class="toggle-btn" onclick="toggle(this,'demo-tfp-law')">Show: why $(\delta+n+g)k$ ? <span class="arrow">&#9660;</span></button>
+      <div class="collapsible" id="demo-tfp-law">
+        <div class="demo-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Differentiate $k = K/(AL)$:</strong>
+            $$\dot{k} = \frac{\dot{K}}{AL} - k\,\frac{d(AL)/dt}{AL} = \frac{\dot{K}}{AL} - k\left(\frac{\dot{A}}{A}+\frac{\dot{L}}{L}\right)$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            Substitute $\dot{A}/A = g$, $\dot{L}/L = n$, and $\dot{K} = sY - \delta K$:
+            $$\dot{k} = \frac{sY - \delta K}{AL} - (n+g)k = sf(k) - \delta k - (n+g)k$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            $$\boxed{\dot{k} = sf(k) - (\delta+n+g)k}$$
+            <p style="margin-top:8px;">The extra $gk$ term captures the <strong>technology dilution</strong> effect: TFP growth makes each unit of effective labour more productive, raising the effective workforce $AL$ and diluting capital per efficient worker.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="key-note blue" style="margin-top:4px;">
+        At the steady state of this extended model, GDP per capita grows at rate $g$ (TFP growth), and aggregate GDP grows at $n+g$. This resolves the original Solow model&rsquo;s limitation: it now generates sustained per-capita growth.
       </div>
     </div>
 
-    <!-- EXERCISE 2: TFP CASE -->
+    <!-- ═══ EXERCISE 2: TFP ═══ -->
     <div class="exo-card">
       <div class="exo-label">&#9998; Exercise 2</div>
       <div class="exo-title">The Cobb-Douglas Case with TFP</div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Answer the same questions as in Exercise&nbsp;1 in this specific case, with $k = K/(AL)$ and $(\delta+n+g)$ replacing $(\delta+n)$.</p>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Answer the same questions as in Exercise 1 in this specific case, with $k = K/(AL)$ and $(\delta+n+g)$ replacing $(\delta+n)$.</p>
 
       <button class="toggle-btn" onclick="toggle(this,'corr-tfp')">Show correction <span class="arrow">&#9660;</span></button>
       <div class="collapsible" id="corr-tfp">
         <div class="corr-section">
 
           <div class="corr-q">
-            <div class="corr-q-title">2 — Intensive form</div>
+            <div class="corr-q-title">2 &mdash; Intensive form</div>
             <div class="corr-body">
-              <p>$Y = (AL)^{1-\alpha}K^\alpha$. Divide by $AL$:</p>
-              $$\tilde{y} = \frac{Y}{AL} = \left(\frac{K}{AL}\right)^\alpha = k^\alpha \implies f(k)=k^\alpha$$
+              <p>Divide $Y = (AL)^{1-\alpha}K^\alpha$ by $AL$:</p>
+              $$\tilde{y} = \frac{Y}{AL} = \left(\frac{K}{AL}\right)^\alpha = k^\alpha \implies f(k) = k^\alpha$$
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">3 — Steady-state $k^*$</div>
+            <div class="corr-q-title">3 &mdash; Steady-state $k^*$</div>
             <div class="corr-body">
-              <p>At $dk/dt=0$: $sk^{*\alpha} = (\delta+n+g)k^*$, so:</p>
+              <p>At $dk/dt = 0$: $sk^{*\,\alpha} = (\delta+n+g)k^*$, so:</p>
               $$k^* = \left(\frac{s}{\delta+n+g}\right)^{\!1/(1-\alpha)}$$
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">4 &amp; 5 — Growth rates at steady state</div>
+            <div class="corr-q-title">4 &amp; 5 &mdash; Growth rates at steady state</div>
             <div class="corr-body">
-              <p>At $k^*$, $k = K/(AL)$ is constant. Since $A$ grows at $g$, $K/L$ grows at $g$, and $y = Y/L$ grows at $g$. So: growth rate of GDP per capita $= g$, growth rate of GDP $= n + g$.</p>
+              <p>At $k^*$, $k = K/(AL)$ is constant. Since $A$ grows at $g$, $K/L$ grows at $g$ too, so $y = Y/L$ grows at $g$. Aggregate GDP $Y = y \cdot L$ grows at $n+g$.</p>
+              <p>&rarr; Growth rate of GDP per capita: $\boldsymbol{g}$. Growth rate of GDP: $\boldsymbol{n+g}$.</p>
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">6 — Saving rate in terms of $k^*$</div>
+            <div class="corr-q-title">6 &mdash; Saving rate in terms of $k^*$</div>
             <div class="corr-body">$$s = (\delta+n+g)\,k^{*\,1-\alpha}$$</div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">7 — Growth rate of $k$ in terms of $k/k^*$</div>
+            <div class="corr-q-title">7 &mdash; Growth rate of $k$ in terms of $k/k^*$</div>
             <div class="corr-body">
-              $$\hat{k} = (\delta+n+g)\!\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]$$
+              $$\hat{k} = (\delta+n+g)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]$$
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">8 &amp; 9 — Growth rates out of steady state</div>
+            <div class="corr-q-title">8 &amp; 9 &mdash; Growth rates out of steady state</div>
             <div class="corr-body">
-              <p>Growth rate of GDP per capita: $\hat{y} = g + \alpha\,\hat{k} = g + \alpha(\delta+n+g)\!\left[\left(\dfrac{k^*}{k}\right)^{\!1-\alpha}-1\right]$</p>
-              <p>Growth rate of GDP: $g_Y = \hat{y} + n$</p>
+              <p>Growth of GDP per capita: $g_y = g + \alpha(\delta+n+g)\!\left[\left(\dfrac{k^*}{k}\right)^{1-\alpha}-1\right]$</p>
+              <p>Growth of GDP: $g_Y = g_y + n$</p>
             </div>
           </div>
 
@@ -497,7 +694,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
       </div>
     </div>
 
-    <!-- GOLDEN RULE 1/2 -->
+    <!-- ═══ GOLDEN RULE 1/2 ═══ -->
     <div class="concept-card amber-top">
       <div class="section-header">
         <span class="section-label">Golden Rule 1/2</span>
@@ -506,30 +703,37 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
         Is there a saving rate $s$ that maximises consumption per <em>efficient worker</em> at the steady state?
       </p>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">$s$ can be expressed in terms of $k^*$:</p>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;">Step 1 &mdash; Express $s$ in terms of $k^*$</p>
       <div class="math-display">$$s = (\delta+n+g)\,k^{*\,1-\alpha}$$</div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Consumption per efficient worker at steady state:</p>
-      <div class="math-display">$$c = (1-s)\,k^{*\alpha} = k^{*\alpha} - (\delta+n+g)\,k^*$$</div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Maximising over $k^*$, this is maximum for:</p>
-      <div class="math-display boxed" style="border-color:var(--amber-border);background:var(--amber-muted);">$$k^{**} = \left(\frac{\alpha}{\delta+n+g}\right)^{\!1/(1-\alpha)} \qquad \text{which is the case if } s = \alpha$$</div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;">Step 2 &mdash; Write consumption per efficient worker</p>
+      <div class="math-display">$$c = (1-s)\,k^{*\,\alpha} = k^{*\,\alpha} - (\delta+n+g)\,k^*$$</div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;">Step 3 &mdash; Maximise over $k^*$</p>
+      <div class="math-display">$$\frac{dc}{dk^*} = \alpha k^{*\,\alpha-1} - (\delta+n+g) = 0 \implies k^{**} = \left(\frac{\alpha}{\delta+n+g}\right)^{\!1/(1-\alpha)}$$</div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">The saving rate corresponding to $k^{**}$ is $s = \alpha$:</p>
+      <div class="math-display boxed-amber">$$k^{**} = \left(\frac{\alpha}{\delta+n+g}\right)^{\!1/(1-\alpha)} \qquad \Longleftrightarrow \qquad s = \alpha$$</div>
+
       <div class="key-note amber">
-        <strong>The Golden Rule:</strong> When the saving rate equals the share of capital income in GDP ($s = \alpha$), the steady state is the one where consumption per efficient worker is maximum.
+        <strong>The Golden Rule:</strong> When the saving rate equals the share of capital income in GDP ($s = \alpha$), the steady state maximises consumption per efficient worker. This is called the golden rule saving rate.
       </div>
     </div>
 
-    <!-- GOLDEN RULE 2/2 -->
-    <div class="exo-card" style="border-color:rgba(251,191,36,0.25);border-top-color:var(--amber-bright);">
-      <div class="exo-label">&#9998; Golden Rule 2/2 &mdash; Questions</div>
-      <div class="exo-title">A higher saving rate is not necessarily better</div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;margin-top:2px;">Note that a higher saving rate is not necessarily better for the economy. Consider:</p>
+    <!-- ═══ GOLDEN RULE 2/2 ═══ -->
+    <div class="exo-card">
+      <div class="exo-label">&#9998; Golden Rule 2/2</div>
+      <div class="exo-title">A Higher Saving Rate Is Not Necessarily Better</div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">Consider two cases:</p>
       <div class="exo-q-list">
         <div class="exo-q">
           <span class="exo-num">1.</span>
-          An economy where the golden rule is not respected and $s > \alpha$. What would happen to the per capita consumption of <em>all</em> generations if this economy enforced the golden rule saving rate?
+          An economy where $s &gt; \alpha$. What would happen to per capita consumption of <em>all</em> generations if one could enforce $s = \alpha$?
         </div>
         <div class="exo-q">
           <span class="exo-num">2.</span>
-          What if, on the opposite, the saving rate is $s < \alpha$?
+          What if, on the opposite, $s &lt; \alpha$?
         </div>
       </div>
 
@@ -538,17 +742,23 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
         <div class="corr-section">
 
           <div class="corr-q">
-            <div class="corr-q-title">1 — Case $s > \alpha$ (over-saving)</div>
+            <div class="corr-q-title">1 &mdash; Case $s &gt; \alpha$ (over-saving)</div>
             <div class="corr-body">
-              <p>If $s > \alpha$, the economy is at a steady state $k^*$ that is <strong>above</strong> the golden rule level $k^{**}$. Consumption per efficient worker is below its maximum.</p>
-              <p>Enforcing $s = \alpha$ reduces saving, which increases consumption <strong>immediately</strong> (since less is saved) and also raises steady-state consumption. Every generation benefits: current consumption rises on impact and the new steady-state consumption is higher. This transition is <strong>Pareto improving</strong>.</p>
+              <p>If $s &gt; \alpha$, the economy&rsquo;s steady state $k^*$ is <strong>above</strong> the golden rule $k^{**}$. The economy is saving too much: it sacrifices current consumption to accumulate capital beyond what maximises long-run welfare.</p>
+              <p>Reducing $s$ to $\alpha$ has two effects that both work in the same direction:</p>
+              <p><strong>(i) Immediate gain:</strong> less saving $\Rightarrow$ more consumption <em>right now</em>. Current generations benefit immediately.</p>
+              <p><strong>(ii) Long-run gain:</strong> the new steady state has higher $c^*$. Future generations also benefit.</p>
+              <p>Since <em>every</em> generation gains, the move to the golden rule is <strong>Pareto improving</strong>. The economy was dynamically inefficient (over-accumulating capital).</p>
             </div>
           </div>
 
           <div class="corr-q">
-            <div class="corr-q-title">2 — Case $s < \alpha$ (under-saving)</div>
+            <div class="corr-q-title">2 &mdash; Case $s &lt; \alpha$ (under-saving)</div>
             <div class="corr-body">
-              <p>If $s < \alpha$, the economy is below the golden rule: $k^* < k^{**}$. Enforcing $s = \alpha$ requires <strong>increasing</strong> saving, which <strong>reduces</strong> current consumption on impact. Although the long-run consumption is higher, current and near-term generations must sacrifice. This is <strong>not</strong> Pareto improving &mdash; there is a trade-off between generations.</p>
+              <p>If $s &lt; \alpha$, the economy is <strong>below</strong> the golden rule. Raising $s$ to $\alpha$ would increase the long-run steady-state consumption &mdash; but at a cost:</p>
+              <p><strong>Short-run sacrifice:</strong> higher saving means lower consumption <em>today</em>. Current and near-future generations must sacrifice.</p>
+              <p><strong>Long-run gain:</strong> capital accumulates more, and eventually the new (higher) $k^{**}$ is reached, raising $c^*$ for all future generations.</p>
+              <p>This creates a <strong>trade-off between generations</strong>: it is not Pareto improving. Whether to move to the golden rule involves a value judgement about how to weigh current vs. future generations.</p>
             </div>
           </div>
 
@@ -556,8 +766,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex
       </div>
     </div>
 
-  </div>
-</div>
+  </div><!-- end main-content -->
+</div><!-- end main-wrap -->
 
 <script>
 function toggleSidebar(){
