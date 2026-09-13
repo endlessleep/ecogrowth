@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECOGROWTH — The Ramsey Model</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$'],['\\(','\\)']] },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<style>
+:root {
+  --sidebar-bg: #07130c;
+  --sidebar-width: 280px;
+
+  --bg: #0b0f0d;
+  --bg-card: #121a15;
+  --bg-card-hover: #18231d;
+  --bg-deep: #060907;
+
+  --green: #10b981;
+  --green-bright: #34d399;
+  --green-muted: rgba(16,185,129,0.1);
+  --green-border: rgba(16,185,129,0.3);
+  --green-glow: rgba(16,185,129,0.15);
+  --green-gradient: linear-gradient(135deg, #10b981 0%, #047857 100%);
+
+  --blue-bright: #60a5fa;
+  --blue-muted: rgba(59,130,246,0.1);
+  --blue-border: rgba(59,130,246,0.3);
+
+  --amber-bright: #fbbf24;
+  --amber-muted: rgba(251,191,36,0.08);
+  --amber-border: rgba(251,191,36,0.3);
+
+  --purple-bright: #c084fc;
+  --purple-muted: rgba(168,85,247,0.1);
+  --purple-border: rgba(168,85,247,0.3);
+
+  --text: #f8fafc;
+  --text-2: #cbd5e1;
+  --text-3: #94a3b8;
+  --text-muted: #64748b;
+
+  --border: rgba(255,255,255,0.07);
+  --radius: 10px;
+  --radius-lg: 16px;
+  --font: 'Outfit', sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  position: fixed; top:0; left:0; bottom:0;
+  z-index: 200; transition: transform .3s ease; overflow: hidden;
+}
+.sidebar:not(.open) { transform: translateX(-100%); }
+.sidebar-brand {
+  padding: 22px 20px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.sidebar-brand h1 { font-size: 1.25rem; font-weight: 800; letter-spacing: 1px; }
+.sidebar-brand h1 span { color: var(--green); }
+.sidebar-close { background:none; border:none; color:var(--text-3); font-size:1.4rem; cursor:pointer; }
+.sidebar-close:hover { color: var(--green); }
+
+.sidebar-nav { flex:1; overflow-y:auto; padding:12px 0; }
+.sidebar-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 22px;
+  color: var(--text-3); text-decoration: none;
+  font-size: 0.88rem; font-weight: 700;
+  transition: all .2s; border-left: 3px solid transparent;
+}
+.sidebar-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.sidebar-link.active { color: var(--green-bright); border-left-color: var(--green); background: var(--green-muted); }
+
+.sidebar-group { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
+.sidebar-group-title {
+  padding: 10px 22px 4px;
+  font-size: 0.82rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.6px; color: var(--text-3);
+}
+.sidebar-sublink {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 22px 9px 36px;
+  color: var(--text-3); text-decoration: none;
+  font-size: 0.85rem; font-weight: 600;
+  transition: all .2s; border-left: 3px solid transparent;
+}
+.sidebar-sublink:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.sidebar-sublink.active { color: var(--green-bright); border-left-color: var(--green); background: var(--green-muted); }
+
+/* ── SIDEBAR FOOTER (STAR NOVA) ── */
+.sidebar-footer { padding: 14px 16px; border-top: 1px solid var(--border); }
+.sidebar-user {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 10px 12px;
+}
+.user-avatar {
+  width: 34px; height: 34px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative;
+}
+.user-dot {
+  width: 8px; height: 8px; background: var(--green);
+  border-radius: 50%; border: 2px solid var(--sidebar-bg);
+  position: absolute; bottom: -2px; right: -2px;
+  box-shadow: 0 0 6px var(--green);
+}
+.user-info { overflow: hidden; }
+.user-name { font-size: 0.82rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-role { font-size: 0.7rem; color: var(--text-muted); }
+
+/* ── TOPBAR ── */
+.topbar {
+  height: 64px; background: rgba(11,15,13,0.9);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px); position: sticky; top:0; z-index: 100;
+  display: flex; align-items: center; padding: 0 28px; gap: 16px;
+}
+.topbar-toggle {
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  color: var(--text); width: 38px; height: 38px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1.1rem; flex-shrink: 0; transition: .2s;
+}
+.topbar-toggle:hover { border-color: var(--green-border); color: var(--green); }
+.topbar-breadcrumb { color: var(--text-3); font-size: 0.88rem; display: flex; align-items: center; gap: 6px; }
+.topbar-breadcrumb .sep { opacity: .4; }
+.topbar-breadcrumb strong { color: var(--text); font-weight: 700; }
+.topbar-pill {
+  margin-left: auto; background: var(--green-muted);
+  border: 1px solid var(--green-border); color: var(--green-bright);
+  padding: 5px 14px; border-radius: 999px; font-size: 0.78rem;
+  font-weight: 700; display: flex; align-items: center; gap: 7px;
+}
+.topbar-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 7px var(--green); }
+
+/* ── LAYOUT ── */
+.main-wrap { margin-left: var(--sidebar-width); flex:1; display:flex; flex-direction:column; transition:margin-left .3s; min-width:0; }
+.main-wrap.expanded { margin-left:0; }
+.main-content { padding: 40px 44px 70px; max-width: 880px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+
+/* ── PAGE TITLE ── */
+.page-title-block { border-bottom: 1px solid var(--border); padding-bottom: 22px; }
+.page-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--green); margin-bottom: 8px; }
+.page-title-block h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.15; }
+.page-title-block p { color: var(--text-3); font-size: 0.95rem; margin-top: 7px; }
+
+/* ── CONCEPT CARDS ── */
+.concept-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 24px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.concept-card.green-top { border-top: 3px solid var(--green); }
+.concept-card.blue-top  { border-top: 3px solid var(--blue-bright); }
+.concept-card.purple-top{ border-top: 3px solid var(--purple-bright); }
+.concept-card.amber-top { border-top: 3px solid var(--amber-bright); }
+
+.section-header { display: flex; align-items: center; gap: 12px; }
+.section-label {
+  font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .8px;
+  background: var(--green-muted); color: var(--green-bright);
+  border: 1px solid var(--green-border); padding: 4px 10px; border-radius: 999px;
+}
+.section-header h3 { font-size: 1.15rem; font-weight: 800; color: var(--text); }
+
+/* ── MATH DISPLAY ── */
+.math-display {
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 13px 18px;
+  text-align: center; margin: 4px 0; overflow-x: auto;
+}
+.math-display.boxed { border-color: var(--green-border); background: var(--green-muted); }
+.math-display.boxed-blue { border-color: var(--blue-border); background: var(--blue-muted); }
+.math-display.boxed-purple { border-color: var(--purple-border); background: var(--purple-muted); }
+.math-display.boxed-amber { border-color: var(--amber-border); background: var(--amber-muted); }
+
+/* ── VAR GRID ── */
+.var-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.var-item {
+  background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 9px 13px; font-size: 0.88rem; color: var(--text-2);
+}
+.var-item strong { color: var(--green-bright); }
+
+/* ── KEY NOTE ── */
+.key-note {
+  font-size: 0.9rem; color: var(--text-2); line-height: 1.65;
+  border-left: 3px solid var(--green); padding: 12px 18px;
+  background: var(--green-muted); border-radius: 0 var(--radius) var(--radius) 0;
+}
+.key-note.blue { border-left-color: var(--blue-bright); background: var(--blue-muted); }
+.key-note.purple { border-left-color: var(--purple-bright); background: var(--purple-muted); }
+.key-note.amber { border-left-color: var(--amber-bright); background: var(--amber-muted); }
+.key-note strong { color: var(--text); font-weight: 800; }
+
+/* ── STEP DEMO ── */
+.demo-step {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 12px 14px; border-radius: var(--radius);
+  background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+}
+.step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--green-muted); border: 1px solid var(--green-border);
+  color: var(--green-bright); font-size: 0.72rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.step-body { font-size: 0.9rem; color: var(--text-2); line-height: 1.65; flex: 1; }
+.step-body strong { color: var(--text); }
+.step-body p { margin-bottom: 6px; }
+.step-body p:last-child { margin-bottom: 0; }
+
+/* ── TOGGLE & COLLAPSIBLE ── */
+.toggle-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  color: var(--text-2); font-family: var(--font);
+  font-size: 0.82rem; font-weight: 700;
+  padding: 8px 16px; border-radius: 999px;
+  cursor: pointer; transition: all .2s ease; width: fit-content;
+}
+.toggle-btn:hover { border-color: var(--green-border); color: var(--green-bright); background: var(--green-muted); }
+.toggle-btn .arrow { font-size: 0.65rem; transition: transform .25s ease; display: inline-block; }
+.toggle-btn.open .arrow { transform: rotate(180deg); }
+
+.collapsible {
+  display: none; margin-top: 10px;
+  background: rgba(6,9,7,0.75); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px 22px;
+  font-size: 0.9rem; color: var(--text-2); line-height: 1.65;
+}
+.collapsible.open { display: block; animation: fadeDown .2s ease; }
+.collapsible strong { color: var(--text); font-weight: 700; }
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── TABLE STYLES ── */
+.comparison-table {
+  width: 100%; border-collapse: collapse; margin-top: 8px;
+  font-size: 0.88rem;
+}
+.comparison-table th {
+  text-align: left; padding: 10px 14px;
+  background: rgba(255,255,255,0.04); color: var(--text);
+  border-bottom: 1px solid var(--border); font-weight: 700;
+}
+.comparison-table td {
+  padding: 11px 14px; border-bottom: 1px solid var(--border);
+  color: var(--text-2); vertical-align: middle;
+}
+.comparison-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+@media(max-width:900px){
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main-wrap { margin-left: 0 !important; }
+  .main-content { padding: 24px 20px 40px; }
+  .var-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar open" id="sidebar">
+  <div class="sidebar-brand">
+    <h1>ECOGROWTH<span>.</span></h1>
+    <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="index.html" class="sidebar-link">📂 0 — Overview</a>
+    <div class="sidebar-group">
+      <div class="sidebar-group-title">📂 1 — Neoclassical Growth Model</div>
+      <a href="solow.html" class="sidebar-sublink">a) Solow Model</a>
+      <a href="ramsey.html" class="sidebar-sublink active">b) Ramsey Model</a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="user-avatar" style="background: transparent;">
+        <img src="images/avatar.png" alt="STAR NOVA" style="width:100%;height:100%;border-radius:8px;object-fit:cover;">
+        <span class="user-dot"></span>
+      </div>
+      <div class="user-info">
+        <div class="user-name">STAR NOVA</div>
+        <div class="user-role">ecogrowth.github.io</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main-wrap" id="main-wrap">
+  <div class="topbar">
+    <button class="topbar-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="topbar-breadcrumb">
+      ECOGROWTH <span class="sep">›</span> 1 — Neoclassical Growth Model <span class="sep">›</span> <strong>b) Ramsey Model</strong>
+    </div>
+    <div class="topbar-pill"><span class="topbar-dot"></span>Chapter 1b</div>
+  </div>
+
+  <div class="main-content">
+
+    <!-- PAGE TITLE -->
+    <div class="page-title-block">
+      <div class="page-label">Chapter 1b — Neoclassical Growth Model</div>
+      <h1>The Ramsey Model</h1>
+      <p>Endogenous saving, instantaneous utility, the Hamiltonian, and optimal consumption dynamics.</p>
+    </div>
+
+    <!-- ═══ CARD 1: MOTIVATION ═══ -->
+    <div class="concept-card green-top">
+      <div class="section-header">
+        <span class="section-label">Motivation</span>
+        <h3>Why an Endogenous Saving Rate?</h3>
+      </div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        In the Solow model, the saving rate $s$ is assumed to be <strong>constant and exogenous</strong>. While this provides a tractable benchmark, it has two major limitations:
+      </p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:2px;">
+        <div class="var-item">
+          <strong>1. Empirical variation:</strong> There is no reason why the saving rate in an economy should be constant. It can vary significantly with the level of economic development and demographic transitions.
+        </div>
+        <div class="var-item">
+          <strong>2. Microeconomic foundation:</strong> In an economic model, one would prefer to have an endogenous saving rate as the <em>consumption–saving trade-off is an economic decision</em>. Forward-looking households choose how much to consume today versus how much to save for future generations.
+        </div>
+      </div>
+      <div class="key-note" style="margin-top:6px;">
+        <strong>The Ramsey approach:</strong> Instead of imposing an arbitrary $s$, the Ramsey model lets households choose their optimal path of consumption over time by maximising an <strong>intertemporal utility function</strong>.
+      </div>
+    </div>
+
+    <!-- ═══ CARD 2: INSTANTANEOUS UTILITY ═══ -->
+    <div class="concept-card purple-top">
+      <div class="section-header">
+        <span class="section-label" style="background:var(--purple-muted);color:var(--purple-bright);border-color:var(--purple-border);">Part 1 / 3</span>
+        <h3>Instantaneous Utility Function $u(c)$</h3>
+      </div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        We need a household instantaneous utility function $u(c)$ where $c$ is consumption per effective worker:
+      </p>
+      <div class="math-display boxed-purple">$$c = \frac{C}{AL}$$</div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        The instantaneous utility function $u(c)$ satisfies <strong>four standard neoclassical characteristics</strong>:
+      </p>
+
+      <div class="var-grid">
+        <div class="var-item">
+          <strong style="color:var(--purple-bright);">$u'(c) > 0$</strong>
+          <p style="margin:4px 0 0;font-size:0.85rem;color:var(--text-2);line-height:1.5;">
+            <strong>Positive marginal utility:</strong> Marginal utility is positive (more consumption = a higher utility).
+          </p>
+        </div>
+        <div class="var-item">
+          <strong style="color:var(--purple-bright);">$u''(c) < 0$</strong>
+          <p style="margin:4px 0 0;font-size:0.85rem;color:var(--text-2);line-height:1.5;">
+            <strong>Decreasing marginal utility:</strong> Marginal utility is decreasing (preference for consumption smoothing across time).
+          </p>
+        </div>
+        <div class="var-item">
+          <strong style="color:var(--purple-bright);">$\lim_{c \to 0} u'(c) = \infty$</strong>
+          <p style="margin:4px 0 0;font-size:0.85rem;color:var(--text-2);line-height:1.5;">
+            <strong>Inada condition at 0:</strong> The marginal utility of the first unit of consumption is infinite. Households will never choose zero consumption.
+          </p>
+        </div>
+        <div class="var-item">
+          <strong style="color:var(--purple-bright);">$\lim_{c \to \infty} u'(c) = 0$</strong>
+          <p style="margin:4px 0 0;font-size:0.85rem;color:var(--text-2);line-height:1.5;">
+            <strong>Inada condition at $\infty$:</strong> As consumption becomes arbitrarily large, marginal satisfaction approaches zero (asymptotic satiation).
+          </p>
+        </div>
+      </div>
+
+      <!-- INLINE SVG VISUALIZATION OF u(c) -->
+      <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-top:6px;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <svg viewBox="0 0 520 180" style="width:100%;max-width:520px;height:auto;overflow:visible;">
+          <!-- Axes -->
+          <line x1="40" y1="160" x2="490" y2="160" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+          <line x1="40" y1="160" x2="40" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+          <text x="490" y="174" fill="#94a3b8" font-size="12" font-family="Outfit" text-anchor="end">c = C / (AL)</text>
+          <text x="40" y="14" fill="#94a3b8" font-size="12" font-family="Outfit">Utility</text>
+
+          <!-- u(c) curve: increasing concave -->
+          <path d="M 40 160 Q 90 60 480 40" fill="none" stroke="#c084fc" stroke-width="3" />
+          <text x="485" y="44" fill="#c084fc" font-size="13" font-weight="700" font-family="Outfit">u(c)</text>
+
+          <!-- u'(c) curve: decreasing from infinity -->
+          <path d="M 44 25 Q 60 120 480 152" fill="none" stroke="#34d399" stroke-width="2" stroke-dasharray="4,4" />
+          <text x="485" y="156" fill="#34d399" font-size="13" font-weight="700" font-family="Outfit">u'(c)</text>
+
+          <!-- Annotations -->
+          <circle cx="40" cy="160" r="3.5" fill="#c084fc" />
+          <text x="50" y="32" fill="#34d399" font-size="11" font-family="Outfit">slope → ∞</text>
+        </svg>
+        <span style="font-size:0.8rem;color:var(--text-3);font-style:italic;">
+          The instantaneous utility function $u(c)$ is strictly increasing ($u' > 0$) and strictly concave ($u'' < 0$).
+        </span>
+      </div>
+    </div>
+
+    <!-- ═══ CARD 3: INTERTEMPORAL UTILITY & SETUP ═══ -->
+    <div class="concept-card blue-top">
+      <div class="section-header">
+        <span class="section-label" style="background:var(--blue-muted);color:var(--blue-bright);border-color:var(--blue-border);">Part 2 / 3</span>
+        <h3>Intertemporal Utility &amp; Model Setup</h3>
+      </div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Households are forward-looking and maximise their total discounted future utility over an infinite horizon:
+      </p>
+      <div class="math-display boxed-blue">$$W = \int_0^\infty u(c(t))\,e^{-\rho t}\,dt$$</div>
+
+      <div class="var-grid">
+        <div class="var-item"><strong>$c(t) = \dfrac{C}{AL}$</strong> — consumption per effective worker at time $t$</div>
+        <div class="var-item"><strong>$\rho > 0$</strong> — annual discount rate for (future) utility (pure rate of time preference)</div>
+        <div class="var-item" style="grid-column: 1 / -1;">
+          <strong>$e^{-\rho t}$</strong> — discount factor: utility in the distant future is discounted more heavily because households prefer present consumption.
+        </div>
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:8px;">
+        Other equations of the model (same as in the Solow model)
+      </p>
+
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="var-item">
+          <strong>1. Production function:</strong>
+          <div class="math-display" style="margin:6px 0;">$$Y = (AL)^{1-\alpha}K^\alpha$$</div>
+          In intensive form: $\bar{y} = \dfrac{Y}{AL} = f(k) = k^\alpha$.
+        </div>
+        <div class="var-item">
+          <strong>2. Aggregate capital accumulation:</strong>
+          <div class="math-display" style="margin:6px 0;">$$\frac{dK}{dt} = Y - \delta K - C$$</div>
+          Gross investment is output minus consumption ($I = Y - C$), and net capital accumulation is gross investment minus physical depreciation.
+        </div>
+        <div class="var-item">
+          <strong>3. No-Ponzi game condition:</strong>
+          <p style="margin-top:4px;font-size:0.88rem;color:var(--text-2);">
+            Households cannot run an infinite debt scheme (Ponzi scheme) by continuously borrowing to finance consumption without ever repaying.
+          </p>
+        </div>
+      </div>
+
+      <button class="toggle-btn" onclick="toggle(this,'demo-ramsey-acc')">
+        Show demonstration: from aggregate $dK/dt$ to intensive $dk/dt$ <span class="arrow">▾</span>
+      </button>
+      <div class="collapsible" id="demo-ramsey-acc">
+        <div class="demo-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Write $k = \dfrac{K}{AL}$ and differentiate with respect to time:</strong>
+            $$\frac{dk}{dt} = \frac{1}{AL}\frac{dK}{dt} - k\,\frac{\frac{d(AL)}{dt}}{AL}$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Growth of effective labour $AL$:</strong> Since $\dfrac{1}{A}\dfrac{dA}{dt} = g$ and $\dfrac{1}{L}\dfrac{dL}{dt} = n$:
+            $$\frac{\frac{d(AL)}{dt}}{AL} = n + g$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Substitute $\dfrac{dK}{dt} = Y - \delta K - C$:</strong>
+            $$\frac{dk}{dt} = \frac{Y - \delta K - C}{AL} - (n + g)k = \frac{Y}{AL} - \delta k - \frac{C}{AL} - (n + g)k$$
+            <p>Using $f(k) = \dfrac{Y}{AL}$ and $c = \dfrac{C}{AL}$:</p>
+            $$\boxed{\frac{dk}{dt} = f(k) - (n + \delta + g)k - c}$$
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CARD 4: THE HAMILTONIAN ═══ -->
+    <div class="concept-card green-top">
+      <div class="section-header">
+        <span class="section-label">Part 3 / 3</span>
+        <h3>Solving the Ramsey Model (1/3) — The Hamiltonian</h3>
+      </div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        The household intertemporal maximisation program is:
+      </p>
+      <div class="math-display boxed">
+        $$\max_c \quad W = \int_0^\infty u(c(t))\,e^{-\rho t}\,dt \qquad \text{under: } \frac{dk}{dt} = f(k) - (n + \delta + g)k - c$$
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:6px;">The Hamiltonian</p>
+      <div class="math-display">$$\mathcal{H} = u(c) + \lambda\left[f(k) - (n + \delta + g)k - c\right]$$</div>
+      <p style="color:var(--text-2);font-size:0.9rem;line-height:1.6;">
+        where $\lambda(t)$ is the <strong>co-state variable</strong>: the <em>shadow price of capital</em> per effective worker.
+      </p>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;">First-Order Conditions &amp; Transversality Condition</p>
+
+      <div class="demo-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>First-order condition on $c$:</strong> $\dfrac{\partial \mathcal{H}}{\partial c} = 0$
+          <div class="math-display" style="margin:6px 0;">$$\frac{\partial \mathcal{H}}{\partial c} = 0 \implies \boxed{u'(c) = \lambda}$$</div>
+          <p>The marginal utility of consumption must equal the shadow price of capital at all times.</p>
+        </div>
+      </div>
+
+      <div class="demo-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>First-order condition on $k$ (co-state equation):</strong> $\dfrac{d\lambda}{dt} = \rho\lambda - \dfrac{\partial \mathcal{H}}{\partial k}$
+          <div class="math-display" style="margin:6px 0;">$$\rho\lambda = \lambda\left[f'(k) - (n + g + \delta)\right] + \frac{d\lambda}{dt}$$</div>
+          <p>Governs the rate at which the shadow value of capital $\lambda$ changes over time.</p>
+        </div>
+      </div>
+
+      <div class="demo-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>The Transversality Condition:</strong>
+          <div class="math-display" style="margin:6px 0;">$$\lim_{t \to \infty} e^{-\rho t}\,\lambda(t)\,k(t) = 0$$</div>
+          <p>The present value of capital at infinity must be zero (households must not leave valuable capital unconsumed at the end of time).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CARD 5: THE EULER EQUATION ═══ -->
+    <div class="concept-card purple-top">
+      <div class="section-header">
+        <span class="section-label" style="background:var(--purple-muted);color:var(--purple-bright);border-color:var(--purple-border);">Part 2 / 3</span>
+        <h3>Solving the Ramsey Model (2/3) — The Euler Equation</h3>
+      </div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Combining the first two conditions yields the <strong>Euler equation</strong>:
+      </p>
+
+      <div class="math-display boxed-purple">
+        $$\boxed{\frac{u''(c)}{u'(c)}\frac{dc}{dt} = \rho - \left[f'(k) - (n + g + \delta)\right]}$$
+      </div>
+
+      <button class="toggle-btn" onclick="toggle(this,'demo-euler-derivation')">
+        Show step-by-step derivation of the Euler equation <span class="arrow">▾</span>
+      </button>
+      <div class="collapsible" id="demo-euler-derivation">
+        <div class="demo-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Differentiate $u'(c) = \lambda$ with respect to time $t$:</strong>
+            $$\frac{d\lambda}{dt} = u''(c)\frac{dc}{dt}$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Substitute $\frac{d\lambda}{dt}$ into the co-state equation:</strong>
+            $$\rho\lambda = \lambda\left[f'(k) - (n + g + \delta)\right] + u''(c)\frac{dc}{dt}$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Divide both sides by $\lambda = u'(c)$:</strong>
+            $$\rho = f'(k) - (n + g + \delta) + \frac{u''(c)}{u'(c)}\frac{dc}{dt}$$
+            <p>Rearranging yields the Euler equation:</p>
+            $$\boxed{\frac{u''(c)}{u'(c)}\frac{dc}{dt} = \rho - \left[f'(k) - (n + g + \delta)\right]}$$
+          </div>
+        </div>
+      </div>
+
+      <div class="key-note purple" style="margin-top:8px;">
+        <strong>Economic Meaning:</strong> This is the <strong>Euler equation</strong>. It gives the <em>optimal growth rate of consumption</em>.
+        <p style="margin-top:6px;">
+          • The net marginal product of capital $f'(k) - (n + g + \delta)$ is the reward for waiting (saving).<br>
+          • $\rho$ is the psychological cost of waiting (impatience).<br>
+          • When $f'(k) - (n + g + \delta) > \rho$, the reward exceeds impatience, so consumption rises over time ($\frac{dc}{dt} > 0$).
+        </p>
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:14px;">
+        The Ramsey Steady State / Regular Path
+      </p>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        When $f'(k) = \rho + n + g + \delta$, we have:
+      </p>
+      <div class="math-display">
+        $$\frac{u''(c)}{u'(c)}\underbrace{\frac{dc}{dt}}_{=0} = 0 \iff \boxed{f'(k^*) = \rho + n + g + \delta}$$
+      </div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        <strong>And this is the steady state / regular path.</strong>
+      </p>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        The result is very similar to that of the Solow model, <em>except for the parameter $\rho$ (the discount rate)</em>.
+      </p>
+    </div>
+
+    <!-- ═══ CARD 6: COMPLETE SUMMARY (3/3) ═══ -->
+    <div class="concept-card green-top">
+      <div class="section-header">
+        <span class="section-label">Summary</span>
+        <h3>Solving the Ramsey Model (3/3) — The Optimal Dynamic System</h3>
+      </div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        The complete dynamic system describing the economy at the optimum consists of:
+      </p>
+
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="var-item">
+          <strong>1. Optimal Consumption Growth (Euler Equation):</strong>
+          <div class="math-display" style="margin:6px 0;">$$\frac{u''(c)}{u'(c)}\frac{dc}{dt} = \rho - \left[f'(k) - (n + g + \delta)\right]$$</div>
+        </div>
+
+        <div class="var-item">
+          <strong>2. Capital Accumulation (Resource Constraint):</strong>
+          <div class="math-display" style="margin:6px 0;">$$\frac{dk}{dt} = f(k) - (n + g + \delta)k - c$$</div>
+        </div>
+
+        <div class="var-item">
+          <strong>3. Transversality Condition (Terminal Constraint):</strong>
+          <div class="math-display" style="margin:6px 0;">$$\lim_{t \to \infty} e^{-\rho t}\,\lambda(t)\,k(t) = 0$$</div>
+        </div>
+      </div>
+
+      <!-- COMPARISON WITH GOLDEN RULE -->
+      <div class="key-note amber" style="margin-top:8px;">
+        <strong>Ramsey Steady State vs. Solow Golden Rule:</strong>
+        <p style="margin-top:6px;">
+          • <strong>Solow Golden Rule:</strong> $f'(k^{**}) = n + g + \delta$<br>
+          • <strong>Ramsey Steady State:</strong> $f'(k^*) = \rho + n + g + \delta$
+        </p>
+        <p style="margin-top:6px;">
+          Since households discount the future ($\rho > 0$), we have $f'(k^*) > f'(k^{**})$. Because capital exhibits diminishing returns ($f'' < 0$), this implies:
+        </p>
+        <div class="math-display" style="margin:6px 0;background:rgba(255,255,255,0.04);">
+          $$\boxed{k^* < k^{**}}$$
+        </div>
+        <p style="margin-top:6px;">
+          <strong>Dynamic Efficiency:</strong> In the Solow model, over-saving ($s > \alpha$) could push the economy into dynamic inefficiency ($k^* > k^{**}$). In the Ramsey model, forward-looking households will <em>never</em> accumulate capital beyond the Golden Rule level: $k^*$ is strictly below $k^{**}$, ruling out dynamic inefficiency endogenously.
+        </p>
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:14px;">
+        Synthesis: Solow Model vs. Ramsey Model
+      </p>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Solow Model (Chapter 1a)</th>
+            <th>Ramsey Model (Chapter 1b)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Saving Rate</strong></td>
+            <td>Exogenous and constant ($s$)</td>
+            <td>Endogenous, chosen by households ($s(t)$)</td>
+          </tr>
+          <tr>
+            <td><strong>Household Behaviour</strong></td>
+            <td>Mechanical saving rule ($S = sY$)</td>
+            <td>Intertemporal utility maximisation ($\max W$)</td>
+          </tr>
+          <tr>
+            <td><strong>Steady-State Condition</strong></td>
+            <td>$s f(k^*) = (n + g + \delta)k^*$</td>
+            <td>$f'(k^*) = \rho + n + g + \delta$</td>
+          </tr>
+          <tr>
+            <td><strong>Dynamic Inefficiency</strong></td>
+            <td>Possible if $s > \alpha$ ($k^* > k^{**}$)</td>
+            <td>Impossible ($k^* < k^{**}$ always because $\rho > 0$)</td>
+          </tr>
+          <tr>
+            <td><strong>Long-run Growth ($y = Y/L$)</strong></td>
+            <td>Exogenous technology rate: $g$</td>
+            <td>Exogenous technology rate: $g$</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- end main-content -->
+</div><!-- end main-wrap -->
+
+<script>
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('main-wrap').classList.toggle('expanded');
+}
+function toggle(btn,id){
+  var box = document.getElementById(id);
+  var isOpen = box.classList.contains('open');
+  box.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  if(!isOpen && window.MathJax){ MathJax.typesetPromise([box]); }
+}
+</script>
+</body>
+</html>
