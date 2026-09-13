@@ -783,90 +783,170 @@ body {
       </ul>
 
       <button class="toggle-btn" onclick="toggle(this,'corr-cd')">Show correction <span class="arrow">▾</span></button>
-      <div class="collapsible" id="corr-cd">
+            <div class="collapsible" id="corr-cd">
         <div class="corr-section">
 
+          <!-- QUESTION 1 -->
           <div class="corr-q">
-            <div class="corr-q-title">Question 1 — Capital and labour income shares</div>
+            <div class="corr-q-title">Question 1 — Capital and Labour Income Shares in GDP</div>
             <div class="corr-body">
-              <p>Compute the marginal product of capital:</p>
-              $$F_K = \frac{\partial Y}{\partial K} = \alpha K^{\alpha-1}L^{1-\alpha} = \alpha \frac{K^\alpha L^{1-\alpha}}{K} = \alpha \frac{Y}{K}$$
-              <p>When capital is paid its marginal product, total capital earnings are $F_K \cdot K = \alpha Y$. Its share in GDP is:</p>
-              $$\frac{F_K \cdot K}{Y} = \frac{\alpha Y}{Y} = \alpha$$
-              <p>Similarly for labour: $F_L = (1-\alpha)\dfrac{Y}{L}$, so labour earnings are $F_L \cdot L = (1-\alpha)Y$. Its share in GDP is:</p>
-              $$\frac{F_L \cdot L}{Y} = \frac{(1-\alpha)Y}{Y} = 1-\alpha$$
+              <p>When factors of production are paid their marginal products:</p>
+              <div class="math-display">$$r = \frac{\partial Y}{\partial K} \qquad \text{and} \qquad w = \frac{\partial Y}{\partial L}$$</div>
+              <p>where $r$ is the real return to capital and $w$ is the real wage rate.</p>
+
+              <p><strong>Capital income share:</strong> Differentiate $Y = K^\alpha L^{1-\alpha}$ with respect to $K$:</p>
+              <div class="math-display">$$r = \frac{\partial Y}{\partial K} = \alpha K^{\alpha-1}L^{1-\alpha}$$</div>
+              <p>Total capital income earned by all capital owners is $rK$:</p>
+              <div class="math-display">$$rK = \alpha K^{\alpha-1}L^{1-\alpha} \cdot K = \alpha K^\alpha L^{1-\alpha} = \alpha Y$$</div>
+              <p>Divide by total GDP $Y$ to get capital's share in output:</p>
+              <div class="math-display">$$\boxed{\frac{rK}{Y} = \alpha}$$</div>
+
+              <p><strong>Labour income share:</strong> Differentiate $Y = K^\alpha L^{1-\alpha}$ with respect to $L$:</p>
+              <div class="math-display">$$w = \frac{\partial Y}{\partial L} = (1-\alpha)K^\alpha L^{-\alpha}$$</div>
+              <p>Total labour income earned by all workers is $wL$:</p>
+              <div class="math-display">$$wL = (1-\alpha)K^\alpha L^{-\alpha} \cdot L = (1-\alpha)K^\alpha L^{1-\alpha} = (1-\alpha)Y$$</div>
+              <p>Divide by total GDP $Y$ to get labour's share in output:</p>
+              <div class="math-display">$$\boxed{\frac{wL}{Y} = 1-\alpha}$$</div>
+              <p><strong>Conclusion:</strong> $\alpha$ is the share of capital income in GDP, and $1-\alpha$ is the share of labour income in GDP.</p>
             </div>
           </div>
 
+          <!-- QUESTION 2 -->
           <div class="corr-q">
-            <div class="corr-q-title">Question 2 — Intensive form $f(k)$</div>
+            <div class="corr-q-title">Question 2 — Intensive Form: $f(k) = k^\alpha$</div>
             <div class="corr-body">
-              <p>Divide total output $Y$ by labour $L$:</p>
-              $$y = \frac{Y}{L} = \frac{K^\alpha L^{1-\alpha}}{L} = \frac{K^\alpha}{L^\alpha} = \left(\frac{K}{L}\right)^\alpha = k^\alpha$$
-              <p>So $f(k) = k^\alpha$.</p>
+              <p>Output per worker is defined as $y = \dfrac{Y}{L}$. Substitute the production function:</p>
+              <div class="math-display">$$y = \frac{K^\alpha L^{1-\alpha}}{L} = K^\alpha L^{-\alpha} = \left(\frac{K}{L}\right)^\alpha$$</div>
+              <p>Since capital per worker is defined as $k = \dfrac{K}{L}$, we obtain:</p>
+              <div class="math-display">$$\boxed{y = f(k) = k^\alpha}$$</div>
+              <p><strong>Interpretation:</strong> Output per worker depends solely on capital per worker. Because $0 < \alpha < 1$, the function has $f'(k) = \alpha k^{\alpha-1} > 0$ and $f''(k) = \alpha(\alpha-1)k^{\alpha-2} < 0$, which mathematically confirms <strong>diminishing marginal returns to capital</strong>.</p>
             </div>
           </div>
 
+          <!-- QUESTION 3 -->
           <div class="corr-q">
-            <div class="corr-q-title">Question 3 — Steady-state capital $k^*$</div>
+            <div class="corr-q-title">Question 3 — Steady-State Capital per Worker: $k^*$</div>
             <div class="corr-body">
-              <p>Set $dk/dt = 0$ in the law of motion:</p>
-              $$s f(k^*) = (\delta + n)k^* \implies s\,k^{*\alpha} = (\delta + n)k^*$$
-              <p>Divide both sides by $k^*$:</p>
-              $$s\,k^{*\alpha-1} = \delta + n \implies k^{*-(1-\alpha)} = \frac{\delta+n}{s} \implies k^{*\,1-\alpha} = \frac{s}{\delta+n}$$
-              $$\boxed{k^* = \left(\frac{s}{\delta+n}\right)^{\!\frac{1}{1-\alpha}}}$$
+              <p>The capital accumulation equation is:</p>
+              <div class="math-display">$$\frac{dk}{dt} = s k^\alpha - (\delta + n)k$$</div>
+              <p>At the steady state, capital per worker is constant by definition, so $\boxed{\dfrac{dk}{dt} = 0}$:</p>
+              <div class="math-display">$$s k^{*\alpha} - (\delta + n)k^* = 0 \implies s k^{*\alpha} = (\delta + n)k^*$$</div>
+              <p>Divide both sides by $k^{*\alpha}$ (or divide by $k^*$):</p>
+              <div class="math-display">$$k^{*\,1-\alpha} = \frac{s}{\delta + n}$$</div>
+              <p>Raise both sides to the power $\dfrac{1}{1-\alpha}$:</p>
+              <div class="math-display">$$\boxed{k^* = \left(\frac{s}{\delta + n}\right)^{\!\frac{1}{1-\alpha}}}$$</div>
+              <p><strong>Interpretation:</strong> $k^*$ is the long-run equilibrium level of capital per worker where gross investment per worker ($s f(k^*)$) exactly compensates for capital depreciation ($\delta k^*$) and population dilution ($nk^*$).</p>
             </div>
           </div>
 
+          <!-- QUESTION 4 -->
           <div class="corr-q">
-            <div class="corr-q-title">Question 4 — Growth rate of GDP per capita at $k^*$</div>
+            <div class="corr-q-title">Question 4 — Growth Rate of GDP per Capita at $k^*$</div>
             <div class="corr-body">
-              <p>At the steady state, $k = k^*$ is constant. Output per worker is $y^* = (k^*)^\alpha$, which is also constant.</p>
-              <p>Therefore, the growth rate of GDP per capita is <strong>0</strong>.</p>
+              <p>Output per worker depends on capital per worker: $y(t) = [k(t)]^\alpha$.</p>
+              <p>Differentiate with respect to time using the chain rule:</p>
+              <div class="math-display">$$\frac{dy}{dt} = \alpha k^{\alpha-1} \frac{dk}{dt}$$</div>
+              <p>The growth rate of GDP per capita is $\dfrac{1}{y}\dfrac{dy}{dt}$:</p>
+              <div class="math-display">$$\frac{1}{y}\frac{dy}{dt} = \frac{1}{k^\alpha} \cdot \alpha k^{\alpha-1} \frac{dk}{dt} = \alpha \frac{k^{\alpha-1}}{k^\alpha}\frac{dk}{dt} = \alpha \frac{1}{k}\frac{dk}{dt}$$</div>
+              <div class="math-display">$$\boxed{\frac{1}{y}\frac{dy}{dt} = \alpha \frac{1}{k}\frac{dk}{dt}}$$</div>
+              <p>At the steady state, $\dfrac{dk}{dt} = 0$, which immediately gives:</p>
+              <div class="math-display">$$\boxed{\frac{1}{y}\frac{dy}{dt} = 0}$$</div>
+              <p><strong>Interpretation:</strong> GDP per capita does <em>not</em> equal zero; rather, its <strong>growth rate is zero</strong>. Output per worker settles at a constant level: $y^* = (k^*)^\alpha$.</p>
             </div>
           </div>
 
+          <!-- QUESTION 5 -->
           <div class="corr-q">
-            <div class="corr-q-title">Question 5 — Growth rate of GDP at $k^*$</div>
+            <div class="corr-q-title">Question 5 — Growth Rate of Total GDP at $k^*$</div>
             <div class="corr-body">
-              <p>Total GDP is $Y = y \cdot L$. Since $y$ is constant and population grows at rate $n$, total GDP grows at the rate <strong>$n$</strong>.</p>
+              <p>Total GDP is output per worker times the number of workers: $Y = y \cdot L$.</p>
+              <p>Differentiate with respect to time using the product rule:</p>
+              <div class="math-display">$$\frac{dY}{dt} = L \frac{dy}{dt} + y \frac{dL}{dt}$$</div>
+              <p>Divide the entire equation by $Y = yL$:</p>
+              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = \frac{1}{y}\frac{dy}{dt} + \frac{1}{L}\frac{dL}{dt}}$$</div>
+              <p>By assumption, population grows at rate $n$, so $\dfrac{1}{L}\dfrac{dL}{dt} = n$. At the steady state, $\dfrac{1}{y}\dfrac{dy}{dt} = 0$. Therefore:</p>
+              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = n}$$</div>
+              <p><strong>Interpretation:</strong> While living standards per person are constant in the steady state, the total economy grows at rate $n$ because the labour force is expanding at rate $n$ (extensive growth only).</p>
             </div>
           </div>
 
+          <!-- QUESTION 6 -->
           <div class="corr-q">
-            <div class="corr-q-title">Question 6 — Saving rate $s$ in terms of $k^*$, $n$, and $\delta$</div>
+            <div class="corr-q-title">Question 6 — Expressing $s$ in Terms of $k^*$, $n$, and $\delta$</div>
             <div class="corr-body">
-              <p>From the steady-state equation $s\,k^{*\alpha} = (\delta+n)k^*$, isolate $s$:</p>
-              $$\boxed{s = (\delta+n)\,k^{*\,1-\alpha}}$$
+              <p>At the steady state, $\dfrac{dk}{dt} = 0 \implies s k^{*\alpha} = (\delta + n)k^*$.</p>
+              <p>Divide both sides by $k^{*\alpha}$:</p>
+              <div class="math-display">$$\boxed{s = (\delta + n)k^{*\,1-\alpha}}$$</div>
+              <p>This expression allows us to replace $s$ directly in the growth equation below.</p>
             </div>
           </div>
 
+          <!-- QUESTION 7 -->
           <div class="corr-q">
-            <div class="corr-q-title">Question 7 — Growth rate of $k$ in terms of $k/k^*$</div>
+            <div class="corr-q-title">Question 7 — Growth Rate of $k$ in Terms of $k/k^*$</div>
             <div class="corr-body">
-              <p>The growth rate of $k$ is:</p>
-              $$\frac{1}{k}\frac{dk}{dt} = \frac{s f(k) - (\delta+n)k}{k} = s k^{\alpha-1} - (\delta+n)$$
-              <p>Substitute $s = (\delta+n)k^{*\,1-\alpha}$:</p>
-              $$\frac{1}{k}\frac{dk}{dt} = (\delta+n)k^{*\,1-\alpha}\,k^{\alpha-1} - (\delta+n) = (\delta+n)\left[\frac{k^{*\,1-\alpha}}{k^{1-\alpha}} - 1\right]$$
-              $$\boxed{\frac{1}{k}\frac{dk}{dt} = (\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$
+              <p>Start from the capital accumulation equation: $\dfrac{dk}{dt} = s k^\alpha - (\delta + n)k$.</p>
+              <p>Divide by $k$ to obtain the growth rate of capital per worker:</p>
+              <div class="math-display">$$\frac{1}{k}\frac{dk}{dt} = s k^{\alpha-1} - (\delta + n)$$</div>
+              <p>Substitute the steady-state saving rate $s = (\delta + n)k^{*\,1-\alpha}$ from Question 6:</p>
+              <div class="math-display">$$\frac{1}{k}\frac{dk}{dt} = (\delta + n)k^{*\,1-\alpha}k^{\alpha-1} - (\delta + n) = (\delta + n)\left[k^{*\,1-\alpha}k^{\alpha-1} - 1\right]$$</div>
+              <p>Notice that $k^{*\,1-\alpha}k^{\alpha-1} = \dfrac{k^{*\,1-\alpha}}{k^{1-\alpha}} = \left(\dfrac{k^*}{k}\right)^{1-\alpha}$. Thus:</p>
+              <div class="math-display">$$\boxed{\frac{1}{k}\frac{dk}{dt} = (\delta + n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$</div>
+              <p>Equivalently, written in terms of $k/k^*$:</p>
+              <div class="math-display">$$\boxed{\frac{1}{k}\frac{dk}{dt} = (\delta + n)\left[\left(\frac{k}{k^*}\right)^{\!\alpha-1} - 1\right]}$$</div>
+
+              <p><strong>Interpretation &amp; Convergence Dynamics:</strong></p>
+              <p>Since $\delta + n > 0$ and $1-\alpha > 0$ (because $0 < \alpha < 1$), the sign of the growth rate depends entirely on the bracket:</p>
+              <ul style="margin-left:18px;display:flex;flex-direction:column;gap:5px;">
+                <li><strong>If $k < k^*$:</strong> then $\dfrac{k^*}{k} > 1 \implies \left(\dfrac{k^*}{k}\right)^{1-\alpha} > 1 \implies \boxed{\dfrac{1}{k}\dfrac{dk}{dt} > 0}$ (capital accumulates, $k \uparrow$).</li>
+                <li><strong>If $k = k^*$:</strong> then $\dfrac{k^*}{k} = 1 \implies \boxed{\dfrac{1}{k}\dfrac{dk}{dt} = 0}$ ($k$ remains constant).</li>
+                <li><strong>If $k > k^*$:</strong> then $\dfrac{k^*}{k} < 1 \implies \left(\dfrac{k^*}{k}\right)^{1-\alpha} < 1 \implies \boxed{\dfrac{1}{k}\dfrac{dk}{dt} < 0}$ (capital decumulates, $k \downarrow$).</li>
+              </ul>
+              <p>This proves mathematically that the steady state $k^*$ is <strong>globally stable</strong>: from any initial level $k(0) > 0$, the economy converges toward $k^*$.</p>
             </div>
           </div>
 
+          <!-- QUESTION 8 -->
           <div class="corr-q">
-            <div class="corr-q-title">Question 8 — Growth rate of GDP per capita (out of steady state)</div>
+            <div class="corr-q-title">Question 8 — Growth Rate of GDP per Capita Outside the Steady State</div>
             <div class="corr-body">
-              <p>Since $y = k^\alpha$, take logs and differentiate with respect to time:</p>
-              $$\ln y = \alpha \ln k \implies \frac{1}{y}\frac{dy}{dt} = \alpha \frac{1}{k}\frac{dk}{dt}$$
-              $$\boxed{\frac{1}{y}\frac{dy}{dt} = \alpha(\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$
+              <p>From Question 4, we established that $\dfrac{1}{y}\dfrac{dy}{dt} = \alpha \dfrac{1}{k}\dfrac{dk}{dt}$.</p>
+              <p>Substitute the expression for $\dfrac{1}{k}\dfrac{dk}{dt}$ found in Question 7:</p>
+              <div class="math-display">$$\boxed{\frac{1}{y}\frac{dy}{dt} = \alpha(\delta + n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$</div>
+
+              <p><strong>Interpretation:</strong></p>
+              <ul style="margin-left:18px;display:flex;flex-direction:column;gap:5px;">
+                <li><strong>If $k < k^*$:</strong> GDP per capita grows ($\dfrac{1}{y}\dfrac{dy}{dt} > 0$).</li>
+                <li><strong>If $k = k^*$:</strong> GDP per capita is constant ($\dfrac{1}{y}\dfrac{dy}{dt} = 0$).</li>
+                <li><strong>If $k > k^*$:</strong> GDP per capita falls ($\dfrac{1}{y}\dfrac{dy}{dt} < 0$).</li>
+              </ul>
+              <p>As the economy approaches its steady state ($k \to k^*$), $\dfrac{k^*}{k} \to 1$, so $\dfrac{1}{y}\dfrac{dy}{dt} \to 0$. The growth rate of GDP per capita <strong>slows down continuously and converges toward zero</strong>.</p>
             </div>
           </div>
 
+          <!-- QUESTION 9 -->
           <div class="corr-q">
-            <div class="corr-q-title">Question 9 — Growth rate of GDP (out of steady state)</div>
+            <div class="corr-q-title">Question 9 — Growth Rate of Total GDP Outside the Steady State</div>
             <div class="corr-body">
-              <p>Total GDP is $Y = y \cdot L$. The growth rate of a product is the sum of growth rates:</p>
-              $$\boxed{\frac{1}{Y}\frac{dY}{dt} = \frac{1}{y}\frac{dy}{dt} + n = \alpha(\delta+n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right] + n}$$
+              <p>Recall from Question 5 that total GDP growth decomposes into two parts:</p>
+              <div class="math-display">$$\text{GDP growth} = \text{GDP per capita growth} + \text{population growth}$$</div>
+              <div class="math-display">$$\frac{1}{Y}\frac{dY}{dt} = \frac{1}{y}\frac{dy}{dt} + \frac{1}{L}\frac{dL}{dt}$$</div>
+              <p>Substitute $\dfrac{1}{L}\dfrac{dL}{dt} = n$ and the result from Question 8:</p>
+              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} = \alpha(\delta + n)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right] + n}$$</div>
+
+              <p><strong>Interpretation:</strong></p>
+              <p>When an economy is developing ($k < k^*$), output per capita is expanding, so total GDP grows <strong>strictly faster than population growth</strong> ($\frac{1}{Y}\frac{dY}{dt} > n$).</p>
+              <p>As the economy gets closer to the steady state ($k \to k^*$), per-capita growth dries up ($\frac{1}{y}\frac{dy}{dt} \to 0$), and total GDP growth converges toward population growth:</p>
+              <div class="math-display">$$\boxed{\frac{1}{Y}\frac{dY}{dt} \longrightarrow n}$$</div>
             </div>
+          </div>
+
+          <!-- FINAL CONCLUSION -->
+          <div class="key-note" style="margin-top:6px;">
+            <strong>Core Takeaway — The Solow Convergence Mechanism:</strong>
+            <p style="margin-top:6px;">• When $k < k^*$, capital per worker grows ($k \uparrow$).</p>
+            <p>• When $k > k^*$, capital per worker declines ($k \downarrow$).</p>
+            <p>• Therefore, the economy always converges to $k^*$. As it nears $k^*$, the growth rate of capital per worker drops to zero ($\frac{1}{k}\frac{dk}{dt} \to 0$), the growth rate of GDP per capita drops to zero ($\frac{1}{y}\frac{dy}{dt} \to 0$), and total GDP growth settles at the rate of population growth ($\frac{1}{Y}\frac{dY}{dt} \to n$).</p>
           </div>
 
         </div>
