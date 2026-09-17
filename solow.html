@@ -1190,81 +1190,6 @@ body {
     </div>
 
 
-    <!-- ═══ TFP SOLOW DIAGRAM ═══ -->
-    <div class="concept-card blue-top">
-      <div class="section-header">
-        <span class="section-label" style="background:var(--blue-muted);color:var(--blue-bright);border-color:var(--blue-border);">Graph</span>
-        <h3>The Solow Diagram with Technological Progress</h3>
-      </div>
-      <div class="diagram-wrap">
-        <svg viewBox="0 0 680 370" width="100%" style="max-width:680px;display:block;">
-          <!-- Card Background -->
-          <rect width="680" height="370" fill="#07100b" rx="12" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          
-          <!-- Axes -->
-          <line x1="70" y1="310" x2="540" y2="310" stroke="#94a3b8" stroke-width="1.8"/>
-          <line x1="70" y1="30" x2="70" y2="310" stroke="#94a3b8" stroke-width="1.8"/>
-          <polygon points="540,306 540,314 550,310" fill="#94a3b8"/>
-          <polygon points="66,30 74,30 70,20" fill="#94a3b8"/>
-          <text x="554" y="314" fill="#94a3b8" font-size="13" font-family="Outfit,sans-serif" font-weight="700">k</text>
-          <text x="30" y="24" fill="#94a3b8" font-size="11" font-family="Outfit,sans-serif" font-weight="600">output, invest.</text>
-          <text x="52" y="324" fill="#64748b" font-size="11" font-family="Outfit,sans-serif">0</text>
-          
-          <!-- 1. f(k) curve (Blue) -->
-          <path d="M 70 310 C 130 170, 220 95, 330 65 S 450 50, 530 48" stroke="#60a5fa" stroke-width="2.6" fill="none"/>
-          <text x="542" y="52" fill="#60a5fa" font-size="12" font-family="Outfit,sans-serif" font-weight="700">f(k) = k^α</text>
-
-          <!-- 2. Break-even line: (delta + n + g_A)k (Amber dashed) -->
-          <line x1="70" y1="310" x2="530" y2="82" stroke="#fbbf24" stroke-width="2.2" stroke-dasharray="7,4"/>
-          <text x="542" y="86" fill="#fbbf24" font-size="12" font-family="Outfit,sans-serif" font-weight="700">(δ+n+g_A)k</text>
-
-          <!-- 3. s_high * f(k) curve (Light green dashed) -->
-          <path d="M 70 310 C 130 205, 220 145, 330 120 S 450 110, 530 112" stroke="#34d399" stroke-width="2.0" fill="none" stroke-dasharray="5,3"/>
-          <text x="542" y="116" fill="#34d399" font-size="11" font-family="Outfit,sans-serif" font-weight="600">s_high · f(k)</text>
-
-          <!-- 4. Baseline s * f(k) curve (Emerald bright solid) -->
-          <path d="M 70 310 C 130 235, 220 190, 330 165 S 450 152, 530 154" stroke="#10b981" stroke-width="2.8" fill="none"/>
-          <text x="542" y="158" fill="#10b981" font-size="12" font-family="Outfit,sans-serif" font-weight="700">s · f(k)</text>
-
-          <!-- 5. s_low * f(k) curve (Soft green dashed) -->
-          <path d="M 70 310 C 130 260, 220 225, 330 205 S 450 192, 530 195" stroke="#a7f3d0" stroke-width="1.8" fill="none" stroke-dasharray="4,3" opacity="0.8"/>
-          <text x="542" y="198" fill="#a7f3d0" font-size="11" font-family="Outfit,sans-serif" font-weight="600">s_low · f(k)</text>
-
-          <!-- Drop line & dot for baseline k* (Intersection at x=318, y=187) -->
-          <line x1="318" y1="187" x2="318" y2="310" stroke="rgba(16,185,129,0.5)" stroke-width="1.6" stroke-dasharray="4,4"/>
-          <circle cx="318" cy="187" r="5.5" fill="#10b981" stroke="#07100b" stroke-width="2"/>
-          <rect x="306" y="316" width="24" height="18" rx="4" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
-          <text x="312" y="329" fill="#10b981" font-size="11" font-family="Outfit,sans-serif" font-weight="700">k*</text>
-
-          <!-- Drop line & dot for s_high (Intersection at x=412, y=140) -->
-          <line x1="412" y1="140" x2="412" y2="310" stroke="rgba(52,211,153,0.35)" stroke-width="1.4" stroke-dasharray="3,3"/>
-          <circle cx="412" cy="140" r="4.5" fill="#34d399" stroke="#07100b" stroke-width="2"/>
-          <text x="400" y="329" fill="#34d399" font-size="10" font-family="Outfit,sans-serif" font-weight="600">k*high</text>
-
-          <!-- Drop line & dot for s_low (Intersection at x=222, y=235) -->
-          <line x1="222" y1="235" x2="222" y2="310" stroke="rgba(167,243,208,0.35)" stroke-width="1.4" stroke-dasharray="3,3"/>
-          <circle cx="222" cy="235" r="4.5" fill="#a7f3d0" stroke="#07100b" stroke-width="2"/>
-          <text x="210" y="329" fill="#a7f3d0" font-size="10" font-family="Outfit,sans-serif" font-weight="600">k*low</text>
-
-          <!-- Convergence arrows along the horizontal axis -->
-          <polygon points="150,306 150,314 162,310" fill="#34d399"/>
-          <text x="125" y="302" fill="#34d399" font-size="10" font-family="Outfit,sans-serif" font-weight="700">dk/dt &gt; 0</text>
-
-          <polygon points="460,306 460,314 448,310" fill="#f87171"/>
-          <text x="440" y="302" fill="#f87171" font-size="10" font-family="Outfit,sans-serif" font-weight="700">dk/dt &lt; 0</text>
-        </svg>
-        <div class="diagram-caption">
-          The Solow diagram with technological progress ($A$). Steady-state capital per effective worker $k^*$ occurs where gross investment $s f(k)$ balances total break-even investment $(\delta+n+g_A)k$.
-        </div>
-      </div>
-
-      <div style="margin-top:14px; font-size:0.92rem; color:var(--text-2); line-height:1.65;">
-        <p>• A higher saving rate ($s$) shifts the investment curve upward, moving the economy to a higher capital per efficient worker ($k^*_{high} > k^*$).</p>
-        <p>• <strong>Is higher $s$ always better?</strong> No: higher saving means that households consume a smaller fraction $(1-s)$ of output. The saving rate that maximises consumption per effective worker is given by the <strong>Golden Rule</strong> ($s = \alpha$).</p>
-      </div>
-    </div>
-
-
     <!-- ═══ EXERCISE 2: TFP ═══ -->
     <div class="exo-card">
       <div class="exo-label">✎ Exercise 2</div>
@@ -1295,7 +1220,7 @@ body {
         <li class="exo-q">
           <span class="exo-num">4.</span>
           <div class="exo-text">
-            For this $k^*$, what is the growth rate of total GDP ($g_Y$) ?
+            For this $k^*$, summarise all three growth rates: $g_y$ (output per effective worker), $g_{Y/L}$ (GDP per capita / living standards), and $g_Y$ (total GDP).
           </div>
         </li>
         <li class="exo-q">
@@ -1396,16 +1321,46 @@ body {
 
           <!-- QUESTION 4 -->
           <div class="corr-q">
-            <div class="corr-q-title">Question 4 — Growth Rate of Total GDP at $k^*$</div>
+            <div class="corr-q-title">Question 4 — All Growth Rates at the Steady State $k^*$</div>
             <div class="corr-body">
-              <p>Total GDP is output per worker multiplied by total labour: $Y = (Y/L) \cdot L$.</p>
-              <p>Differentiate with respect to time using the product rule:</p>
-              <div class="math-display">$$\frac{dY}{dt} = \frac{d(Y/L)}{dt}L + (Y/L)\frac{dL}{dt}$$</div>
+              <p>At the steady state $k = k^*$, we have $\dfrac{dk}{dt} = 0$ (so $g_k = 0$). We derive the three key growth rates the professor presented.</p>
+
+              <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:12px;">Part A — Growth Rate of Output per Effective Worker: $y = Y/(AL) = k^\alpha$</p>
+              <p>Differentiate $y = k^\alpha$ with respect to time:</p>
+              <div class="math-display">$$\frac{dy}{dt} = \alpha k^{\alpha-1}\frac{dk}{dt}$$</div>
+              <p>Divide by $y = k^\alpha$ to obtain the proportional growth rate:</p>
+              <div class="math-display">$$g_y \equiv \frac{1}{y}\frac{dy}{dt} = \alpha \left(\frac{1}{k}\frac{dk}{dt}\right) = \alpha g_k$$</div>
+              <p>At the steady state, $\dfrac{dk}{dt} = 0$ (so $g_k = 0$):</p>
+              <div class="math-display boxed">$$\boxed{g_y \equiv \frac{1}{y}\frac{dy}{dt} = \alpha \underbrace{g_k}_{=0} = 0}$$</div>
+              <p><strong>Conclusion:</strong> Output per effective worker is <em>stationary</em> at the steady state — it neither grows nor falls.</p>
+
+              <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:16px;">Part B — Growth Rate of GDP per Capita (Living Standards): $Y/L = A \cdot y = A k^\alpha$</p>
+              <p>Differentiate $Y/L = A k^\alpha$ with respect to time using the product rule. Write the full derivative first:</p>
+              <div class="math-display">$$\frac{d(Y/L)}{dt} = \frac{dA}{dt}k^\alpha + A\alpha k^{\alpha-1}\frac{dk}{dt}$$</div>
+              <p>Divide by $Y/L = Ak^\alpha$ to obtain the general growth rate of GDP per capita:</p>
+              <div class="math-display">$$g_{Y/L} \equiv \frac{1}{Y/L}\frac{d(Y/L)}{dt} = \frac{1}{A}\frac{dA}{dt} + \alpha\frac{1}{k}\frac{dk}{dt} = g_A + \alpha g_k$$</div>
+              <p>At the steady state, substitute $\dfrac{dk}{dt} = 0$ explicitly:</p>
+              <div class="math-display">$$\frac{d(Y/L)}{dt} = \frac{dA}{dt}(k^*)^\alpha + A\alpha(k^*)^{\alpha-1}\underbrace{\frac{dk}{dt}}_{=0} = \frac{dA}{dt}(k^*)^\alpha$$</div>
+              <div class="math-display boxed">$$\boxed{g_{Y/L} \equiv \frac{1}{Y/L}\frac{d(Y/L)}{dt} = g_A + \alpha\underbrace{g_k}_{=0} = g_A}$$</div>
+              <p><strong>Conclusion:</strong> Even though output per <em>effective</em> worker $y$ is stationary, GDP per capita (living standards) grows at rate $g_A$ because workers continuously become more productive as technology improves.</p>
+
+              <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:16px;">Part C — Growth Rate of Total GDP: $Y = (Y/L) \cdot L$</p>
+              <p>Total GDP is output per worker times the labour force. Differentiate using the product rule:</p>
+              <div class="math-display">$$\frac{dY}{dt} = \frac{d(Y/L)}{dt} \cdot L + (Y/L)\cdot\frac{dL}{dt}$$</div>
               <p>Divide by $Y = (Y/L)L$ to obtain the general growth rate of total GDP:</p>
               <div class="math-display">$$g_Y \equiv \frac{1}{Y}\frac{dY}{dt} = g_{Y/L} + g_L$$</div>
-              <p>At the steady state, substitute $g_{Y/L} = g_A$ and $g_L = n$:</p>
+              <p>At the steady state, substitute $g_{Y/L} = g_A$ (from Part B) and $g_L = n$:</p>
               <div class="math-display boxed">$$\boxed{g_Y \equiv \frac{1}{Y}\frac{dY}{dt} = g_A + n}$$</div>
-              <p><strong>Interpretation:</strong> Total GDP grows at the combined rate of technological progress and population growth ($g_A + n$). Total output expands both because each worker produces more ($g_A$) and because the labour force increases in size ($n$).</p>
+              <p><strong>Conclusion:</strong> Total GDP grows at the combined rate of technological progress and population growth. Output expands because each worker produces more ($g_A$) <em>and</em> because the labour force grows ($n$).</p>
+
+              <div class="key-note blue" style="margin-top:14px;">
+                <strong>Summary of Growth Rates at the Balanced Growth Path:</strong>
+                <ul style="margin-left:18px;margin-top:6px;display:flex;flex-direction:column;gap:5px;">
+                  <li>$g_y = 0$ &nbsp;— output per <em>effective</em> worker is stationary.</li>
+                  <li>$g_{Y/L} = g_A$ &nbsp;— living standards (GDP per capita) grow at the rate of technological progress.</li>
+                  <li>$g_Y = g_A + n$ &nbsp;— total GDP grows at the rate of technology plus population growth.</li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -1596,6 +1551,82 @@ body {
         $$rK = \alpha k^{\alpha-1}(kAL) = \alpha k^\alpha (AL) = \alpha Y \qquad \text{and} \qquad wL = (1-\alpha)A k^\alpha L = (1-\alpha)Y$$
       </div>
     </div>
+
+
+    <!-- ═══ TFP SOLOW DIAGRAM ═══ -->
+    <div class="concept-card blue-top">
+      <div class="section-header">
+        <span class="section-label" style="background:var(--blue-muted);color:var(--blue-bright);border-color:var(--blue-border);">Graph</span>
+        <h3>The Solow Diagram with Technological Progress</h3>
+      </div>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 680 370" width="100%" style="max-width:680px;display:block;">
+          <!-- Card Background -->
+          <rect width="680" height="370" fill="#07100b" rx="12" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          
+          <!-- Axes -->
+          <line x1="70" y1="310" x2="540" y2="310" stroke="#94a3b8" stroke-width="1.8"/>
+          <line x1="70" y1="30" x2="70" y2="310" stroke="#94a3b8" stroke-width="1.8"/>
+          <polygon points="540,306 540,314 550,310" fill="#94a3b8"/>
+          <polygon points="66,30 74,30 70,20" fill="#94a3b8"/>
+          <text x="554" y="314" fill="#94a3b8" font-size="13" font-family="Outfit,sans-serif" font-weight="700">k</text>
+          <text x="30" y="24" fill="#94a3b8" font-size="11" font-family="Outfit,sans-serif" font-weight="600">output, invest.</text>
+          <text x="52" y="324" fill="#64748b" font-size="11" font-family="Outfit,sans-serif">0</text>
+          
+          <!-- 1. f(k) curve (Blue) -->
+          <path d="M 70 310 C 130 170, 220 95, 330 65 S 450 50, 530 48" stroke="#60a5fa" stroke-width="2.6" fill="none"/>
+          <text x="542" y="52" fill="#60a5fa" font-size="12" font-family="Outfit,sans-serif" font-weight="700">f(k) = k^α</text>
+
+          <!-- 2. Break-even line: (delta + n + g_A)k (Amber dashed) -->
+          <line x1="70" y1="310" x2="530" y2="82" stroke="#fbbf24" stroke-width="2.2" stroke-dasharray="7,4"/>
+          <text x="542" y="86" fill="#fbbf24" font-size="12" font-family="Outfit,sans-serif" font-weight="700">(δ+n+g_A)k</text>
+
+          <!-- 3. s_high * f(k) curve (Light green dashed) -->
+          <path d="M 70 310 C 130 205, 220 145, 330 120 S 450 110, 530 112" stroke="#34d399" stroke-width="2.0" fill="none" stroke-dasharray="5,3"/>
+          <text x="542" y="116" fill="#34d399" font-size="11" font-family="Outfit,sans-serif" font-weight="600">s_high · f(k)</text>
+
+          <!-- 4. Baseline s * f(k) curve (Emerald bright solid) -->
+          <path d="M 70 310 C 130 235, 220 190, 330 165 S 450 152, 530 154" stroke="#10b981" stroke-width="2.8" fill="none"/>
+          <text x="542" y="158" fill="#10b981" font-size="12" font-family="Outfit,sans-serif" font-weight="700">s · f(k)</text>
+
+          <!-- 5. s_low * f(k) curve (Soft green dashed) -->
+          <path d="M 70 310 C 130 260, 220 225, 330 205 S 450 192, 530 195" stroke="#a7f3d0" stroke-width="1.8" fill="none" stroke-dasharray="4,3" opacity="0.8"/>
+          <text x="542" y="198" fill="#a7f3d0" font-size="11" font-family="Outfit,sans-serif" font-weight="600">s_low · f(k)</text>
+
+          <!-- Drop line & dot for baseline k* (Intersection at x=318, y=187) -->
+          <line x1="318" y1="187" x2="318" y2="310" stroke="rgba(16,185,129,0.5)" stroke-width="1.6" stroke-dasharray="4,4"/>
+          <circle cx="318" cy="187" r="5.5" fill="#10b981" stroke="#07100b" stroke-width="2"/>
+          <rect x="306" y="316" width="24" height="18" rx="4" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+          <text x="312" y="329" fill="#10b981" font-size="11" font-family="Outfit,sans-serif" font-weight="700">k*</text>
+
+          <!-- Drop line & dot for s_high (Intersection at x=412, y=140) -->
+          <line x1="412" y1="140" x2="412" y2="310" stroke="rgba(52,211,153,0.35)" stroke-width="1.4" stroke-dasharray="3,3"/>
+          <circle cx="412" cy="140" r="4.5" fill="#34d399" stroke="#07100b" stroke-width="2"/>
+          <text x="400" y="329" fill="#34d399" font-size="10" font-family="Outfit,sans-serif" font-weight="600">k*high</text>
+
+          <!-- Drop line & dot for s_low (Intersection at x=222, y=235) -->
+          <line x1="222" y1="235" x2="222" y2="310" stroke="rgba(167,243,208,0.35)" stroke-width="1.4" stroke-dasharray="3,3"/>
+          <circle cx="222" cy="235" r="4.5" fill="#a7f3d0" stroke="#07100b" stroke-width="2"/>
+          <text x="210" y="329" fill="#a7f3d0" font-size="10" font-family="Outfit,sans-serif" font-weight="600">k*low</text>
+
+          <!-- Convergence arrows along the horizontal axis -->
+          <polygon points="150,306 150,314 162,310" fill="#34d399"/>
+          <text x="125" y="302" fill="#34d399" font-size="10" font-family="Outfit,sans-serif" font-weight="700">dk/dt &gt; 0</text>
+
+          <polygon points="460,306 460,314 448,310" fill="#f87171"/>
+          <text x="440" y="302" fill="#f87171" font-size="10" font-family="Outfit,sans-serif" font-weight="700">dk/dt &lt; 0</text>
+        </svg>
+        <div class="diagram-caption">
+          The Solow diagram with technological progress ($A$). Steady-state capital per effective worker $k^*$ occurs where gross investment $s f(k)$ balances total break-even investment $(\delta+n+g_A)k$.
+        </div>
+      </div>
+
+      <div style="margin-top:14px; font-size:0.92rem; color:var(--text-2); line-height:1.65;">
+        <p>• A higher saving rate ($s$) shifts the investment curve upward, moving the economy to a higher capital per efficient worker ($k^*_{high} > k^*$).</p>
+        <p>• <strong>Is higher $s$ always better?</strong> No: higher saving means that households consume a smaller fraction $(1-s)$ of output. The saving rate that maximises consumption per effective worker is given by the <strong>Golden Rule</strong> ($s = \alpha$).</p>
+      </div>
+    </div>
+
 
 
     <!-- ═══ GOLDEN RULE 1/2 ═══ -->
