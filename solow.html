@@ -1553,6 +1553,369 @@ body {
     </div>
 
 
+    <!-- ═══ EXERCISE 2: TFP ═══ -->
+    <div class="exo-card">
+      <div class="exo-label">✎ Exercise 2</div>
+      <div class="exo-title">The Cobb-Douglas Case with TFP</div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Consider the Cobb-Douglas economy with labour-augmenting technological progress: $Y = (AL)^{1-\alpha} K^\alpha$, where $k = K/(AL)$ and break-even investment is $(\delta+n+g_A)k$.
+      </p>
+
+      <ul class="exo-q-list">
+        <li class="exo-q">
+          <span class="exo-num">1.</span>
+          <div class="exo-text">
+            Show that the intensive production function is $y = f(k) = k^\alpha$ where $k = K/(AL)$ and $y = Y/(AL)$.
+          </div>
+        </li>
+        <li class="exo-q">
+          <span class="exo-num">2.</span>
+          <div class="exo-text">
+            What is the value of $k^*$ at which $dk/dt = 0$ ?
+          </div>
+        </li>
+        <li class="exo-q">
+          <span class="exo-num">3.</span>
+          <div class="exo-text">
+            For this $k^*$, what are the growth rates of output per effective worker ($g_y$) and of GDP per capita ($g_{Y/L}$) ?
+          </div>
+        </li>
+        <li class="exo-q">
+          <span class="exo-num">4.</span>
+          <div class="exo-text">
+            For this $k^*$, summarise all three growth rates: $g_y$ (output per effective worker), $g_{Y/L}$ (GDP per capita / living standards), and $g_Y$ (total GDP).
+          </div>
+        </li>
+        <li class="exo-q">
+          <span class="exo-num">5.</span>
+          <div class="exo-text">
+            Show that $s$ can be expressed in terms of $k^*$, $n$, $g_A$ and $\delta$.
+          </div>
+        </li>
+        <li class="exo-q">
+          <span class="exo-num">6.</span>
+          <div class="exo-text">
+            Show that the growth rate of $k$ ($g_k$) can be expressed in terms of $k/k^*$.
+          </div>
+        </li>
+        <li class="exo-q">
+          <span class="exo-num">7.</span>
+          <div class="exo-text">
+            What is the growth rate of GDP per capita outside the steady state ?
+          </div>
+        </li>
+        <li class="exo-q">
+          <span class="exo-num">8.</span>
+          <div class="exo-text">
+            What is the growth rate of total GDP outside the steady state ?
+          </div>
+        </li>
+      </ul>
+
+      <button class="toggle-btn" onclick="toggle(this,'corr-tfp')">Show correction <span class="arrow">▾</span></button>
+      <div class="collapsible" id="corr-tfp">
+        <div class="corr-section">
+
+          <!-- QUESTION 1 -->
+          <div class="corr-q">
+            <div class="corr-q-title">Question 1 — Intensive Form: $f(k) = k^\alpha$ with $k = \dfrac{K}{AL}$</div>
+            <div class="corr-body">
+              <p>The aggregate production function with labour-augmenting technological progress is:</p>
+              <div class="math-display">$$Y = (AL)^{1-\alpha} K^\alpha$$</div>
+
+              <p>Output per <em>effective worker</em> is denoted as $y \equiv \dfrac{Y}{AL}$. Divide both sides by $AL$:</p>
+              <div class="math-display">$$y = \frac{Y}{AL} = \frac{(AL)^{1-\alpha} K^\alpha}{AL} = \frac{K^\alpha}{(AL)^\alpha} = \left(\frac{K}{AL}\right)^\alpha$$</div>
+
+              <p>Since capital per effective worker is defined as $k = \dfrac{K}{AL}$, we obtain the intensive form:</p>
+              <div class="math-display boxed">$$\boxed{y = f(k) = k^\alpha}$$</div>
+
+              <div class="key-note blue" style="margin-top:10px;">
+                <strong>Crucial Distinction — Two Different Output Concepts:</strong>
+                <ul style="margin-left:18px;margin-top:6px;display:flex;flex-direction:column;gap:5px;">
+                  <li><strong>$y = \dfrac{Y}{AL}$</strong> : output per <em>effective</em> worker (adjusted for worker efficiency).</li>
+                  <li><strong>$Y/L = A \cdot y = A k^\alpha$</strong> : output per <em>actual</em> worker (real GDP per capita / living standards).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- QUESTION 2 -->
+          <div class="corr-q">
+            <div class="corr-q-title">Question 2 — Steady-State Capital per Effective Worker: $k^*$</div>
+            <div class="corr-body">
+              <p>The capital accumulation equation in intensive form is $\dfrac{dk}{dt} = s k^\alpha - (\delta + n + g_A)k$.</p>
+              <p>At the steady state, capital per effective worker is constant, so $\boxed{\dfrac{dk}{dt} = 0}$:</p>
+              <div class="math-display">$$s (k^*)^\alpha - (\delta + n + g_A)k^* = 0 \implies s (k^*)^\alpha = (\delta + n + g_A)k^*$$</div>
+              <p>Divide both sides by $(k^*)^\alpha$:</p>
+              <div class="math-display">$$(k^*)^{1-\alpha} = \frac{s}{\delta + n + g_A}$$</div>
+              <p>Raise both sides to the power $\dfrac{1}{1-\alpha}$:</p>
+              <div class="math-display boxed">$$\boxed{k^* = \left(\frac{s}{\delta + n + g_A}\right)^{\!\frac{1}{1-\alpha}}}$$</div>
+              <p><strong>Interpretation:</strong> $k^*$ is the long-run equilibrium level of capital per effective worker. Investment per effective worker $s f(k^*)$ balances physical depreciation ($\delta k^*$), population growth ($n k^*$), and technological dilution ($g_A k^*$).</p>
+            </div>
+          </div>
+
+          <!-- QUESTION 3 -->
+          <div class="corr-q">
+            <div class="corr-q-title">Question 3 — Growth Rates of Output per Effective Worker ($g_y$) and GDP per Capita ($g_{Y/L}$) at $k^*$</div>
+            <div class="corr-body">
+              <p>At the steady state, capital per effective worker is stationary: $k = k^* \implies g_k \equiv \frac{1}{k}\frac{dk}{dt} = 0$. We explicitly distinguish both output measures:</p>
+
+              <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;">Part A — Output per Effective Worker: $y = \frac{Y}{AL} = k^\alpha$</p>
+              <p>Differentiate $y = k^\alpha$ with respect to time:</p>
+              <div class="math-display">$$\frac{dy}{dt} = \alpha k^{\alpha-1} \frac{dk}{dt}$$</div>
+              <p>Divide by $y = k^\alpha$ to obtain its proportional growth rate:</p>
+              <div class="math-display">$$g_y \equiv \frac{1}{y}\frac{dy}{dt} = \alpha \left(\frac{1}{k}\frac{dk}{dt}\right) = \alpha g_k$$</div>
+              <p>At the steady state, $\frac{dk}{dt} = 0$ (so $g_k = 0$):</p>
+              <div class="math-display boxed">$$\boxed{g_y \equiv \frac{1}{y}\frac{dy}{dt} = \alpha \underbrace{g_k}_{=0} = 0}$$</div>
+              <p><strong>Conclusion:</strong> <em>Output per effective worker is stationary at the steady state.</em></p>
+
+              <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:14px;">Part B — Output per Actual Worker / GDP per Capita: $Y/L = A \cdot y = A k^\alpha$</p>
+              <p>Differentiate $Y/L = A k^\alpha$ with respect to time using the product rule (writing the full derivative before setting anything to zero):</p>
+              <div class="math-display">$$\frac{d(Y/L)}{dt} = \frac{dA}{dt}k^\alpha + A \alpha k^{\alpha-1}\frac{dk}{dt}$$</div>
+              <p>Divide by $Y/L = A k^\alpha$ to obtain the general growth rate of GDP per capita:</p>
+              <div class="math-display">$$g_{Y/L} \equiv \frac{1}{Y/L}\frac{d(Y/L)}{dt} = \frac{\frac{dA}{dt}k^\alpha}{A k^\alpha} + \frac{A\alpha k^{\alpha-1}\frac{dk}{dt}}{A k^\alpha} = \frac{1}{A}\frac{dA}{dt} + \alpha \frac{1}{k}\frac{dk}{dt} = g_A + \alpha g_k$$</div>
+              
+              <p>At the steady state, substitute $\frac{dk}{dt} = 0$ (so $g_k = 0$) and $\frac{1}{A}\frac{dA}{dt} = g_A$:</p>
+              <div class="math-display">$$\frac{d(Y/L)}{dt} = \frac{dA}{dt}(k^*)^\alpha + A\alpha(k^*)^{\alpha-1}\underbrace{\frac{dk}{dt}}_{=0} = \frac{dA}{dt}(k^*)^\alpha$$</div>
+              <div class="math-display boxed">$$\boxed{g_{Y/L} \equiv \frac{1}{Y/L}\frac{d(Y/L)}{dt} = g_A + \alpha \underbrace{g_k}_{=0} = g_A}$$</div>
+              <p><strong>Interpretation:</strong> While output per effective worker $y^*$ is stationary, output per actual worker (living standards) grows continuously at the rate of technological progress $g_A$ because workers become continuously more productive over time.</p>
+            </div>
+          </div>
+
+          <!-- QUESTION 4 -->
+          <div class="corr-q">
+            <div class="corr-q-title">Question 4 — All Growth Rates at the Steady State $k^*$</div>
+            <div class="corr-body">
+              <p>At the steady state $k = k^*$, we have $\dfrac{dk}{dt} = 0$ (so $g_k = 0$). We derive the three key growth rates the professor presented.</p>
+
+              <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:12px;">Part A — Growth Rate of Output per Effective Worker: $y = Y/(AL) = k^\alpha$</p>
+              <p>Differentiate $y = k^\alpha$ with respect to time:</p>
+              <div class="math-display">$$\frac{dy}{dt} = \alpha k^{\alpha-1}\frac{dk}{dt}$$</div>
+              <p>Divide by $y = k^\alpha$ to obtain the proportional growth rate:</p>
+              <div class="math-display">$$g_y \equiv \frac{1}{y}\frac{dy}{dt} = \alpha \left(\frac{1}{k}\frac{dk}{dt}\right) = \alpha g_k$$</div>
+              <p>At the steady state, $\dfrac{dk}{dt} = 0$ (so $g_k = 0$):</p>
+              <div class="math-display boxed">$$\boxed{g_y \equiv \frac{1}{y}\frac{dy}{dt} = \alpha \underbrace{g_k}_{=0} = 0}$$</div>
+              <p><strong>Conclusion:</strong> Output per effective worker is <em>stationary</em> at the steady state — it neither grows nor falls.</p>
+
+              <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:16px;">Part B — Growth Rate of GDP per Capita (Living Standards): $Y/L = A \cdot y = A k^\alpha$</p>
+              <p>Differentiate $Y/L = A k^\alpha$ with respect to time using the product rule. Write the full derivative first:</p>
+              <div class="math-display">$$\frac{d(Y/L)}{dt} = \frac{dA}{dt}k^\alpha + A\alpha k^{\alpha-1}\frac{dk}{dt}$$</div>
+              <p>Divide by $Y/L = Ak^\alpha$ to obtain the general growth rate of GDP per capita:</p>
+              <div class="math-display">$$g_{Y/L} \equiv \frac{1}{Y/L}\frac{d(Y/L)}{dt} = \frac{1}{A}\frac{dA}{dt} + \alpha\frac{1}{k}\frac{dk}{dt} = g_A + \alpha g_k$$</div>
+              <p>At the steady state, substitute $\dfrac{dk}{dt} = 0$ explicitly:</p>
+              <div class="math-display">$$\frac{d(Y/L)}{dt} = \frac{dA}{dt}(k^*)^\alpha + A\alpha(k^*)^{\alpha-1}\underbrace{\frac{dk}{dt}}_{=0} = \frac{dA}{dt}(k^*)^\alpha$$</div>
+              <div class="math-display boxed">$$\boxed{g_{Y/L} \equiv \frac{1}{Y/L}\frac{d(Y/L)}{dt} = g_A + \alpha\underbrace{g_k}_{=0} = g_A}$$</div>
+              <p><strong>Conclusion:</strong> Even though output per <em>effective</em> worker $y$ is stationary, GDP per capita (living standards) grows at rate $g_A$ because workers continuously become more productive as technology improves.</p>
+
+              <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:16px;">Part C — Growth Rate of Total GDP: $Y = (Y/L) \cdot L$</p>
+              <p>Total GDP is output per worker times the labour force. Differentiate using the product rule:</p>
+              <div class="math-display">$$\frac{dY}{dt} = \frac{d(Y/L)}{dt} \cdot L + (Y/L)\cdot\frac{dL}{dt}$$</div>
+              <p>Divide by $Y = (Y/L)L$ to obtain the general growth rate of total GDP:</p>
+              <div class="math-display">$$g_Y \equiv \frac{1}{Y}\frac{dY}{dt} = g_{Y/L} + g_L$$</div>
+              <p>At the steady state, substitute $g_{Y/L} = g_A$ (from Part B) and $g_L = n$:</p>
+              <div class="math-display boxed">$$\boxed{g_Y \equiv \frac{1}{Y}\frac{dY}{dt} = g_A + n}$$</div>
+              <p><strong>Conclusion:</strong> Total GDP grows at the combined rate of technological progress and population growth. Output expands because each worker produces more ($g_A$) <em>and</em> because the labour force grows ($n$).</p>
+
+              <div class="key-note blue" style="margin-top:14px;">
+                <strong>Summary of Growth Rates at the Balanced Growth Path:</strong>
+                <ul style="margin-left:18px;margin-top:6px;display:flex;flex-direction:column;gap:5px;">
+                  <li>$g_y = 0$ &nbsp;— output per <em>effective</em> worker is stationary.</li>
+                  <li>$g_{Y/L} = g_A$ &nbsp;— living standards (GDP per capita) grow at the rate of technological progress.</li>
+                  <li>$g_Y = g_A + n$ &nbsp;— total GDP grows at the rate of technology plus population growth.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- QUESTION 5 -->
+          <div class="corr-q">
+            <div class="corr-q-title">Question 5 — Expressing $s$ in Terms of $k^*$, $n$, $g_A$, and $\delta$</div>
+            <div class="corr-body">
+              <p>At the steady state, $\dfrac{dk}{dt} = 0 \implies s (k^*)^\alpha = (\delta + n + g_A)k^*$.</p>
+              <p>Divide both sides by $(k^*)^\alpha$:</p>
+              <div class="math-display boxed">$$\boxed{s = (\delta + n + g_A)(k^*)^{1-\alpha}}$$</div>
+              <p>This links the saving rate directly to the steady-state capital stock per effective worker and the effective depreciation rate $(\delta + n + g_A)$.</p>
+            </div>
+          </div>
+
+          <!-- QUESTION 6 -->
+          <div class="corr-q">
+            <div class="corr-q-title">Question 6 — Growth Rate of $k$ in Terms of $k/k^*$</div>
+            <div class="corr-body">
+              <p>Start from the capital accumulation equation: $\dfrac{dk}{dt} = s k^\alpha - (\delta + n + g_A)k$.</p>
+              <p>Divide by $k$ to obtain the proportional growth rate of capital per effective worker $g_k \equiv \frac{1}{k}\frac{dk}{dt}$:</p>
+              <div class="math-display">$$g_k \equiv \frac{1}{k}\frac{dk}{dt} = s k^{\alpha-1} - (\delta + n + g_A)$$</div>
+              <p>Substitute $s = (\delta + n + g_A)(k^*)^{1-\alpha}$ from Question 5:</p>
+              <div class="math-display">$$g_k = (\delta + n + g_A)(k^*)^{1-\alpha}k^{\alpha-1} - (\delta + n + g_A) = (\delta + n + g_A)\left[(k^*)^{1-\alpha}k^{\alpha-1} - 1\right]$$</div>
+              <p>Since $(k^*)^{1-\alpha}k^{\alpha-1} = \left(\dfrac{k^*}{k}\right)^{1-\alpha}$, we obtain:</p>
+              <div class="math-display boxed">$$\boxed{g_k \equiv \frac{1}{k}\frac{dk}{dt} = (\delta + n + g_A)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$</div>
+              <p>Equivalently, written in terms of $k/k^*$:</p>
+              <div class="math-display">$$\boxed{g_k \equiv \frac{1}{k}\frac{dk}{dt} = (\delta + n + g_A)\left[\left(\frac{k}{k^*}\right)^{\!\alpha-1} - 1\right]}$$</div>
+              <p><strong>Convergence Dynamics:</strong> When $k < k^*$, $g_k > 0$; when $k = k^*$, $g_k = 0$; when $k > k^*$, $g_k < 0$. Capital per effective worker always converges to $k^*$.</p>
+            </div>
+          </div>
+
+          <!-- QUESTION 7 -->
+          <div class="corr-q">
+            <div class="corr-q-title">Question 7 — Growth Rate of GDP per Capita Outside the Steady State</div>
+            <div class="corr-body">
+              <p>From Question 3 (Part B), the general growth rate of GDP per capita ($Y/L$) is:</p>
+              <div class="math-display">$$g_{Y/L} \equiv \frac{1}{Y/L}\frac{d(Y/L)}{dt} = g_A + \alpha g_k$$</div>
+              <p>Outside the steady state, substitute $g_k$ from Question 6:</p>
+              <div class="math-display boxed">$$\boxed{g_{Y/L} \equiv \frac{1}{Y/L}\frac{d(Y/L)}{dt} = g_A + \alpha(\delta + n + g_A)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$</div>
+
+              <p><strong>Interpretation (Catch-up Growth):</strong></p>
+              <p>When an economy is developing ($k < k^*$), capital per effective worker is rising ($g_k > 0$), so GDP per capita grows faster than technology ($g_{Y/L} > g_A$). As $k \to k^*$, this transitional boost fades away, and per-capita growth settles at $g_A$.</p>
+            </div>
+          </div>
+
+          <!-- QUESTION 8 -->
+          <div class="corr-q">
+            <div class="corr-q-title">Question 8 — Growth Rate of Total GDP Outside the Steady State</div>
+            <div class="corr-body">
+              <p>From Question 4, total GDP growth is $g_Y \equiv \frac{1}{Y}\frac{dY}{dt} = g_{Y/L} + g_L = g_{Y/L} + n$.</p>
+              <p>Substitute $g_{Y/L}$ from Question 7:</p>
+              <div class="math-display boxed">$$\boxed{g_Y \equiv \frac{1}{Y}\frac{dY}{dt} = g_A + n + \alpha(\delta + n + g_A)\left[\left(\frac{k^*}{k}\right)^{\!1-\alpha} - 1\right]}$$</div>
+
+              <p><strong>Interpretation:</strong></p>
+              <p>If $k < k^*$, total GDP grows at a rate strictly higher than $g_A + n$. As $k \to k^*$, total GDP growth converges smoothly to its balanced growth path:</p>
+              <div class="math-display">$$\boxed{g_Y \longrightarrow g_A + n}$$</div>
+            </div>
+          </div>
+
+        </div><!-- end corr-section -->
+      </div><!-- end collapsible -->
+
+      <!-- ═══ KEY RESULTS DASHBOARD (ALWAYS VISIBLE OUTSIDE TOGGLE) ═══ -->
+      <div class="summary-dashboard blue-accent">
+        <div class="summary-dashboard-header">
+          <div class="summary-dashboard-title">
+            <span>⚡</span> Key Results Summary — Solow Model with TFP
+          </div>
+          <span class="summary-badge">Balanced Growth Path</span>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-card-item">
+            <span class="summary-card-label">Capital per Effective Worker ($k^*$)</span>
+            <span class="summary-card-val">$$k^* = \left[\frac{s}{\delta+n+g_A}\right]^{\!\frac{1}{1-\alpha}}$$</span>
+          </div>
+          <div class="summary-card-item">
+            <span class="summary-card-label">Output per Effective Worker ($y^*$)</span>
+            <span class="summary-card-val">$$y^* = (k^*)^\alpha = \left[\frac{s}{\delta+n+g_A}\right]^{\!\frac{\alpha}{1-\alpha}}$$</span>
+          </div>
+          <div class="summary-card-item">
+            <span class="summary-card-label">Golden Rule Saving Rate</span>
+            <span class="summary-card-val">$$s = \alpha \iff k^{**} = \left[\frac{\alpha}{\delta+n+g_A}\right]^{\!\frac{1}{1-\alpha}}$$</span>
+          </div>
+          <div class="summary-card-item">
+            <span class="summary-card-label">Living Standards Growth ($g_{Y/L}$)</span>
+            <span class="summary-card-val" style="color:var(--blue-bright);">$$g_{Y/L} = g_A \quad (\text{sustained by technology})$$</span>
+          </div>
+          <div class="summary-card-item">
+            <span class="summary-card-label">Aggregate GDP Growth ($g_Y$)</span>
+            <span class="summary-card-val" style="color:var(--green-bright);">$$g_Y = g_A + n \quad (\text{technology } + \text{ labour})$$</span>
+          </div>
+          <div class="summary-card-item">
+            <span class="summary-card-label">Factor Price Trends ($g_w, g_r$)</span>
+            <span class="summary-card-val">$$g_w = g_A, \quad g_r = 0 \quad (\text{constant interest rate } r)$$</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end exo-card -->
+
+
+    <!-- ═══ WAGES AND RETURN TO CAPITAL ═══ -->
+    <div class="concept-card blue-top">
+      <div class="section-header">
+        <span class="section-label" style="background:var(--blue-muted);color:var(--blue-bright);border-color:var(--blue-border);">Extension</span>
+        <h3>Growth of Wages and the Real Interest Rate</h3>
+      </div>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        How do factor prices behave in the long run along the balanced growth path? Under perfect competition, inputs are paid their marginal product.
+      </p>
+      
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;">A. Real Wage ($w$)</p>
+      <div class="math-display boxed-blue">$$w = (1-\alpha)A \cdot k^\alpha$$</div>
+      <button class="toggle-btn" onclick="toggle(this,'demo-wages')">Show derivation for $w$ and $g_w$ <span class="arrow">▾</span></button>
+      <div class="collapsible" id="demo-wages">
+        <div class="demo-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Marginal Product of Labour:</strong>
+            $$w = \frac{\partial Y}{\partial L} = (1-\alpha)(AL)^{-\alpha} A K^\alpha = (1-\alpha)A^{1-\alpha}K^\alpha L^{-\alpha}$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Substitute $K = kAL$:</strong>
+            $$w = (1-\alpha)A^{1-\alpha}(kAL)^\alpha L^{-\alpha} = (1-\alpha)A^{1-\alpha}k^\alpha A^\alpha L^\alpha L^{-\alpha} = (1-\alpha)A \cdot k^\alpha$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Growth Rate $g_w$:</strong> Differentiate with respect to time using the product rule:
+            $$\frac{dw}{dt} = (1-\alpha)\left[ \frac{dA}{dt}k^\alpha + A \cdot \alpha k^{\alpha-1}\frac{dk}{dt} \right]$$
+            Divide by $w = (1-\alpha)Ak^\alpha$:
+            $$g_w \equiv \frac{1}{w}\frac{dw}{dt} = \frac{1}{A}\frac{dA}{dt} + \alpha \frac{1}{k}\frac{dk}{dt} = g_A + \alpha g_k$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <strong>At Steady State:</strong> Since $g_k = 0$, we obtain:
+            $$\boxed{g_w \equiv \frac{1}{w}\frac{dw}{dt} = g_A}$$
+            <em>Interpretation:</em> Real wages grow permanently at the rate of technological progress $g_A$. Workers directly benefit from technological progress over time.
+          </div>
+        </div>
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:14px;">B. Real Interest Rate / Return to Capital ($r$)</p>
+      <div class="math-display boxed-blue">$$r = \alpha \cdot k^{\alpha-1}$$</div>
+      <button class="toggle-btn" onclick="toggle(this,'demo-interest')">Show derivation for $r$ and $g_r$ <span class="arrow">▾</span></button>
+      <div class="collapsible" id="demo-interest">
+        <div class="demo-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Marginal Product of Capital:</strong>
+            $$r = \frac{\partial Y}{\partial K} = \alpha(AL)^{1-\alpha}K^{\alpha-1}$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Substitute $K = kAL$:</strong>
+            $$r = \alpha(AL)^{1-\alpha}(kAL)^{\alpha-1} = \alpha(AL)^{1-\alpha}k^{\alpha-1}(AL)^{\alpha-1} = \alpha \cdot k^{\alpha-1}$$
+            <p style="margin-top:4px;font-size:0.85rem;color:var(--text-3);"><em>(Note: $r$ represents the real interest rate / return to capital given by the marginal product of capital MPK).</em></p>
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Growth Rate $g_r$:</strong>
+            $$g_r \equiv \frac{1}{r}\frac{dr}{dt} = (\alpha-1)g_k = -(1-\alpha)g_k$$
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <strong>At Steady State:</strong> Since $g_k = 0$, we have:
+            $$\boxed{g_r \equiv \frac{1}{r}\frac{dr}{dt} = 0}$$
+            <em>Interpretation:</em> The real interest rate / return to capital is constant along the balanced growth path. Capital deepening does not depress returns in the long run because continuous technological improvements offset diminishing returns.
+          </div>
+        </div>
+      </div>
+
+      <div class="key-note blue" style="margin-top:12px;">
+        <strong>Connection to Income Shares:</strong> Multiplying factor prices by factor quantities confirms Euler's exhaustion:
+        $$rK = \alpha k^{\alpha-1}(kAL) = \alpha k^\alpha (AL) = \alpha Y \qquad \text{and} \qquad wL = (1-\alpha)A k^\alpha L = (1-\alpha)Y$$
+      </div>
+    </div>
+
+
     <!-- ═══ TFP SOLOW DIAGRAM ═══ -->
     <div class="concept-card blue-top">
       <div class="section-header">
@@ -1628,6 +1991,109 @@ body {
     </div>
 
 
+
+    <!-- ═══ TFP SOLOW DIAGRAM ═══ -->
+    <div class="concept-card amber-top">
+      <div class="section-header">
+        <span class="section-label" style="background:var(--amber-muted);color:var(--amber-bright);border-color:var(--amber-border);">Graph</span>
+        <h3>Is a Higher Saving Rate Always Better?</h3>
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        The diagram below shows the Solow model with technological progress for <strong>three different saving rates</strong>: $s_{\text{low}}$, $s$, and $s_{\text{high}}$. Each rate implies a different steady-state capital per effective worker.
+      </p>
+
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 680 370" width="100%" style="max-width:680px;display:block;">
+          <!-- Card Background -->
+          <rect width="680" height="370" fill="#07100b" rx="12" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+          <!-- Axes -->
+          <line x1="70" y1="310" x2="540" y2="310" stroke="#94a3b8" stroke-width="1.8"/>
+          <line x1="70" y1="30" x2="70" y2="310" stroke="#94a3b8" stroke-width="1.8"/>
+          <polygon points="540,306 540,314 550,310" fill="#94a3b8"/>
+          <polygon points="66,30 74,30 70,20" fill="#94a3b8"/>
+          <text x="554" y="314" fill="#94a3b8" font-size="13" font-family="Outfit,sans-serif" font-weight="700">k</text>
+          <text x="30" y="24" fill="#94a3b8" font-size="11" font-family="Outfit,sans-serif" font-weight="600">output, invest.</text>
+          <text x="52" y="324" fill="#64748b" font-size="11" font-family="Outfit,sans-serif">0</text>
+
+          <!-- 1. f(k) curve (Blue) -->
+          <path d="M 70 310 C 130 170, 220 95, 330 65 S 450 50, 530 48" stroke="#60a5fa" stroke-width="2.6" fill="none"/>
+          <text x="542" y="52" fill="#60a5fa" font-size="12" font-family="Outfit,sans-serif" font-weight="700">f(k) = k&#x3B1;</text>
+
+          <!-- 2. Break-even line: (delta + n + g_A)k (Amber dashed) -->
+          <line x1="70" y1="310" x2="530" y2="82" stroke="#fbbf24" stroke-width="2.2" stroke-dasharray="7,4"/>
+          <text x="542" y="86" fill="#fbbf24" font-size="12" font-family="Outfit,sans-serif" font-weight="700">(&#x3B4;+n+g&#x2090;)k</text>
+
+          <!-- 3. s_high * f(k) curve (Light green dashed) -->
+          <path d="M 70 310 C 130 205, 220 145, 330 120 S 450 110, 530 112" stroke="#34d399" stroke-width="2.0" fill="none" stroke-dasharray="5,3"/>
+          <text x="542" y="116" fill="#34d399" font-size="11" font-family="Outfit,sans-serif" font-weight="600">s&#x2095;&#x1D62;&#x1D63;&#x2095; &#xB7; f(k)</text>
+
+          <!-- 4. Baseline s * f(k) curve (Emerald bright solid) -->
+          <path d="M 70 310 C 130 235, 220 190, 330 165 S 450 152, 530 154" stroke="#10b981" stroke-width="2.8" fill="none"/>
+          <text x="542" y="158" fill="#10b981" font-size="12" font-family="Outfit,sans-serif" font-weight="700">s &#xB7; f(k)</text>
+
+          <!-- 5. s_low * f(k) curve (Soft green dashed) -->
+          <path d="M 70 310 C 130 260, 220 225, 330 205 S 450 192, 530 195" stroke="#a7f3d0" stroke-width="1.8" fill="none" stroke-dasharray="4,3" opacity="0.8"/>
+          <text x="542" y="198" fill="#a7f3d0" font-size="11" font-family="Outfit,sans-serif" font-weight="600">s&#x2097;&#x2092;&#x1D42; &#xB7; f(k)</text>
+
+          <!-- Drop line and dot for k*_low -->
+          <line x1="222" y1="235" x2="222" y2="310" stroke="rgba(167,243,208,0.4)" stroke-width="1.4" stroke-dasharray="3,3"/>
+          <circle cx="222" cy="235" r="4.5" fill="#a7f3d0" stroke="#07100b" stroke-width="2"/>
+          <text x="210" y="329" fill="#a7f3d0" font-size="10" font-family="Outfit,sans-serif" font-weight="600">k*low</text>
+
+          <!-- Drop line and dot for k* (baseline) -->
+          <line x1="318" y1="187" x2="318" y2="310" stroke="rgba(16,185,129,0.5)" stroke-width="1.6" stroke-dasharray="4,4"/>
+          <circle cx="318" cy="187" r="5.5" fill="#10b981" stroke="#07100b" stroke-width="2"/>
+          <rect x="306" y="316" width="24" height="18" rx="4" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+          <text x="312" y="329" fill="#10b981" font-size="11" font-family="Outfit,sans-serif" font-weight="700">k*</text>
+
+          <!-- Drop line and dot for k*_high -->
+          <line x1="412" y1="140" x2="412" y2="310" stroke="rgba(52,211,153,0.35)" stroke-width="1.4" stroke-dasharray="3,3"/>
+          <circle cx="412" cy="140" r="4.5" fill="#34d399" stroke="#07100b" stroke-width="2"/>
+          <text x="400" y="329" fill="#34d399" font-size="10" font-family="Outfit,sans-serif" font-weight="600">k*high</text>
+
+          <!-- Consumption gap annotation at k*_high -->
+          <line x1="412" y1="140" x2="412" y2="109" stroke="rgba(251,191,36,0.6)" stroke-width="1.5" stroke-dasharray="2,2"/>
+          <circle cx="412" cy="109" r="3.5" fill="#fbbf24" opacity="0.8"/>
+          <text x="418" y="125" fill="#fbbf24" font-size="9" font-family="Outfit,sans-serif" font-weight="600">f(k*high)</text>
+          <text x="418" y="136" fill="#fbbf24" font-size="9" font-family="Outfit,sans-serif">(break-even)</text>
+
+          <!-- Consumption gap brace at k* -->
+          <line x1="325" y1="148" x2="325" y2="187" stroke="rgba(251,191,36,0.7)" stroke-width="1.5"/>
+          <text x="330" y="172" fill="#fbbf24" font-size="9" font-family="Outfit,sans-serif" font-weight="600">c* = f(k*)-(&#x3B4;+n+g&#x2090;)k*</text>
+
+          <!-- Convergence arrows -->
+          <polygon points="148,306 148,314 160,310" fill="#34d399"/>
+          <text x="118" y="302" fill="#34d399" font-size="10" font-family="Outfit,sans-serif" font-weight="700">dk/dt &gt; 0</text>
+          <polygon points="460,306 460,314 448,310" fill="#f87171"/>
+          <text x="435" y="302" fill="#f87171" font-size="10" font-family="Outfit,sans-serif" font-weight="700">dk/dt &lt; 0</text>
+        </svg>
+        <div class="diagram-caption">
+          Steady-state capital depends on $s$: higher $s$ shifts the investment curve up, raising $k^*$. But consumption per effective worker $c^* = f(k^*) - (\delta+n+g_A)k^*$ is not maximised by the highest $k^*$.
+        </div>
+      </div>
+
+      <!-- Two observations clearly laid out -->
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px;font-size:0.92rem;line-height:1.65;color:var(--text-2);">
+        <div style="background:rgba(52,211,153,0.06);border-left:3px solid #34d399;border-radius:6px;padding:12px 16px;">
+          <strong style="color:#34d399;">Observation 1 — A higher $s$ raises $k^*$:</strong><br>
+          Moving from $s_{\text{low}}$ to $s_{\text{high}}$ shifts the investment curve upward, pushing the intersection point with the break-even line to the right. Capital per effective worker, and therefore output per effective worker, are permanently higher.
+        </div>
+
+        <div style="background:rgba(251,191,36,0.06);border-left:3px solid #fbbf24;border-radius:6px;padding:12px 16px;">
+          <strong style="color:#fbbf24;">Observation 2 — But a higher $s$ compresses consumption:</strong><br>
+          Steady-state consumption per effective worker is $c^* = f(k^*) - (\delta+n+g_A)k^*$. Raising $s$ above some threshold means too much output is channelled into investment: households sacrifice consumption today <em>and</em> in the long run. Somewhere between $s_{\text{low}}$ and $s_{\text{high}}$ lies the optimal $s$.
+        </div>
+
+        <div style="background:rgba(16,185,129,0.06);border-left:3px solid #10b981;border-radius:6px;padding:12px 16px;">
+          <strong style="color:#10b981;">Economic Question — What is the optimal saving rate?</strong><br>
+          Which saving rate $s$ maximises $c^* = f(k^*) - (\delta+n+g_A)k^*$? Graphically, it is the saving rate for which the vertical gap between $f(k)$ and the break-even line $(\delta+n+g_A)k$ is greatest — i.e., where their <em>slopes are equal</em>:
+          $$f'(k^{**}) = \delta + n + g_A$$
+          This condition defines the <strong>Golden Rule</strong> capital stock $k^{**}$ and, for Cobb-Douglas, implies the <strong>Golden Rule saving rate $s = \alpha$</strong>.
+        </div>
+      </div>
+    </div>
 
     <!-- ═══ GOLDEN RULE 1/2 ═══ -->
     <div class="concept-card amber-top">
