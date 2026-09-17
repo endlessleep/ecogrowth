@@ -332,7 +332,7 @@ body {
     <div class="page-title-block">
       <div class="page-label">Chapter 1b — Neoclassical Growth Model</div>
       <h1>The Ramsey Model</h1>
-      <p>Endogenous saving, instantaneous utility, the Hamiltonian, and optimal consumption dynamics.</p>
+      <p>Endogenous saving, CRRA utility, the Hamiltonian, and optimal consumption dynamics.</p>
     </div>
 
     <!-- ═══ CARD 1: MOTIVATION ═══ -->
@@ -341,59 +341,147 @@ body {
         <span class="section-label">Motivation</span>
         <h3>Why an Endogenous Saving Rate?</h3>
       </div>
+
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        In the Solow model, the saving rate $s$ is assumed to be <strong>constant and exogenous</strong>. While this provides a tractable benchmark, it has two major limitations:
+        In the <strong>Solow model</strong>, the saving rate $s$ is assumed to be <strong>exogenous and constant</strong>: households mechanically save a fixed fraction $s$ of their income regardless of interest rates, wages, or future expectations.
       </p>
-      <div style="display:flex;flex-direction:column;gap:10px;margin-top:2px;">
+
+      <div style="background:rgba(16,185,129,0.06);border-left:3px solid var(--green);border-radius:0 var(--radius) var(--radius) 0;padding:12px 18px;font-size:0.9rem;line-height:1.65;color:var(--text-2);">
+        <strong style="color:var(--text);">The Ramsey Departure:</strong>
+        <ul style="margin:6px 0 0 18px;display:flex;flex-direction:column;gap:5px;">
+          <li>There is <strong>no imposed constant saving rate $s$</strong>.</li>
+          <li>Households choose their <strong>consumption path $c(t)$ optimally over time</strong>.</li>
+          <li>Saving becomes <strong>endogenous</strong>: it is determined residually through the household's consumption decision.</li>
+        </ul>
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;margin-top:2px;">
+        To model forward-looking households making intertemporal choices, the Ramsey framework introduces <strong>two essential preference parameters</strong>:
+      </p>
+
+      <div class="var-grid">
         <div class="var-item">
-          <strong>1. Empirical variation:</strong> There is no reason why the saving rate in an economy should be constant. It can vary significantly with the level of economic development and demographic transitions.
+          <strong style="color:var(--green-bright);">1. Pure rate of time preference: $\rho > 0$</strong>
+          <p style="margin:4px 0 0;font-size:0.85rem;color:var(--text-2);line-height:1.5;">
+            Measures <strong>impatience</strong>. A higher $\rho$ means households value present consumption relatively more compared with future consumption. Future utility is discounted at rate $\rho$.
+          </p>
         </div>
+
         <div class="var-item">
-          <strong>2. Microeconomic foundation:</strong> In an economic model, one would prefer to have an endogenous saving rate as the <em>consumption–saving trade-off is an economic decision</em>. Forward-looking households choose how much to consume today versus how much to save for future generations.
+          <strong style="color:var(--green-bright);">2. Curvature parameter of utility: $\varepsilon > 0$</strong>
+          <p style="margin:4px 0 0;font-size:0.85rem;color:var(--text-2);line-height:1.5;">
+            Governs the concavity of the utility function. The <strong>intertemporal elasticity of substitution</strong> is:
+            $$\text{IES} = \frac{1}{\varepsilon}$$
+          </p>
         </div>
       </div>
-      <div class="key-note" style="margin-top:6px;">
-        <strong>The Ramsey approach:</strong> Instead of imposing an arbitrary $s$, the Ramsey model lets households choose their optimal path of consumption over time by maximising an <strong>intertemporal utility function</strong>.
+
+      <div class="key-note" style="margin-top:4px;">
+        <strong>Intuition on $\varepsilon$ and the Intertemporal Elasticity of Substitution ($\text{IES} = 1/\varepsilon$):</strong>
+        <p style="margin-top:6px;">
+          • <strong>High $\varepsilon$ (low $\text{IES}$):</strong> The household strongly dislikes fluctuations in living standards across time. It is <em>less willing</em> to substitute consumption across periods and insists on a very smooth consumption profile.<br>
+          • <strong>Low $\varepsilon$ (high $\text{IES}$):</strong> The household is <em>more willing</em> to shift consumption between periods in response to economic incentives (such as a high return to capital).
+        </p>
       </div>
     </div>
 
-    <!-- ═══ CARD 2: INSTANTANEOUS UTILITY ═══ -->
+    <!-- ═══ CARD 2: INSTANTANEOUS UTILITY & CRRA ═══ -->
     <div class="concept-card purple-top">
       <div class="section-header">
-        <span class="section-label" style="background:var(--purple-muted);color:var(--purple-bright);border-color:var(--purple-border);">Part 1 / 3</span>
-        <h3>Instantaneous Utility Function $u(c)$</h3>
+        <span class="section-label" style="background:var(--purple-muted);color:var(--purple-bright);border-color:var(--purple-border);">Part 1 / 4</span>
+        <h3>Household Instantaneous Utility Function $u(c)$</h3>
       </div>
+
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        We need a household instantaneous utility function $u(c)$ where $c$ is consumption per effective worker:
+        We consider a representative household that derives satisfaction from consumption per effective worker:
       </p>
       <div class="math-display boxed-purple">$$c = \frac{C}{AL}$$</div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:4px;">
+        The CRRA (Constant Relative Risk Aversion) Utility Function
+      </p>
+
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        The instantaneous utility function $u(c)$ satisfies <strong>four standard neoclassical characteristics</strong>:
+        In the Ramsey model, the instantaneous utility function takes the standard <strong>CRRA functional form</strong>:
+      </p>
+
+      <div class="math-display boxed-purple" style="font-size:1.05rem;">
+        $$\boxed{u(c) = \begin{cases} \dfrac{c^{1-\varepsilon} - 1}{1-\varepsilon} & \text{for } \varepsilon \neq 1 \\[10pt] \ln(c) & \text{for } \varepsilon = 1 \end{cases}}$$
+      </div>
+
+      <div class="key-note purple" style="margin-top:2px;">
+        <strong>The Logarithmic Case as a Limit:</strong>
+        When $\varepsilon \to 1$, applying L’Hôpital’s rule to $\dfrac{c^{1-\varepsilon}-1}{1-\varepsilon}$ with respect to $\varepsilon$ gives:
+        $$\lim_{\varepsilon \to 1} \frac{c^{1-\varepsilon} - 1}{1-\varepsilon} = \lim_{\varepsilon \to 1} \frac{\frac{d}{d\varepsilon}(c^{1-\varepsilon}-1)}{\frac{d}{d\varepsilon}(1-\varepsilon)} = \lim_{\varepsilon \to 1} \frac{-c^{1-\varepsilon}\ln(c)}{-1} = \ln(c)$$
+        Hence, logarithmic utility $u(c) = \ln(c)$ is the continuous limiting special case when $\varepsilon = 1$.
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;">
+        Explicit Derivation of Derivatives
+      </p>
+
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="demo-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Case $\varepsilon \neq 1$ — First Derivative (Marginal Utility):</strong>
+            Differentiating $u(c) = \dfrac{c^{1-\varepsilon}-1}{1-\varepsilon}$ with respect to $c$:
+            $$u'(c) = \frac{d}{dc}\left[\frac{c^{1-\varepsilon}-1}{1-\varepsilon}\right] = \frac{1}{1-\varepsilon}\cdot (1-\varepsilon)c^{(1-\varepsilon)-1} = c^{-\varepsilon}$$
+            <div class="math-display" style="margin:6px 0;">$$\boxed{u'(c) = c^{-\varepsilon}}$$</div>
+            Since $c > 0$ and $\varepsilon > 0$, we have $\mathbf{u'(c) > 0}$: marginal utility is strictly positive (more consumption increases utility).
+          </div>
+        </div>
+
+        <div class="demo-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Case $\varepsilon \neq 1$ — Second Derivative (Curvature):</strong>
+            Differentiating $u'(c) = c^{-\varepsilon}$ with respect to $c$:
+            $$u''(c) = \frac{d}{dc}\left[c^{-\varepsilon}\right] = -\varepsilon c^{-\varepsilon - 1}$$
+            <div class="math-display" style="margin:6px 0;">$$\boxed{u''(c) = -\varepsilon c^{-(\varepsilon+1)}}$$</div>
+            Since $\varepsilon > 0$ and $c > 0$, we have $\mathbf{u''(c) < 0}$: marginal utility is strictly decreasing. This concavity implies that households have a preference for smoother consumption paths rather than volatile spikes.
+          </div>
+        </div>
+
+        <div class="demo-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Special Case $\varepsilon = 1$ (Logarithmic Utility):</strong>
+            When $u(c) = \ln(c)$:
+            $$u'(c) = \frac{1}{c} = c^{-1} > 0$$
+            $$u''(c) = -\frac{1}{c^2} = -c^{-2} < 0$$
+            This is exactly identical to evaluating $c^{-\varepsilon}$ and $-\varepsilon c^{-\varepsilon-1}$ at $\varepsilon = 1$.
+          </div>
+        </div>
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;">
+        Standard Neoclassical Characteristics Satisfied
       </p>
 
       <div class="var-grid">
         <div class="var-item">
           <strong style="color:var(--purple-bright);">$u'(c) > 0$</strong>
           <p style="margin:4px 0 0;font-size:0.85rem;color:var(--text-2);line-height:1.5;">
-            <strong>Positive marginal utility:</strong> Marginal utility is positive (more consumption = a higher utility).
+            <strong>Positive marginal utility:</strong> More consumption always yields higher satisfaction.
           </p>
         </div>
         <div class="var-item">
           <strong style="color:var(--purple-bright);">$u''(c) < 0$</strong>
           <p style="margin:4px 0 0;font-size:0.85rem;color:var(--text-2);line-height:1.5;">
-            <strong>Decreasing marginal utility:</strong> Marginal utility is decreasing (preference for consumption smoothing across time).
+            <strong>Decreasing marginal utility:</strong> Each additional unit of consumption yields less extra utility than the previous one.
           </p>
         </div>
         <div class="var-item">
           <strong style="color:var(--purple-bright);">$\lim_{c \to 0} u'(c) = \infty$</strong>
           <p style="margin:4px 0 0;font-size:0.85rem;color:var(--text-2);line-height:1.5;">
-            <strong>Inada condition at 0:</strong> The marginal utility of the first unit of consumption is infinite. Households will never choose zero consumption.
+            <strong>Inada condition at 0:</strong> $\lim_{c \to 0} c^{-\varepsilon} = \infty$. The first drop of consumption is infinitely valuable, so households will never choose $c = 0$.
           </p>
         </div>
         <div class="var-item">
           <strong style="color:var(--purple-bright);">$\lim_{c \to \infty} u'(c) = 0$</strong>
           <p style="margin:4px 0 0;font-size:0.85rem;color:var(--text-2);line-height:1.5;">
-            <strong>Inada condition at $\infty$:</strong> As consumption becomes arbitrarily large, marginal satisfaction approaches zero (asymptotic satiation).
+            <strong>Inada condition at $\infty$:</strong> $\lim_{c \to \infty} c^{-\varepsilon} = 0$. As consumption approaches infinity, additional satisfaction approaches zero.
           </p>
         </div>
       </div>
@@ -413,151 +501,342 @@ body {
 
           <!-- u'(c) curve: decreasing from infinity -->
           <path d="M 44 25 Q 60 120 480 152" fill="none" stroke="#34d399" stroke-width="2" stroke-dasharray="4,4" />
-          <text x="485" y="156" fill="#34d399" font-size="13" font-weight="700" font-family="Outfit">u'(c)</text>
+          <text x="485" y="156" fill="#34d399" font-size="13" font-weight="700" font-family="Outfit">u'(c) = c^(-&#x3B5;)</text>
 
           <!-- Annotations -->
           <circle cx="40" cy="160" r="3.5" fill="#c084fc" />
           <text x="50" y="32" fill="#34d399" font-size="11" font-family="Outfit">slope → ∞</text>
         </svg>
         <span style="font-size:0.8rem;color:var(--text-3);font-style:italic;">
-          The instantaneous utility function $u(c)$ is strictly increasing ($u' > 0$) and strictly concave ($u'' < 0$).
+          The CRRA instantaneous utility function $u(c)$ is strictly increasing ($u'(c) > 0$) and strictly concave ($u''(c) < 0$).
         </span>
       </div>
     </div>
 
-    <!-- ═══ CARD 3: INTERTEMPORAL UTILITY & SETUP ═══ -->
+    <!-- ═══ CARD 3: INTERTEMPORAL UTILITY W ═══ -->
     <div class="concept-card blue-top">
       <div class="section-header">
-        <span class="section-label" style="background:var(--blue-muted);color:var(--blue-bright);border-color:var(--blue-border);">Part 2 / 3</span>
-        <h3>Intertemporal Utility &amp; Model Setup</h3>
+        <span class="section-label" style="background:var(--blue-muted);color:var(--blue-bright);border-color:var(--blue-border);">Part 2 / 4</span>
+        <h3>Intertemporal Utility Function $W$</h3>
       </div>
+
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        Households are forward-looking and maximise their total discounted future utility over an infinite horizon:
+        Households do not simply maximise utility in a single period: they are forward-looking and evaluate an <strong>entire trajectory of consumption $\{c(t)\}_{t \ge 0}$</strong> from the present into the indefinite future:
       </p>
-      <div class="math-display boxed-blue">$$W = \int_0^\infty u(c(t))\,e^{-\rho t}\,dt$$</div>
+
+      <div class="math-display boxed-blue">
+        $$W = \int_0^\infty u(c(t))\,e^{-\rho t}\,dt$$
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:6px;">
+        Understanding Every Component of the Integral
+      </p>
+
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="var-item">
+          <strong>$t = 0$:</strong> The present moment / initial date at which the optimisation decision takes place.
+        </div>
+        <div class="var-item">
+          <strong>$t \to \infty$:</strong> The infinite horizon. 
+          <em style="color:var(--text-3);display:block;margin-top:2px;">
+            Important: $+ \infty$ does not literally mean until an individual dies. The Ramsey model uses an infinite horizon interpreted as an <strong>infinitely lived representative household or dynasty</strong> where parents care altruistically about their descendants.
+          </em>
+        </div>
+        <div class="var-item">
+          <strong>Entire path $\{c(t)\}$:</strong> The household chooses a complete time path of consumption per effective worker $c(t)$, balancing current consumption against future living standards.
+        </div>
+        <div class="var-item">
+          <strong>$e^{-\rho t}$:</strong> The discount factor. Because $\rho > 0$, $e^{-\rho t}$ declines exponentially over time: utility gained in the distant future is discounted more heavily.
+        </div>
+        <div class="var-item">
+          <strong>$\rho > 0$:</strong> The pure rate of time preference (psychological impatience).
+        </div>
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:12px;">
+        Substituting the Explicit CRRA Utility Function into $W$
+      </p>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Substituting the explicit CRRA form gives the actual intertemporal objective function used in the dynamic problem:
+      </p>
+
+      <div class="math-display boxed-blue" style="font-size:1.05rem;">
+        $$\boxed{W = \int_0^\infty \left[\frac{c(t)^{1-\varepsilon}-1}{1-\varepsilon}\right] e^{-\rho t}\,dt \qquad (\text{for } \varepsilon \neq 1)}$$
+      </div>
+
+      <div class="key-note blue" style="margin-top:4px;">
+        <strong>Special Case ($\varepsilon = 1$ — Logarithmic Utility):</strong>
+        <div class="math-display" style="margin:6px 0;background:rgba(255,255,255,0.03);">
+          $$W = \int_0^\infty \ln(c(t))\,e^{-\rho t}\,dt$$
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CARD 4: PRODUCTION & CAPITAL ACCUMULATION ═══ -->
+    <div class="concept-card amber-top">
+      <div class="section-header">
+        <span class="section-label" style="background:var(--amber-muted);color:var(--amber-bright);border-color:var(--amber-border);">Part 3 / 4</span>
+        <h3>The Economy: Production &amp; Capital Accumulation</h3>
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        The technology and demographic setting of the Ramsey model are identical to the Solow model with technological progress:
+      </p>
 
       <div class="var-grid">
-        <div class="var-item"><strong>$c(t) = \dfrac{C}{AL}$</strong> — consumption per effective worker at time $t$</div>
-        <div class="var-item"><strong>$\rho > 0$</strong> — annual discount rate for (future) utility (pure rate of time preference)</div>
-        <div class="var-item" style="grid-column: 1 / -1;">
-          <strong>$e^{-\rho t}$</strong> — discount factor: utility in the distant future is discounted more heavily because households prefer present consumption.
-        </div>
+        <div class="var-item"><strong>Effective labour:</strong> $AL$ with growth rate $g_A + n$</div>
+        <div class="var-item"><strong>Technology growth:</strong> $g_A \equiv \dfrac{1}{A}\dfrac{dA}{dt}$</div>
+        <div class="var-item"><strong>Population growth:</strong> $n \equiv \dfrac{1}{L}\dfrac{dL}{dt}$</div>
+        <div class="var-item"><strong>Depreciation rate:</strong> $\delta > 0$</div>
+        <div class="var-item"><strong>Capital per effective worker:</strong> $k = \dfrac{K}{AL}$</div>
+        <div class="var-item"><strong>Consumption per effective worker:</strong> $c = \dfrac{C}{AL}$</div>
       </div>
 
       <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:8px;">
-        Other equations of the model (same as in the Solow model)
+        Production per Effective Worker
+      </p>
+      <div class="math-display">
+        $$Y = (AL)^{1-\alpha}K^\alpha \implies y = \frac{Y}{AL} = \left(\frac{K}{AL}\right)^\alpha = k^\alpha$$
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;">
+        The Ramsey Resource Constraint: Gross Investment vs. Break-Even Investment
       </p>
 
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <div class="var-item">
-          <strong>1. Production function:</strong>
-          <div class="math-display" style="margin:6px 0;">$$Y = (AL)^{1-\alpha}K^\alpha$$</div>
-          In intensive form: $\bar{y} = \dfrac{Y}{AL} = f(k) = k^\alpha$.
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Since output per effective worker is $k(t)^\alpha$ and households consume $c(t)$, what is left is channelled into <strong>gross investment</strong>:
+      </p>
+
+      <div class="math-display boxed-amber" style="font-size:1rem;">
+        $$\textbf{GROSS INVESTMENT: } \quad i(t) = k(t)^\alpha - c(t)$$
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;margin-top:6px;">
+        To maintain capital per effective worker $k(t)$ constant, the economy requires <strong>break-even investment</strong>:
+      </p>
+
+      <div class="math-display" style="font-size:0.95rem;">
+        $$\textbf{BREAK-EVEN INVESTMENT: } \quad (n + \delta + g_A)k(t)$$
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px;margin:6px 0;font-size:0.88rem;color:var(--text-2);">
+        <div style="padding:6px 12px;background:rgba(255,255,255,0.02);border-radius:var(--radius);border:1px solid var(--border);">
+          • $\delta k(t)$: <strong>physical depreciation</strong> (capital wearing out)
         </div>
-        <div class="var-item">
-          <strong>2. Aggregate capital accumulation:</strong>
-          <div class="math-display" style="margin:6px 0;">$$\frac{dK}{dt} = Y - \delta K - C$$</div>
-          Gross investment is output minus consumption ($I = Y - C$), and net capital accumulation is gross investment minus physical depreciation.
+        <div style="padding:6px 12px;background:rgba(255,255,255,0.02);border-radius:var(--radius);border:1px solid var(--border);">
+          • $n k(t)$: <strong>population dilution</strong> (spreading capital over more workers as $L$ grows)
         </div>
-        <div class="var-item">
-          <strong>3. No-Ponzi game condition:</strong>
-          <p style="margin-top:4px;font-size:0.88rem;color:var(--text-2);">
-            Households cannot run an infinite debt scheme (Ponzi scheme) by continuously borrowing to finance consumption without ever repaying.
-          </p>
+        <div style="padding:6px 12px;background:rgba(255,255,255,0.02);border-radius:var(--radius);border:1px solid var(--border);">
+          • $g_A k(t)$: <strong>technological dilution</strong> (each worker becomes more productive as $A$ grows, so more capital is needed to keep $K/(AL)$ constant)
         </div>
       </div>
 
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;margin-top:6px;">
+        Therefore, <strong>net capital accumulation</strong> is simply:
+      </p>
+      <div class="math-display" style="font-size:0.95rem;">
+        $$\text{Net capital accumulation} = \text{Gross investment} - \text{Break-even investment}$$
+      </div>
+      <div class="math-display" style="font-size:0.95rem;">
+        $$\frac{dk}{dt} = \left[k(t)^\alpha - c(t)\right] - (n + \delta + g_A)k(t)$$
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Rearranging gives the central <strong>equation of capital accumulation</strong>:
+      </p>
+
+      <div class="math-display boxed-amber" style="font-size:1.05rem;">
+        $$\boxed{\frac{dk}{dt} = k(t)^\alpha - c(t) - (n + \delta + g_A)k(t)}$$
+      </div>
+
       <button class="toggle-btn" onclick="toggle(this,'demo-ramsey-acc')">
-        Show demonstration: from aggregate $dK/dt$ to intensive $dk/dt$ <span class="arrow">▾</span>
+        Show step-by-step derivation: from aggregate $dK/dt$ to intensive $dk/dt$ <span class="arrow">▾</span>
       </button>
       <div class="collapsible" id="demo-ramsey-acc">
         <div class="demo-step">
           <div class="step-num">1</div>
           <div class="step-body">
-            <strong>Write $k = \dfrac{K}{AL}$ and differentiate with respect to time:</strong>
-            $$\frac{dk}{dt} = \frac{1}{AL}\frac{dK}{dt} - k\,\frac{\frac{d(AL)}{dt}}{AL}$$
+            <strong>Aggregate accumulation equation:</strong>
+            Total output is split between consumption $C$ and gross investment $I$: $Y = C + I$. Net aggregate capital accumulation equals gross investment minus depreciation:
+            $$\frac{dK}{dt} = I - \delta K = Y - C - \delta K$$
           </div>
         </div>
         <div class="demo-step">
           <div class="step-num">2</div>
           <div class="step-body">
-            <strong>Growth of effective labour $AL$:</strong> Since $\dfrac{1}{A}\dfrac{dA}{dt} = g$ and $\dfrac{1}{L}\dfrac{dL}{dt} = n$:
-            $$\frac{\frac{d(AL)}{dt}}{AL} = n + g$$
+            <strong>Differentiating $k = \dfrac{K}{AL}$ with respect to time using the quotient rule:</strong>
+            $$\frac{dk}{dt} = \frac{\frac{dK}{dt}(AL) - K\frac{d(AL)}{dt}}{(AL)^2} = \frac{1}{AL}\frac{dK}{dt} - \frac{K}{AL}\left(\frac{1}{AL}\frac{d(AL)}{dt}\right)$$
+            Since $\dfrac{1}{AL}\dfrac{d(AL)}{dt} = \dfrac{1}{A}\dfrac{dA}{dt} + \dfrac{1}{L}\dfrac{dL}{dt} = g_A + n$:
+            $$\frac{dk}{dt} = \frac{1}{AL}\frac{dK}{dt} - (n + g_A)k$$
           </div>
         </div>
         <div class="demo-step">
           <div class="step-num">3</div>
           <div class="step-body">
-            <strong>Substitute $\dfrac{dK}{dt} = Y - \delta K - C$:</strong>
-            $$\frac{dk}{dt} = \frac{Y - \delta K - C}{AL} - (n + g)k = \frac{Y}{AL} - \delta k - \frac{C}{AL} - (n + g)k$$
-            <p>Using $f(k) = \dfrac{Y}{AL}$ and $c = \dfrac{C}{AL}$:</p>
-            $$\boxed{\frac{dk}{dt} = f(k) - (n + \delta + g)k - c}$$
+            <strong>Substitute $\dfrac{dK}{dt} = Y - C - \delta K$:</strong>
+            $$\frac{dk}{dt} = \frac{Y - C - \delta K}{AL} - (n + g_A)k = \frac{Y}{AL} - \frac{C}{AL} - \delta k - (n + g_A)k$$
+            Since $\dfrac{Y}{AL} = k^\alpha$ and $\dfrac{C}{AL} = c$:
+            $$\boxed{\frac{dk}{dt} = k^\alpha - c - (n + \delta + g_A)k}$$
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ═══ CARD 4: THE HAMILTONIAN ═══ -->
+    <!-- ═══ CARD 5: CONTROL VS STATE VARIABLE ═══ -->
+    <div class="concept-card purple-top">
+      <div class="section-header">
+        <span class="section-label" style="background:var(--purple-muted);color:var(--purple-bright);border-color:var(--purple-border);">Framework</span>
+        <h3>Dynamic Optimisation: Control Variable vs. State Variable</h3>
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Before solving the dynamic problem, we must clearly distinguish the <strong>two economic variables</strong> that govern the household's environment:
+      </p>
+
+      <table class="comparison-table" style="margin-top:10px;">
+        <thead>
+          <tr>
+            <th style="width:25%;">Variable Type</th>
+            <th style="width:20%;">Symbol</th>
+            <th>Economic Meaning &amp; Dynamic Nature</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--green-bright);">CONTROL VARIABLE</strong></td>
+            <td>$$c(t)$$</td>
+            <td>
+              <strong>Chosen directly and instantaneously:</strong>
+              <p style="margin-top:4px;font-size:0.88rem;color:var(--text-2);">
+                At any point in time $t$, the household can freely decide how much to consume right now. It can jump discontinuously if economic conditions or expectations change.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--blue-bright);">STATE VARIABLE</strong></td>
+            <td>$$k(t)$$</td>
+            <td>
+              <strong>Inherited and predetermined:</strong>
+              <p style="margin-top:4px;font-size:0.88rem;color:var(--text-2);">
+                The capital stock is inherited from previous investment decisions ($k(0)$ is historically given). It <em>cannot jump instantaneously</em>; it changes smoothly over time according to the capital accumulation differential equation:
+                $$\frac{dk}{dt} = k(t)^\alpha - c(t) - (n + \delta + g_A)k(t)$$
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="key-note purple" style="margin-top:10px;">
+        <strong>Key Takeaway:</strong>
+        The household controls its path of consumption $c(t)$ (the <strong>control variable</strong>), which in turn determines the rate of change of the economy's capital stock $k(t)$ (the <strong>state variable</strong>).
+      </div>
+    </div>
+
+    <!-- ═══ CARD 6: THE HAMILTONIAN & TWO TYPES OF FOCs ═══ -->
     <div class="concept-card green-top">
       <div class="section-header">
-        <span class="section-label">Part 3 / 3</span>
-        <h3>Solving the Ramsey Model (1/3) — The Hamiltonian</h3>
+        <span class="section-label">Part 4 / 4</span>
+        <h3>Solving the Ramsey Model (1/3) — The Hamiltonian &amp; FOCs</h3>
       </div>
+
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        The household intertemporal maximisation program is:
+        The dynamic optimisation problem for the household (with $\varepsilon \neq 1$) is:
       </p>
+
       <div class="math-display boxed">
-        $$\max_c \quad W = \int_0^\infty u(c(t))\,e^{-\rho t}\,dt \qquad \text{under: } \frac{dk}{dt} = f(k) - (n + \delta + g)k - c$$
+        $$\max_{\{c(t)\}} \quad \int_0^\infty \left[\frac{c(t)^{1-\varepsilon}-1}{1-\varepsilon}\right] e^{-\rho t}\,dt \qquad \text{subject to: } \frac{dk}{dt} = k(t)^\alpha - c(t) - (n + \delta + g_A)k(t)$$
       </div>
 
-      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:6px;">The Hamiltonian</p>
-      <div class="math-display">$$\mathcal{H} = u(c) + \lambda\left[f(k) - (n + \delta + g)k - c\right]$$</div>
-      <p style="color:var(--text-2);font-size:0.9rem;line-height:1.6;">
-        where $\lambda(t)$ is the <strong>co-state variable</strong>: the <em>shadow price of capital</em> per effective worker.
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:4px;">
+        The Current-Value Hamiltonian
       </p>
 
-      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;">First-Order Conditions &amp; Transversality Condition</p>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        We set up the Hamiltonian by adding the instantaneous utility and the product of the multiplier $\lambda(t)$ with the capital accumulation rate $\dfrac{dk}{dt}$:
+      </p>
 
-      <div class="demo-step">
-        <div class="step-num">1</div>
+      <div class="math-display boxed" style="font-size:1.05rem;">
+        $$\boxed{\mathcal{H} = \frac{c^{1-\varepsilon}-1}{1-\varepsilon} + \lambda\left[k^\alpha - c - (n + \delta + g_A)k\right]}$$
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.9rem;line-height:1.65;">
+        • Notice that the expression inside the brackets is exactly $\mathbf{\dfrac{dk}{dt}}$.<br>
+        • $\lambda(t)$ is the <strong>multiplier / shadow value of capital</strong>: it measures the marginal value of having an additional unit of capital per effective worker today for future utility.
+      </p>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:14px;">
+        Two Types of First-Order Conditions
+      </p>
+
+      <!-- TYPE 1: CONTROL VARIABLE -->
+      <div class="demo-step" style="border-left:3px solid var(--green);">
+        <div class="step-num" style="background:var(--green-muted);color:var(--green-bright);border-color:var(--green-border);">1</div>
         <div class="step-body">
-          <strong>First-order condition on $c$:</strong> $\dfrac{\partial \mathcal{H}}{\partial c} = 0$
-          <div class="math-display" style="margin:6px 0;">$$\frac{\partial \mathcal{H}}{\partial c} = 0 \implies \boxed{u'(c) = \lambda}$$</div>
-          <p>The marginal utility of consumption must equal the shadow price of capital at all times.</p>
+          <strong style="color:var(--green-bright);font-size:0.95rem;">TYPE 1 — First-Order Condition on the CONTROL VARIABLE $c$:</strong>
+          <p style="margin-top:4px;">
+            Since $c$ is chosen freely at every instant, we set the derivative of $\mathcal{H}$ with respect to $c$ to zero:
+          </p>
+          <div class="math-display" style="margin:6px 0;">$$\frac{\partial \mathcal{H}}{\partial c} = 0$$</div>
+          <p>Differentiating explicitly:</p>
+          $$\frac{\partial \mathcal{H}}{\partial c} = c^{-\varepsilon} - \lambda = 0$$
+          <div class="math-display boxed" style="margin:6px 0;">$$\boxed{\lambda = c^{-\varepsilon}}$$</div>
+          <p><strong>Economic Interpretation:</strong> The marginal utility of consumption $c^{-\varepsilon}$ must equal the shadow value $\lambda$ of capital. If consumption gave more utility than saving, the household would consume more; if capital had a higher shadow value, it would consume less.</p>
         </div>
       </div>
 
-      <div class="demo-step">
-        <div class="step-num">2</div>
+      <!-- TYPE 2: STATE VARIABLE -->
+      <div class="demo-step" style="border-left:3px solid var(--blue-bright);margin-top:10px;">
+        <div class="step-num" style="background:var(--blue-muted);color:var(--blue-bright);border-color:var(--blue-border);">2</div>
         <div class="step-body">
-          <strong>First-order condition on $k$ (co-state equation):</strong> $\dfrac{d\lambda}{dt} = \rho\lambda - \dfrac{\partial \mathcal{H}}{\partial k}$
-          <div class="math-display" style="margin:6px 0;">$$\rho\lambda = \lambda\left[f'(k) - (n + g + \delta)\right] + \frac{d\lambda}{dt}$$</div>
-          <p>Governs the rate at which the shadow value of capital $\lambda$ changes over time.</p>
+          <strong style="color:var(--blue-bright);font-size:0.95rem;">TYPE 2 — Dynamic Condition on the STATE VARIABLE $k$:</strong>
+          <p style="margin-top:4px;color:var(--amber-bright);font-weight:700;">
+            ⚠️ Do NOT set $\dfrac{\partial \mathcal{H}}{\partial k} = 0$!
+          </p>
+          <p style="margin-top:4px;">
+            Because $k$ is a <strong>state variable</strong> (its level is predetermined and evolves over time), its optimality condition is <strong>dynamic</strong> and describes how the shadow value $\lambda(t)$ changes over time:
+          </p>
+          <div class="math-display" style="margin:6px 0;">$$\frac{d\lambda}{dt} = \rho\lambda - \frac{\partial \mathcal{H}}{\partial k}$$</div>
+          <p>First, compute the partial derivative of $\mathcal{H}$ with respect to $k$:</p>
+          $$\frac{\partial \mathcal{H}}{\partial k} = \lambda\left[\alpha k^{\alpha-1} - (n + \delta + g_A)\right]$$
+          <p>Substituting into the dynamic state-variable condition gives:</p>
+          <div class="math-display" style="margin:6px 0;">
+            $$\frac{d\lambda}{dt} = \rho\lambda - \lambda\left[\alpha k^{\alpha-1} - (n + \delta + g_A)\right]$$
+          </div>
+          <p>or equivalently written as:</p>
+          <div class="math-display boxed-blue" style="margin:6px 0;">
+            $$\boxed{\rho\lambda = \lambda\left[\alpha k^{\alpha-1} - (n + \delta + g_A)\right] + \frac{d\lambda}{dt}}$$
+          </div>
+          <p><strong>Economic Interpretation:</strong> The required rate of return on saving ($\rho\lambda$) must equal the economic dividend from capital ($\lambda \times \text{net marginal product}$) plus the capital gain or loss on the shadow price ($\dfrac{d\lambda}{dt}$).</p>
         </div>
       </div>
 
-      <div class="demo-step">
-        <div class="step-num">3</div>
+      <!-- TRANSVERSALITY CONDITION -->
+      <div class="demo-step" style="border-left:3px solid var(--amber-bright);margin-top:10px;">
+        <div class="step-num" style="background:var(--amber-muted);color:var(--amber-bright);border-color:var(--amber-border);">3</div>
         <div class="step-body">
-          <strong>The Transversality Condition:</strong>
-          <div class="math-display" style="margin:6px 0;">$$\lim_{t \to \infty} e^{-\rho t}\,\lambda(t)\,k(t) = 0$$</div>
-          <p>The present value of capital at infinity must be zero (households must not leave valuable capital unconsumed at the end of time).</p>
+          <strong style="color:var(--amber-bright);font-size:0.95rem;">Transversality Condition (Terminal Condition):</strong>
+          <div class="math-display boxed-amber" style="margin:6px 0;">
+            $$\boxed{\lim_{t \to \infty} e^{-\rho t}\,\lambda(t)\,k(t) = 0}$$
+          </div>
+          <p><strong>Economic Interpretation:</strong> The discounted shadow value of leftover capital cannot remain strictly positive forever. Households must not over-accumulate capital endlessly and leave valuable resources unconsumed as time goes to infinity.</p>
         </div>
       </div>
     </div>
 
-    <!-- ═══ CARD 5: THE EULER EQUATION ═══ -->
+    <!-- ═══ CARD 7: THE EULER EQUATION ═══ -->
     <div class="concept-card purple-top">
       <div class="section-header">
         <span class="section-label" style="background:var(--purple-muted);color:var(--purple-bright);border-color:var(--purple-border);">Part 2 / 3</span>
-        <h3>Solving the Ramsey Model (2/3) — The Euler Equation</h3>
+        <h3>Solving the Ramsey Model (2/3) — The Ramsey Euler Equation</h3>
       </div>
+
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        Combining the first two conditions yields the <strong>Euler equation</strong>:
+        By combining the control-variable condition $\lambda = c^{-\varepsilon}$ and the state-variable condition, we derive the <strong>Ramsey Euler Equation</strong> governing optimal consumption growth.
       </p>
 
-      <div class="math-display boxed-purple">
-        $$\boxed{\frac{u''(c)}{u'(c)}\frac{dc}{dt} = \rho - \left[f'(k) - (n + g + \delta)\right]}$$
+      <div class="math-display boxed-purple" style="font-size:1.1rem;">
+        $$\boxed{g_c \equiv \frac{1}{c}\frac{dc}{dt} = \frac{1}{\varepsilon}\left[\alpha k^{\alpha-1} - \rho - n - \delta - g_A\right]}$$
       </div>
 
       <button class="toggle-btn" onclick="toggle(this,'demo-euler-derivation')">
@@ -567,73 +846,142 @@ body {
         <div class="demo-step">
           <div class="step-num">1</div>
           <div class="step-body">
-            <strong>Differentiate $u'(c) = \lambda$ with respect to time $t$:</strong>
+            <strong>General derivation:</strong>
+            From the control condition, $\lambda = u'(c)$. Differentiating both sides with respect to time $t$:
             $$\frac{d\lambda}{dt} = u''(c)\frac{dc}{dt}$$
+            Substitute this into the state-variable equation $\rho\lambda = \lambda\left[f'(k) - (n + \delta + g_A)\right] + \dfrac{d\lambda}{dt}$:
+            $$\rho\lambda = \lambda\left[f'(k) - (n + \delta + g_A)\right] + u''(c)\frac{dc}{dt}$$
+            Dividing both sides by $\lambda = u'(c)$:
+            $$\rho = f'(k) - (n + \delta + g_A) + \frac{u''(c)}{u'(c)}\frac{dc}{dt}$$
+            Rearranging gives the general Euler equation:
+            $$\frac{u''(c)}{u'(c)}\frac{dc}{dt} = \rho - \left[f'(k) - (n + \delta + g_A)\right]$$
           </div>
         </div>
+
         <div class="demo-step">
           <div class="step-num">2</div>
           <div class="step-body">
-            <strong>Substitute $\frac{d\lambda}{dt}$ into the co-state equation:</strong>
-            $$\rho\lambda = \lambda\left[f'(k) - (n + g + \delta)\right] + u''(c)\frac{dc}{dt}$$
+            <strong>Substitute the explicit CRRA derivatives:</strong>
+            We know for CRRA utility that:
+            $$u'(c) = c^{-\varepsilon} \quad \text{and} \quad u''(c) = -\varepsilon c^{-\varepsilon-1}$$
+            Therefore the ratio $\dfrac{u''(c)}{u'(c)}$ simplifies neatly:
+            $$\frac{u''(c)}{u'(c)} = \frac{-\varepsilon c^{-\varepsilon-1}}{c^{-\varepsilon}} = -\frac{\varepsilon}{c}$$
           </div>
         </div>
+
         <div class="demo-step">
           <div class="step-num">3</div>
           <div class="step-body">
-            <strong>Divide both sides by $\lambda = u'(c)$:</strong>
-            $$\rho = f'(k) - (n + g + \delta) + \frac{u''(c)}{u'(c)}\frac{dc}{dt}$$
-            <p>Rearranging yields the Euler equation:</p>
-            $$\boxed{\frac{u''(c)}{u'(c)}\frac{dc}{dt} = \rho - \left[f'(k) - (n + g + \delta)\right]}$$
+            <strong>Substitute into the general equation with $f'(k) = \alpha k^{\alpha-1}$:</strong>
+            $$-\frac{\varepsilon}{c}\frac{dc}{dt} = \rho - \left[\alpha k^{\alpha-1} - (n + \delta + g_A)\right]$$
+            Multiply both sides by $-\dfrac{1}{\varepsilon}$:
+            $$\frac{1}{c}\frac{dc}{dt} = \frac{1}{\varepsilon}\left[\alpha k^{\alpha-1} - (n + \delta + g_A) - \rho\right]$$
+            Introducing the growth rate of consumption $g_c \equiv \dfrac{1}{c}\dfrac{dc}{dt}$:
+            $$\boxed{g_c = \frac{1}{\varepsilon}\left[\alpha k^{\alpha-1} - \rho - n - \delta - g_A\right]}$$
           </div>
         </div>
       </div>
 
-      <div class="key-note purple" style="margin-top:8px;">
-        <strong>Economic Meaning:</strong> This is the <strong>Euler equation</strong>. It gives the <em>optimal growth rate of consumption</em>.
+      <div class="key-note purple" style="margin-top:10px;">
+        <strong>Economic Meaning of the Ramsey Euler Equation:</strong>
         <p style="margin-top:6px;">
-          • The net marginal product of capital $f'(k) - (n + g + \delta)$ is the reward for waiting (saving).<br>
-          • $\rho$ is the psychological cost of waiting (impatience).<br>
-          • When $f'(k) - (n + g + \delta) > \rho$, the reward exceeds impatience, so consumption rises over time ($\frac{dc}{dt} > 0$).
+          • $\alpha k^{\alpha-1}$ is the <strong>marginal product of capital</strong> ($f'(k)$), representing the gross return to saving.<br>
+          • $n + \delta + g_A$ are the <strong>break-even terms</strong> that capital must offset.<br>
+          • $\rho$ is the <strong>rate of impatience</strong> (psychological cost of waiting).<br>
+          • $\dfrac{1}{\varepsilon} = \text{IES}$ is the <strong>intertemporal elasticity of substitution</strong>, determining how strongly consumption growth responds to the net return to saving.
+        </p>
+        <div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:5px;">
+          <div>• <strong>If $\alpha k^{\alpha-1} - (n + \delta + g_A) > \rho$:</strong> The net return to saving exceeds impatience $\implies \mathbf{g_c > 0}$ (consumption grows over time).</div>
+          <div>• <strong>If $\alpha k^{\alpha-1} - (n + \delta + g_A) = \rho$:</strong> The return exactly equals impatience $\implies \mathbf{g_c = 0}$ (consumption is constant).</div>
+          <div>• <strong>If $\alpha k^{\alpha-1} - (n + \delta + g_A) < \rho$:</strong> The return is below impatience $\implies \mathbf{g_c < 0}$ (consumption declines over time).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CARD 8: RAMSEY STEADY STATE & SUMMARY ═══ -->
+    <div class="concept-card green-top">
+      <div class="section-header">
+        <span class="section-label">Summary</span>
+        <h3>Solving the Ramsey Model (3/3) — The Steady State &amp; Complete System</h3>
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        At the <strong>Ramsey steady state</strong>, both per-effective-worker variables must be stationary. The steady state requires <strong>two simultaneous conditions</strong>:
+      </p>
+
+      <div class="math-display boxed" style="font-size:1.05rem;">
+        $$\boxed{g_c = 0 \iff \frac{dc}{dt} = 0 \qquad \text{and} \qquad \frac{dk}{dt} = 0}$$
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:8px;">
+        1. Determining Steady-State Capital $k^*$ (From the Euler Equation)
+      </p>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Setting $g_c = 0$ in the Euler equation gives:
+      </p>
+
+      <div class="math-display boxed-blue">
+        $$\alpha (k^*)^{\alpha-1} = \rho + n + \delta + g_A \iff \boxed{f'(k^*) = \rho + n + \delta + g_A}$$
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Solving explicitly for $k^*$ under Cobb-Douglas production:
+      </p>
+
+      <div class="math-display boxed-blue">
+        $$\boxed{k^* = \left[\frac{\alpha}{\rho + n + \delta + g_A}\right]^{\frac{1}{1-\alpha}}}$$
+      </div>
+
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:8px;">
+        2. Determining Steady-State Consumption $c^*$ (From Capital Accumulation)
+      </p>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Setting $\dfrac{dk}{dt} = 0$ in the capital accumulation equation ensures the capital stock does not change:
+      </p>
+
+      <div class="math-display boxed-green">
+        $$(k^*)^\alpha - c^* - (n + \delta + g_A)k^* = 0 \iff \boxed{c^* = (k^*)^\alpha - (n + \delta + g_A)k^*}$$
+      </div>
+
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;font-style:italic;color:var(--text-3);">
+        Note: $\dfrac{dc}{dt} = 0$ alone is not sufficient to define the steady state; $\dfrac{dk}{dt} = 0$ is equally required for the full macroeconomic equilibrium.
+      </p>
+
+      <!-- COMPARISON WITH GOLDEN RULE -->
+      <div class="key-note amber" style="margin-top:12px;">
+        <strong>Ramsey Steady State vs. Solow Golden Rule:</strong>
+        <p style="margin-top:6px;">
+          • <strong>Solow Golden Rule:</strong> $f'(k^{**}) = n + \delta + g_A$<br>
+          • <strong>Ramsey Steady State:</strong> $f'(k^*) = \rho + n + \delta + g_A$
+        </p>
+        <p style="margin-top:6px;">
+          Since households are impatient ($\rho > 0$), we have:
+          $$f'(k^*) > f'(k^{**})$$
+          Because the production function exhibits strictly diminishing returns to capital ($f''(k) < 0$), a higher marginal product implies a <strong>strictly lower capital stock</strong>:
+        </p>
+        <div class="math-display" style="margin:6px 0;background:rgba(255,255,255,0.04);">
+          $$\boxed{k^* < k^{**}}$$
+        </div>
+        <p style="margin-top:6px;">
+          <strong>Dynamic Efficiency:</strong> In the Solow model, an economy could accumulate too much capital ($k^* > k^{**}$ if $s > \alpha$), wasting output in unproductive investment (dynamic inefficiency). In the Ramsey model, forward-looking households choose consumption optimally and will <em>never</em> over-accumulate capital beyond the Golden Rule: $k^* < k^{**}$ holds endogenously because $\rho > 0$.
         </p>
       </div>
 
       <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:14px;">
-        The Ramsey Steady State / Regular Path
-      </p>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        When $f'(k) = \rho + n + g + \delta$, we have:
-      </p>
-      <div class="math-display">
-        $$\frac{u''(c)}{u'(c)}\underbrace{\frac{dc}{dt}}_{=0} = 0 \iff \boxed{f'(k^*) = \rho + n + g + \delta}$$
-      </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        <strong>And this is the steady state / regular path.</strong>
-      </p>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        The result is very similar to that of the Solow model, <em>except for the parameter $\rho$ (the discount rate)</em>.
-      </p>
-    </div>
-
-    <!-- ═══ CARD 6: COMPLETE SUMMARY (3/3) ═══ -->
-    <div class="concept-card green-top">
-      <div class="section-header">
-        <span class="section-label">Summary</span>
-        <h3>Solving the Ramsey Model (3/3) — The Optimal Dynamic System</h3>
-      </div>
-      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        The complete dynamic system describing the economy at the optimum consists of:
+        Complete Dynamic System at the Optimum
       </p>
 
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div class="var-item">
           <strong>1. Optimal Consumption Growth (Euler Equation):</strong>
-          <div class="math-display" style="margin:6px 0;">$$\frac{u''(c)}{u'(c)}\frac{dc}{dt} = \rho - \left[f'(k) - (n + g + \delta)\right]$$</div>
+          <div class="math-display" style="margin:6px 0;">$$g_c \equiv \frac{1}{c}\frac{dc}{dt} = \frac{1}{\varepsilon}\left[\alpha k^{\alpha-1} - \rho - n - \delta - g_A\right]$$</div>
         </div>
 
         <div class="var-item">
           <strong>2. Capital Accumulation (Resource Constraint):</strong>
-          <div class="math-display" style="margin:6px 0;">$$\frac{dk}{dt} = f(k) - (n + g + \delta)k - c$$</div>
+          <div class="math-display" style="margin:6px 0;">$$\frac{dk}{dt} = k^\alpha - c - (n + \delta + g_A)k$$</div>
         </div>
 
         <div class="var-item">
@@ -642,25 +990,7 @@ body {
         </div>
       </div>
 
-      <!-- COMPARISON WITH GOLDEN RULE -->
-      <div class="key-note amber" style="margin-top:8px;">
-        <strong>Ramsey Steady State vs. Solow Golden Rule:</strong>
-        <p style="margin-top:6px;">
-          • <strong>Solow Golden Rule:</strong> $f'(k^{**}) = n + g + \delta$<br>
-          • <strong>Ramsey Steady State:</strong> $f'(k^*) = \rho + n + g + \delta$
-        </p>
-        <p style="margin-top:6px;">
-          Since households discount the future ($\rho > 0$), we have $f'(k^*) > f'(k^{**})$. Because capital exhibits diminishing returns ($f'' < 0$), this implies:
-        </p>
-        <div class="math-display" style="margin:6px 0;background:rgba(255,255,255,0.04);">
-          $$\boxed{k^* < k^{**}}$$
-        </div>
-        <p style="margin-top:6px;">
-          <strong>Dynamic Efficiency:</strong> In the Solow model, over-saving ($s > \alpha$) could push the economy into dynamic inefficiency ($k^* > k^{**}$). In the Ramsey model, forward-looking households will <em>never</em> accumulate capital beyond the Golden Rule level: $k^*$ is strictly below $k^{**}$, ruling out dynamic inefficiency endogenously.
-        </p>
-      </div>
-
-      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:14px;">
+      <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:16px;">
         Synthesis: Solow Model vs. Ramsey Model
       </p>
 
@@ -676,7 +1006,7 @@ body {
           <tr>
             <td><strong>Saving Rate</strong></td>
             <td>Exogenous and constant ($s$)</td>
-            <td>Endogenous, chosen by households ($s(t)$)</td>
+            <td>Endogenous, implied residually by consumption ($i(t) = y(t) - c(t)$)</td>
           </tr>
           <tr>
             <td><strong>Household Behaviour</strong></td>
@@ -684,9 +1014,19 @@ body {
             <td>Intertemporal utility maximisation ($\max W$)</td>
           </tr>
           <tr>
-            <td><strong>Steady-State Condition</strong></td>
-            <td>$s f(k^*) = (n + g + \delta)k^*$</td>
-            <td>$f'(k^*) = \rho + n + g + \delta$</td>
+            <td><strong>Preference Parameters</strong></td>
+            <td>None (no utility function)</td>
+            <td>Impatience $\rho > 0$, Curvature $\varepsilon > 0$ ($\text{IES} = 1/\varepsilon$)</td>
+          </tr>
+          <tr>
+            <td><strong>Dynamic Variables</strong></td>
+            <td>Only capital per worker $k(t)$</td>
+            <td>Control variable $c(t)$, State variable $k(t)$</td>
+          </tr>
+          <tr>
+            <td><strong>Steady-State Capital Condition</strong></td>
+            <td>$s(k^*)^\alpha = (n + \delta + g_A)k^*$</td>
+            <td>$\alpha(k^*)^{\alpha-1} = \rho + n + \delta + g_A$</td>
           </tr>
           <tr>
             <td><strong>Dynamic Inefficiency</strong></td>
@@ -694,14 +1034,13 @@ body {
             <td>Impossible ($k^* < k^{**}$ always because $\rho > 0$)</td>
           </tr>
           <tr>
-            <td><strong>Long-run Growth ($y = Y/L$)</strong></td>
-            <td>Exogenous technology rate: $g$</td>
-            <td>Exogenous technology rate: $g$</td>
+            <td><strong>Long-run Growth ($Y/L$)</strong></td>
+            <td>Technological progress rate $g_A$</td>
+            <td>Technological progress rate $g_A$</td>
           </tr>
         </tbody>
       </table>
     </div>
-
   </div><!-- end main-content -->
 </div><!-- end main-wrap -->
 
