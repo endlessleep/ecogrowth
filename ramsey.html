@@ -284,6 +284,48 @@ body {
   .main-content { padding: 24px 20px 40px; }
   .var-grid { grid-template-columns: 1fr; }
 }
+
+/* ── SEGMENTED CHAPTER PROGRESS BAR ── */
+.chapter-progress-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  margin: 0 20px;
+  padding: 0 2px;
+}
+.progress-segment {
+  flex: 1;
+  height: 7px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+.progress-segment:hover {
+  transform: scaleY(1.35);
+  filter: brightness(1.25);
+}
+.progress-segment.completed {
+  background: linear-gradient(90deg, #059669, #10b981);
+  border-color: rgba(52, 211, 153, 0.5);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.35);
+}
+.progress-segment.active {
+  background: linear-gradient(90deg, #10b981, #34d399);
+  border-color: rgba(52, 211, 153, 0.9);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6), 0 0 4px rgba(52, 211, 153, 0.4);
+}
+@media(max-width:900px){
+  .chapter-progress-bar { margin: 0 10px; gap: 4px; }
+  .progress-segment { height: 5px; }
+}
+@media(max-width:640px){
+  .chapter-progress-bar { display: none; }
+}
+
 </style>
 </head>
 <body>
@@ -323,6 +365,7 @@ body {
     <div class="topbar-breadcrumb">
       ECOGROWTH <span class="sep">›</span> 1 — Neoclassical Growth Model <span class="sep">›</span> <strong>b) Ramsey Model</strong>
     </div>
+    <div class="chapter-progress-bar" id="chapterProgressBar" role="progressbar" aria-label="Chapter progress"></div>
     <div class="topbar-pill"><span class="topbar-dot"></span>Chapter 1b</div>
   </div>
 
@@ -1056,6 +1099,73 @@ function toggle(btn,id){
   btn.classList.toggle('open', !isOpen);
   if(!isOpen && window.MathJax){ MathJax.typesetPromise([box]); }
 }
+
+/* ── CHAPTER PROGRESS BAR LOGIC ── */
+function initChapterProgress(){
+  const container = document.getElementById('chapterProgressBar');
+  if(!container) return;
+
+  const cards = Array.from(document.querySelectorAll('.concept-card'));
+  if(cards.length === 0) return;
+
+  container.innerHTML = '';
+  const segments = cards.map((card, idx) => {
+    const seg = document.createElement('div');
+    seg.className = 'progress-segment' + (idx === 0 ? ' active' : '');
+    seg.setAttribute('role', 'button');
+    seg.setAttribute('tabindex', '0');
+    const titleEl = card.querySelector('h3, h2, .section-header');
+    const titleText = titleEl ? titleEl.innerText.replace(/\s+/g, ' ').trim() : `Section ${idx + 1}`;
+    seg.setAttribute('title', titleText);
+    seg.setAttribute('aria-label', titleText);
+    const jump = () => { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+    seg.addEventListener('click', jump);
+    seg.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); jump(); } });
+    container.appendChild(seg);
+    return seg;
+  });
+
+  function updateProgress(){
+    const scrollY = window.scrollY || window.pageYOffset;
+    const windowH = window.innerHeight;
+    const totalH = document.documentElement.scrollHeight;
+    const isAtBottom = (windowH + scrollY) >= (totalH - 50);
+
+    if(isAtBottom){
+      segments.forEach(seg => { seg.className = 'progress-segment completed'; });
+      return;
+    }
+
+    let activeIdx = 0;
+    for(let i = 0; i < cards.length; i++){
+      const rect = cards[i].getBoundingClientRect();
+      if(rect.top <= 160){
+        activeIdx = i;
+      }
+    }
+
+    segments.forEach((seg, idx) => {
+      if(idx < activeIdx){
+        seg.className = 'progress-segment completed';
+      } else if(idx === activeIdx){
+        seg.className = 'progress-segment active';
+      } else {
+        seg.className = 'progress-segment';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  updateProgress();
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initChapterProgress);
+} else {
+  initChapterProgress();
+}
+
 </script>
 </body>
 </html>
