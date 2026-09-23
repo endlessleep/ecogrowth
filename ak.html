@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECOGROWTH — Externalities and the AK Model</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$'],['\\(','\\)']] },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<style>
+:root {
+  --sidebar-bg: #07130c;
+  --sidebar-width: 280px;
+
+  --bg: #0b0f0d;
+  --bg-card: #121a15;
+  --bg-card-hover: #18231d;
+  --bg-deep: #060907;
+
+  --green: #10b981;
+  --green-bright: #34d399;
+  --green-muted: rgba(16,185,129,0.1);
+  --green-border: rgba(16,185,129,0.3);
+  --green-glow: rgba(16,185,129,0.15);
+  --green-gradient: linear-gradient(135deg, #10b981 0%, #047857 100%);
+
+  --blue-bright: #60a5fa;
+  --blue-muted: rgba(59,130,246,0.1);
+  --blue-border: rgba(59,130,246,0.3);
+
+  --amber-bright: #fbbf24;
+  --amber-muted: rgba(251,191,36,0.08);
+  --amber-border: rgba(251,191,36,0.3);
+
+  --purple-bright: #c084fc;
+  --purple-muted: rgba(168,85,247,0.1);
+  --purple-border: rgba(168,85,247,0.3);
+
+  --text: #f8fafc;
+  --text-2: #cbd5e1;
+  --text-3: #94a3b8;
+  --text-muted: #64748b;
+
+  --border: rgba(255,255,255,0.07);
+  --radius: 10px;
+  --radius-lg: 16px;
+  --font: 'Outfit', sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  position: fixed; top:0; left:0; bottom:0;
+  z-index: 200; transition: transform .3s ease; overflow: hidden;
+}
+.sidebar:not(.open) { transform: translateX(-100%); }
+.sidebar-brand {
+  padding: 22px 20px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.sidebar-brand h1 { font-size: 1.25rem; font-weight: 800; letter-spacing: 1px; }
+.sidebar-brand h1 span { color: var(--green); }
+.sidebar-close { background:none; border:none; color:var(--text-3); font-size:1.4rem; cursor:pointer; }
+.sidebar-close:hover { color: var(--green); }
+
+.sidebar-nav { flex:1; overflow-y:auto; padding:12px 0; }
+.sidebar-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 22px;
+  color: var(--text-3); text-decoration: none;
+  font-size: 0.88rem; font-weight: 700;
+  transition: all .2s; border-left: 3px solid transparent;
+}
+.sidebar-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.sidebar-link.active { color: var(--green-bright); border-left-color: var(--green); background: var(--green-muted); }
+
+.sidebar-group { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
+.sidebar-group-title {
+  padding: 10px 22px 4px;
+  font-size: 0.82rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.6px; color: var(--text-3);
+}
+.sidebar-sublink {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 22px 9px 36px;
+  color: var(--text-3); text-decoration: none;
+  font-size: 0.85rem; font-weight: 600;
+  transition: all .2s; border-left: 3px solid transparent;
+}
+.sidebar-sublink:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.sidebar-sublink.active { color: var(--green-bright); border-left-color: var(--green); background: var(--green-muted); }
+
+/* ── SIDEBAR FOOTER (STAR NOVA) ── */
+.sidebar-footer { padding: 14px 16px; border-top: 1px solid var(--border); }
+.sidebar-user {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 10px 12px;
+}
+.user-avatar {
+  width: 34px; height: 34px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative;
+}
+.user-dot {
+  width: 8px; height: 8px; background: var(--green);
+  border-radius: 50%; border: 2px solid var(--sidebar-bg);
+  position: absolute; bottom: -2px; right: -2px;
+  box-shadow: 0 0 6px var(--green);
+}
+.user-info { overflow: hidden; }
+.user-name { font-size: 0.82rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-role { font-size: 0.7rem; color: var(--text-muted); }
+
+/* ── TOPBAR ── */
+.topbar {
+  height: 64px; background: rgba(11,15,13,0.9); border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px); position: sticky; top:0; z-index: 100;
+  display: flex; align-items: center; padding: 0 28px; gap: 16px;
+}
+.topbar-toggle {
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  color: var(--text); width: 38px; height: 38px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1.1rem; flex-shrink: 0; transition: .2s;
+}
+.topbar-toggle:hover { border-color: var(--green-border); color: var(--green); }
+.topbar-breadcrumb { color: var(--text-3); font-size: 0.88rem; display: flex; align-items: center; gap: 6px; }
+.topbar-breadcrumb .sep { opacity: .4; }
+.topbar-breadcrumb strong { color: var(--text); font-weight: 700; }
+.topbar-pill {
+  margin-left: auto; background: var(--green-muted); border: 1px solid var(--green-border);
+  color: var(--green-bright); padding: 5px 14px; border-radius: 999px;
+  font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; gap: 7px;
+}
+.topbar-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 7px var(--green); }
+
+/* ── LAYOUT ── */
+.main-wrap { margin-left: var(--sidebar-width); flex: 1; display: flex; flex-direction: column; transition: margin-left .3s; min-width: 0; }
+.main-wrap.expanded { margin-left: 0; }
+.main-content { padding: 40px 44px 70px; max-width: 880px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+
+/* ── PAGE TITLE ── */
+.page-title-block { border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+.page-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--green); margin-bottom: 8px; }
+.page-title-block h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.15; }
+.page-title-block p { color: var(--text-3); font-size: 0.95rem; margin-top: 7px; }
+
+/* ── SECTION HEADER ── */
+.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+.section-label {
+  background: var(--green-muted); border: 1px solid var(--green-border);
+  color: var(--green-bright); font-size: 0.72rem; font-weight: 800;
+  padding: 3px 11px; border-radius: 999px; white-space: nowrap;
+}
+.section-header h3 { font-size: 1.05rem; font-weight: 800; color: var(--text); }
+
+/* ── CONCEPT CARDS ── */
+.concept-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+  transition: transform .2s, border-color .2s;
+}
+.concept-card:hover { transform: translateY(-2px); border-color: var(--green-border); }
+.concept-card.green-top { border-top: 3px solid var(--green); }
+.concept-card.blue-top  { border-top: 3px solid var(--blue-bright); }
+.concept-card.amber-top { border-top: 3px solid var(--amber-bright); }
+.concept-card.purple-top { border-top: 3px solid var(--purple-bright); }
+
+/* ── KEY NOTE / CALLOUT ── */
+.key-note {
+  font-size: 0.9rem; color: var(--text-2); line-height: 1.65;
+  border-left: 3px solid var(--green);
+  padding: 12px 18px; background: var(--green-muted);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.key-note strong { color: var(--text); font-weight: 800; }
+.key-note.amber { border-left-color: var(--amber-bright); background: var(--amber-muted); }
+.key-note.blue  { border-left-color: var(--blue-bright);  background: var(--blue-muted); }
+.key-note.purple { border-left-color: var(--purple-bright); background: var(--purple-muted); }
+
+/* ── MATH DISPLAYS ── */
+.math-display {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  text-align: center;
+  margin: 4px 0;
+  overflow-x: auto;
+}
+.math-display.boxed { border-color: var(--green-border); background: var(--green-muted); }
+.math-display.boxed-blue { border-color: var(--blue-border); background: var(--blue-muted); }
+.math-display.boxed-amber { border-color: var(--amber-border); background: var(--amber-muted); }
+.math-display.boxed-purple { border-color: var(--purple-border); background: var(--purple-muted); }
+
+/* ── ASSUMPTIONS REVISION CARDS ── */
+.assump-grid { display: flex; flex-direction: column; gap: 14px; }
+.assump-card {
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 18px 22px; background: rgba(255,255,255,0.015);
+  display: flex; flex-direction: column; gap: 10px;
+  transition: border-color .2s;
+}
+.assump-card:hover { border-color: var(--green-border); }
+.assump-card.key-assump { border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.04); }
+.assump-header { display: flex; align-items: center; gap: 12px; }
+.assump-num {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: var(--green-gradient); display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 800; color: #fff; flex-shrink: 0;
+}
+.assump-num.key { background: linear-gradient(135deg, #10b981, #065f46); box-shadow: 0 0 12px rgba(16,185,129,0.35); }
+.assump-title { font-size: 1.02rem; font-weight: 800; color: var(--text); }
+.assump-badge-key {
+  font-size: 0.7rem; font-weight: 800; background: var(--green-muted);
+  border: 1px solid var(--green-border); color: var(--green-bright);
+  padding: 3px 10px; border-radius: 999px; margin-left: auto; white-space: nowrap;
+}
+.assump-details { display: flex; flex-direction: column; gap: 8px; }
+.assump-line { font-size: 0.9rem; color: var(--text-2); line-height: 1.65; }
+.assump-line strong { color: var(--text); }
+
+/* ── MAIN MESSAGES REVISION CARDS ── */
+.msg-grid { display: flex; flex-direction: column; gap: 12px; }
+.msg-card {
+  display: flex; gap: 16px; padding: 18px 20px;
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.015); transition: border-color .2s;
+}
+.msg-card:hover { border-color: var(--green-border); }
+.msg-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--green-muted); border: 1px solid var(--green-border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 1.1rem; color: var(--green-bright);
+}
+.msg-content { display: flex; flex-direction: column; gap: 5px; }
+.msg-title { font-size: 0.98rem; font-weight: 800; color: var(--text); }
+.msg-desc { font-size: 0.88rem; color: var(--text-3); line-height: 1.65; }
+
+/* ── VAR GRID ── */
+.var-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.var-item {
+  background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 9px 13px; font-size: 0.88rem; color: var(--text-2);
+}
+.var-item strong { color: var(--green-bright); }
+
+/* ── TOGGLE BUTTON & COLLAPSIBLE CONTAINER ── */
+.toggle-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  color: var(--text-2); font-family: var(--font); font-size: 0.82rem; font-weight: 700;
+  padding: 8px 16px; border-radius: 999px; cursor: pointer; transition: all .2s; width: fit-content;
+}
+.toggle-btn:hover { border-color: var(--green-border); color: var(--green-bright); background: var(--green-muted); }
+.toggle-btn .arrow { font-size: 0.65rem; transition: transform .25s; display: inline-block; }
+.toggle-btn.open .arrow { transform: rotate(180deg); }
+
+.collapsible {
+  display: none; margin-top: 10px;
+  background: rgba(6,9,7,0.85); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 24px;
+  font-size: 0.9rem; color: var(--text-2); line-height: 1.7;
+}
+.collapsible.open { display: block; animation: fadeDown .2s ease; }
+.collapsible strong { color: var(--text); font-weight: 700; }
+.collapsible p { margin-bottom: 10px; }
+.collapsible p:last-child { margin-bottom: 0; }
+
+/* ── STEP-BY-STEP INSIDE DEMONSTRATIONS ── */
+.demo-step { display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
+.demo-step:last-child { margin-bottom: 0; }
+.step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--green-muted); border: 1px solid var(--green-border);
+  color: var(--green-bright); font-size: 0.72rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.step-body { font-size: 0.9rem; color: var(--text-2); line-height: 1.65; flex: 1; }
+.step-body strong { color: var(--text); }
+.step-body p { margin-bottom: 6px; }
+.step-body p:last-child { margin-bottom: 0; }
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── EXERCISE BLOCK (ROBUST FIX FOR TEXT & MATH ALIGNMENT) ── */
+.exo-card {
+  background: #080f0b;
+  border: 1px solid rgba(251,191,36,0.28);
+  border-top: 3px solid var(--amber-bright);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.exo-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--amber-muted); border: 1px solid var(--amber-border);
+  color: var(--amber-bright); font-size: 0.72rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .8px; padding: 4px 12px;
+  border-radius: 999px; width: fit-content;
+}
+.exo-title { font-size: 1.1rem; font-weight: 800; color: var(--text); }
+
+/* The question list: normal block flow for text + math inside .exo-text */
+.exo-q-list {
+  display: flex; flex-direction: column; gap: 11px;
+  padding: 0; margin: 0; list-style: none;
+}
+.exo-q {
+  display: flex; align-items: baseline; gap: 10px;
+  font-size: 0.92rem; color: var(--text-2); line-height: 1.65;
+}
+.exo-num {
+  color: var(--amber-bright); font-weight: 800; font-size: 0.92rem;
+  min-width: 22px; flex-shrink: 0;
+}
+.exo-text {
+  flex: 1; min-width: 0;
+}
+
+/* ── CORRECTION BLOCK ── */
+.corr-section { display: flex; flex-direction: column; gap: 16px; }
+.corr-q {
+  border-left: 2px solid var(--green-border);
+  padding: 10px 16px; display: flex; flex-direction: column; gap: 7px;
+}
+.corr-q-title {
+  font-size: 0.76rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .6px; color: var(--green-bright);
+}
+.corr-body { font-size: 0.9rem; color: var(--text-2); line-height: 1.65; }
+.corr-body p { margin-bottom: 8px; }
+.corr-body p:last-child { margin-bottom: 0; }
+
+/* ── KEY RESULTS DASHBOARD BOX (OUTSIDE TOGGLE) ── */
+.summary-dashboard {
+  background: linear-gradient(145deg, rgba(251,191,36,0.06) 0%, rgba(16,185,129,0.03) 100%);
+  border: 1px solid rgba(251,191,36,0.35);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+.summary-dashboard.blue-accent {
+  background: linear-gradient(145deg, rgba(96,165,250,0.07) 0%, rgba(16,185,129,0.03) 100%);
+  border-color: rgba(96,165,250,0.35);
+}
+.summary-dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 12px;
+}
+.summary-dashboard-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--amber-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.summary-dashboard.blue-accent .summary-dashboard-title {
+  color: var(--blue-bright);
+}
+.summary-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(251,191,36,0.15);
+  color: var(--amber-bright);
+  border: 1px solid rgba(251,191,36,0.35);
+  letter-spacing: 0.4px;
+}
+.summary-dashboard.blue-accent .summary-badge {
+  background: rgba(96,165,250,0.15);
+  color: var(--blue-bright);
+  border-color: rgba(96,165,250,0.35);
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+}
+.summary-card-item {
+  background: rgba(0,0,0,0.38);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 9px;
+  padding: 12px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.summary-card-item:hover {
+  border-color: rgba(251,191,36,0.4);
+  background: rgba(0,0,0,0.5);
+  transform: translateY(-1px);
+}
+.summary-dashboard.blue-accent .summary-card-item:hover {
+  border-color: rgba(96,165,250,0.4);
+}
+.summary-card-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-3);
+}
+.summary-card-val {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+/* ── DIAGRAM CONTAINER ── */
+.diagram-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.diagram-caption { font-size: 0.82rem; color: var(--text-3); text-align: center; font-style: italic; }
+
+@media(max-width:900px){
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main-wrap { margin-left: 0 !important; }
+  .main-content { padding: 24px 20px 40px; }
+  .var-grid { grid-template-columns: 1fr; }
+}
+
+/* ── SEGMENTED CHAPTER PROGRESS BAR ── */
+.chapter-progress-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  margin: 0 20px;
+  padding: 0 2px;
+}
+.progress-segment {
+  flex: 1;
+  height: 7px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+.progress-segment:hover {
+  transform: scaleY(1.35);
+  filter: brightness(1.25);
+}
+.progress-segment.completed {
+  background: linear-gradient(90deg, #059669, #10b981);
+  border-color: rgba(52, 211, 153, 0.5);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.35);
+}
+.progress-segment.active {
+  background: linear-gradient(90deg, #10b981, #34d399);
+  border-color: rgba(52, 211, 153, 0.9);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6), 0 0 4px rgba(52, 211, 153, 0.4);
+}
+@media(max-width:900px){
+  .chapter-progress-bar { margin: 0 10px; gap: 4px; }
+  .progress-segment { height: 5px; }
+}
+@media(max-width:640px){
+  .chapter-progress-bar { display: none; }
+}
+
+
+/* Chapter 2: same course components, with readable narrow-screen equations. */
+.concept-card > p, .exo-card > p { color:var(--text-2); font-size:.92rem; line-height:1.7; }
+.concept-card, .exo-card { scroll-margin-top:84px; min-width:0; }
+.step-body, .corr-body { min-width:0; }
+.collapsible .math-display { max-width:100%; }
+.outline { padding-left:22px; color:var(--text-2); line-height:1.9; }
+.outline a { color:var(--green-bright); text-decoration:none; }
+.source-note { font-size:.82rem !important; color:var(--text-3) !important; }
+button:focus-visible, a:focus-visible, .progress-segment:focus-visible { outline:2px solid var(--green-bright); outline-offset:4px; }
+.topbar-pill { white-space:nowrap; }
+.section-header { flex-wrap:wrap; }
+@media(max-width:640px) {
+ .topbar { padding:0 12px; gap:10px; }
+ .topbar-breadcrumb { font-size:.75rem; min-width:0; }
+ .topbar-pill { padding:5px 9px; font-size:.7rem; }
+ .main-content { padding:24px 14px 40px; }
+ .concept-card, .exo-card { padding:18px; }
+ .collapsible { padding:14px 10px; }
+ .math-display { padding:10px 8px; }
+ .demo-step { gap:8px; }
+}
+
+.course-part { font-size:1.2rem; font-weight:800; color:var(--text); padding:12px 0 0; letter-spacing:-.2px; }
+@media(max-width:640px) {
+ .topbar { height:78px; min-height:78px; padding-bottom:14px; }
+ .chapter-progress-bar { display:flex; position:absolute; left:12px; right:12px; bottom:7px; height:7px; margin:0; gap:4px; }
+}
+
+/* Reading hierarchy: preserve the full explanation, give each idea room. */
+.concept-card { --section-accent:var(--green-bright); gap:20px; padding:28px; }
+.concept-card.blue-top { --section-accent:var(--blue-bright); }
+.concept-card.purple-top { --section-accent:var(--purple-bright); }
+.concept-card.amber-top, .exo-card { --section-accent:var(--amber-bright); }
+.concept-card:hover { transform:none; }
+.section-header { align-items:flex-start; flex-direction:column; gap:10px; padding-bottom:17px; border-bottom:1px solid var(--border); }
+.section-header h3 { font-size:1.25rem; line-height:1.35; letter-spacing:-.3px; }
+.section-label { color:var(--section-accent); background:rgba(255,255,255,.025); border-color:var(--border); }
+.concept-card p, .exo-card p { line-height:1.8; }
+.concept-card strong, .exo-card strong { color:var(--text); font-weight:600; }
+.reading-block, .definition-strip, .takeaway, .reading-tile, .result-row { min-width:0; }
+.reading-block h4, .definition-strip h4, .takeaway h4, .reading-tile h4, .idea-row h4, .result-row h4 { font-size:.88rem; font-weight:700; line-height:1.5; margin-bottom:8px; color:var(--section-accent); }
+.reading-block p, .definition-strip p, .takeaway p, .reading-tile p, .idea-row p, .result-row p { color:var(--text-2); font-size:.92rem; }
+.reading-block { padding:0 0 0 16px; border-left:2px solid var(--border); }
+.definition-strip { padding:15px 18px; background:rgba(255,255,255,.025); border-radius:10px; }
+.definition-strip p { font-size:.86rem; color:var(--text-3); }
+.definition-strip h4 { color:var(--text-3); font-size:.76rem; text-transform:uppercase; letter-spacing:.6px; }
+.reading-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.reading-tile { padding:18px; border:1px solid var(--border); border-radius:12px; background:rgba(255,255,255,.018); }
+.reading-tile:last-child:nth-child(odd) { grid-column:1/-1; }
+.takeaway { padding:18px 20px; border-left:3px solid var(--section-accent); background:rgba(16,185,129,.045); border-radius:0 12px 12px 0; }
+.idea-list { display:flex; flex-direction:column; gap:0; }
+.idea-row { display:flex; gap:16px; padding:17px 0; border-top:1px solid var(--border); }
+.idea-row:last-child { padding-bottom:0; }
+.idea-row > div { min-width:0; }
+.idea-index { color:var(--section-accent); font-size:.8rem; font-weight:700; border:1px solid var(--green-border); background:var(--green-muted); border-radius:8px; width:30px; height:30px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+.result-row { padding:0 0 19px; border-bottom:1px solid var(--border); }
+.result-row:last-child { padding-bottom:0; border:0; }
+.course-part { display:flex; align-items:center; gap:14px; margin-top:12px; }
+.course-part::before { content:''; width:22px; height:3px; border-radius:3px; background:var(--green); flex-shrink:0; }
+.math-display.boxed { background:rgba(16,185,129,.045); padding:18px 14px; }
+.toggle-btn { padding:11px 17px; line-height:1.5; text-align:left; }
+.collapsible { padding:24px; }
+.demo-step { padding:16px 0; margin-bottom:0; border-bottom:1px solid var(--border); }
+.demo-step:first-child { padding-top:0; }
+.demo-step:last-child { padding-bottom:0; border-bottom:0; }
+.step-body > strong { display:block; margin-bottom:10px; color:var(--green-bright); }
+.step-body p { margin-bottom:12px; }
+.exo-q { padding:13px 0; border-bottom:1px solid var(--border); }
+.exo-q:last-child { border-bottom:0; }
+@media(max-width:640px) {
+ .concept-card, .exo-card { padding:20px 18px; gap:18px; }
+ .reading-grid { grid-template-columns:1fr; }
+ .reading-tile { padding:15px; }
+ .collapsible { padding:18px 10px; }
+ .section-header h3 { font-size:1.15rem; }
+ .course-part { font-size:1.1rem; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar open" id="sidebar">
+  <div class="sidebar-brand">
+    <h1>ECOGROWTH<span>.</span></h1>
+    <button class="sidebar-close" aria-label="Close navigation" onclick="toggleSidebar()">✕</button>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-group">
+      <div class="sidebar-group-title">📂 1 — Neoclassical Growth Model</div>
+      <a href="solow.html" class="sidebar-sublink">a) Solow Model</a>
+      <a href="ramsey.html" class="sidebar-sublink">b) Ramsey Model</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-group-title">📂 2 — Externalities and Growth</div>
+      <a href="ak.html" class="sidebar-sublink active">The AK Model</a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="user-avatar" style="background: transparent;">
+        <img src="images/avatar.png" alt="STAR NOVA" style="width:100%;height:100%;border-radius:8px;object-fit:cover;">
+        <span class="user-dot"></span>
+      </div>
+      <div class="user-info">
+        <div class="user-name">STAR NOVA</div>
+        <div class="user-role">ecogrowth.github.io</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main-wrap" id="main-wrap">
+  <div class="topbar">
+    <button class="topbar-toggle" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="true" onclick="toggleSidebar()">☰</button>
+    <div class="topbar-breadcrumb">
+      ECOGROWTH <span class="sep">›</span> <strong>The AK Model</strong>
+    </div>
+    <div class="chapter-progress-bar" id="chapterProgressBar" role="navigation" aria-label="Chapter sections"></div>
+    <div class="topbar-pill"><span class="topbar-dot"></span>Chapter 2</div>
+  </div>
+
+  <div class="main-content">
+
+
+<div class="page-title-block">
+ <div class="page-label">Chapter 2 — Economic Growth</div>
+ <h1>Externalities and the “AK” Model</h1>
+</div>
+<h2 class="course-part">Why endogenous growth?</h2>
+<section class="concept-card green-top" id="intro"><div class="section-header"><span class="section-label">Motivation</span><h3>Why explain technological progress?</h3></div><p>In the Solow model, once the economy reaches its regular growth path, output per capita grows at the rate of <strong>exogenous technical progress</strong>, also referred to as TFP growth.</p><div class="definition-strip"><h4>Reading the terms</h4><p>“Exogenous” means that the model takes this rate as given: it does not explain the decisions that produce it. TFP means total factor productivity, the productivity component of production.</p></div><p>There are three reasons to connect productivity growth to economic decisions.</p><div class="idea-list"><div class="idea-row"><span class="idea-index">1</span><div><h4>Firm innovation</h4><p>Firms undertake <strong>industrial innovations</strong> because they expect profits.</p></div></div><div class="idea-row"><span class="idea-index">2</span><div><h4>Public research</h4><p>Governments allocate <strong>public funds to research and development (R&amp;D)</strong>.</p></div></div><div class="idea-row"><span class="idea-index">3</span><div><h4>Capital accumulation</h4><p>Finally, <strong>capital accumulation</strong> can contribute to productivity growth; this is the channel developed in the AK model below.</p></div></div></div><div class="takeaway"><h4>Why this matters</h4><p>A complete growth theory therefore needs to describe how productivity growth is generated. This matters because, on the long-run path, productivity growth determines the growth of output per capita. Explaining that growth requires going beyond an assumed rate of technical progress.</p></div></section>
+<section class="concept-card blue-top" id="incentives"><div class="section-header"><span class="section-label">Framework</span><h3>The financing problem and two possible approaches</h3></div><p>To make innovation <strong>endogenous</strong>, a model must describe the economic incentives that lead agents to innovate.</p><div class="reading-block"><h4>The financing problem</h4><p>This raises a financing problem: if technology has constant returns to scale and each production factor is paid its marginal product, the Euler theorem implies that factor payments exhaust output. There is no remaining part of output to reward innovation separately under these assumptions.</p></div><div class="reading-grid"><div class="reading-tile"><h4>01 · Production externalities</h4><p>There are two approaches. The first uses <strong>externalities</strong>: production decisions affect productivity beyond the benefits taken into account by the individual decision-maker. This is the approach of the AK model studied here.</p></div><div class="reading-tile"><h4>02 · Imperfect competition</h4></div></div><p>The second allows <strong>imperfect competition</strong> in at least some sectors. Innovators can then obtain a rent, meaning earnings associated with their innovation that provide an incentive to undertake it. Romer’s variety-of-goods model and the Schumpeterian model of Aghion–Howitt are examples of this second approach.</p></section>
+
+<h2 class="course-part">The AK model</h2>
+<section class="concept-card blue-top" id="firms"><div class="section-header"><span class="section-label">Production</span><h3>Firms’ production and the capital externality</h3></div><div class="math-display boxed">$$y_i=\bar A k_i^\alpha L_i^{1-\alpha},\qquad \bar A=A_0\left(\sum_{i=1}^{N}k_i\right)^\eta$$</div><div class="reading-grid"><div class="reading-tile"><h4>Firm-level inputs</h4><p>The index $i$ identifies a firm. Its output is $y_i$, its capital is $k_i$, and its labour input is $L_i$.</p></div><div class="reading-tile"><h4>Capital exponent</h4><p>The parameter $\alpha$ is the capital exponent, with $0&lt;\alpha&lt;1$ in the decreasing-marginal-return setting.</p></div><div class="reading-tile"><h4>Common productivity</h4><p>The common productivity term $\bar A$ multiplies each firm’s production; $A_0$ is its baseline coefficient.</p></div></div><div class="reading-block"><h4>Where the externality enters</h4><p>The term $\sum_{i=1}^{N}k_i$ is the capital stock of all $N$ firms together. Productivity therefore depends on <strong>aggregate capital</strong>, rather than only on a firm’s own input. The parameter $\eta$ measures the size of this externality: it governs how aggregate capital enters the productivity term.</p></div><div class="takeaway"><h4>The firm’s perspective</h4><p>An individual firm treats $\bar A$ as given when making its decision. The externality is precisely the productivity effect of aggregate accumulation that is not internalized in this private decision. This distinction explains why the private and aggregate returns to capital can differ.</p></div></section>
+<section class="concept-card green-top" id="aggregate"><div class="section-header"><span class="section-label">Aggregation</span><h3>From identical firms to aggregate production</h3></div><div class="math-display boxed">$$K=\sum_{i=1}^{N}k_i,\qquad Y=\sum_{i=1}^{N}y_i$$</div><div class="reading-grid"><div class="reading-tile"><h4>Aggregate quantities</h4><p>Total capital $K$ and total output $Y$ are the sums of firm-level quantities.</p></div><div class="reading-tile"><h4>Labour normalization</h4><p>Labour is normalized by setting $L_i=1$. Total labour is therefore $L=N$.</p></div><div class="reading-tile"><h4>Identical firms</h4><p>All firms are assumed identical, so each holds the same capital stock $k_i=K/N$.</p></div></div><div class="math-display boxed">$$L_i=1,\qquad L=N,\qquad k_i=\frac{K}{N},\qquad Y=A_0N^{1-\alpha}K^{\alpha+\eta}$$</div><div class="reading-block"><h4>Read the capital exponent</h4><p>In the aggregate formula, the exponent on capital is $\alpha+\eta$. It combines capital’s role as a direct production input, represented by $\alpha$, with its role in the common productivity term, represented by $\eta$. Holding $N$ fixed, there are three cases:</p></div><div class="assump-grid"><div class="var-item"><strong>$\alpha+\eta&lt;1$ — Decreasing marginal returns.</strong><p>As aggregate capital rises, each additional unit contributes less additional output.</p></div><div class="var-item"><strong>$\alpha+\eta&gt;1$ — Increasing marginal returns.</strong><p>As aggregate capital rises, each additional unit contributes more additional output.</p></div><div class="var-item"><strong>$\alpha+\eta=1$ — Constant marginal returns.</strong><p>Each additional unit of aggregate capital contributes the same additional output. This is the AK case.</p></div></div></section>
+<section class="concept-card purple-top" id="household"><div class="section-header"><span class="section-label">Optimization</span><h3>Individual optimization and consumption growth</h3></div><p>The household chooses its consumption path $c(t)$ to maximize discounted utility. Its capital accumulation equation is production minus consumption.</p><div class="definition-strip"><h4>Variables in this chapter</h4><p>Here $k$ denotes the capital of the representative firm/household, so $K=Nk$ in the symmetric economy; $N$ is fixed in the growth expressions.</p></div><div class="math-display boxed">$$\max_{\{c(t)\}}\int_0^\infty u(c(t))e^{-\rho t}\,dt,\qquad \dot k=\bar A k^\alpha-c$$</div><div class="math-display boxed">$$u(c)=\frac{c^{1-\varepsilon}-1}{1-\varepsilon}$$</div><div class="reading-grid"><div class="reading-tile"><h4>Time notation</h4><p>The dot denotes a time derivative: $\dot k=dk/dt$.</p></div><div class="reading-tile"><h4>Preferences</h4><p>The parameter $\rho$ is the rate of time preference, and $\varepsilon$ is the utility-curvature parameter; the intertemporal elasticity of substitution is $1/\varepsilon$.</p></div></div><div class="definition-strip"><h4>The specified setting</h4><p>The displayed utility expression is written for $\varepsilon\ne1$. The accumulation equation here has no depreciation or population-growth term.</p></div><p>Applying the Ramsey optimization conditions to this constraint gives the following consumption-growth expression. The derivation is available below.</p><div class="math-display boxed">$$g_c\equiv\frac{\dot c}{c}=\frac{\alpha\bar A k^{\alpha-1}-\rho}{\varepsilon}=\frac{\alpha A_0N^\eta k^{\alpha+\eta-1}-\rho}{\varepsilon}$$</div><button type="button" class="toggle-btn" aria-expanded="false" aria-controls="demo-consumption" onclick="toggle(this,'demo-consumption')"><span class="toggle-label">Show worked answer: consumption growth</span><span class="arrow" aria-hidden="true">▾</span></button><div class="collapsible" id="demo-consumption"><div class="demo-step"><div class="step-num">1</div><div class="step-body"><strong>Set up the private problem.</strong><p>Treat $\bar A$ as given when differentiating with respect to private capital. With $\lambda$ denoting the current-value multiplier, the Hamiltonian is:</p><div class="math-display boxed">$$\mathcal H=u(c)+\lambda(\bar A k^\alpha-c)$$</div></div></div><div class="demo-step"><div class="step-num">2</div><div class="step-body"><strong>Use the consumption and capital conditions.</strong><div class="math-display boxed">$$\lambda=u\prime(c)=c^{-\varepsilon},\qquad \dot\lambda=(\rho-\alpha\bar A k^{\alpha-1})\lambda$$</div><p>Differentiating $\lambda=c^{-\varepsilon}$ with respect to time and dividing by $\lambda$ gives:</p><div class="math-display boxed">$$\frac{\dot\lambda}{\lambda}=-\varepsilon\frac{\dot c}{c}=\rho-\alpha\bar A k^{\alpha-1}$$</div></div></div><div class="demo-step"><div class="step-num">3</div><div class="step-body"><strong>Rearrange, then impose symmetry.</strong><p>Multiplying by $-1/\varepsilon$ gives the first expression for $g_c$. Only after taking the private derivative do we substitute $\bar A=A_0(Nk)^\eta$:</p><div class="math-display boxed">$$\alpha\bar A k^{\alpha-1}=\alpha A_0N^\eta k^{\eta+\alpha-1}$$</div><p>This yields the displayed formula. Differentiating the aggregate productivity effect as part of the private return would change the problem: households do not internalize it.</p></div></div></div><button type="button" class="toggle-btn" aria-expanded="false" aria-controls="answer-increasing" onclick="toggle(this,'answer-increasing')"><span class="toggle-label">Show worked answer: why set aside increasing returns?</span><span class="arrow" aria-hidden="true">▾</span></button><div class="collapsible" id="answer-increasing"><p>Why set aside $\alpha+\eta&gt;1$? In this case, the exponent $\alpha+\eta-1$ in the growth formula is positive. As capital accumulates, the return term rises and consumption growth accelerates instead of remaining constant. This creates an explosive-growth concern and does not deliver the constant-growth case pursued in the chapter. This argument motivates the restriction; it does not establish that every possible path must explode.</p></div></section>
+<section class="concept-card green-top" id="decentralized"><div class="section-header"><span class="section-label">Growth</span><h3>The growth of the decentralized economy</h3></div><p>The AK case imposes $\alpha+\eta=1$. The capital exponent in the consumption-growth formula becomes zero, so the growth rate no longer changes with the level of capital.</p><div class="math-display boxed">$$g=g_c=\frac{\alpha A_0N^\eta-\rho}{\varepsilon}$$</div><button type="button" class="toggle-btn" aria-expanded="false" aria-controls="demo-ak-growth" onclick="toggle(this,'demo-ak-growth')"><span class="toggle-label">Show worked answer: the AK growth rate</span><span class="arrow" aria-hidden="true">▾</span></button><div class="collapsible" id="demo-ak-growth"><div class="demo-step"><div class="step-num">1</div><div class="step-body"><strong>Substitute the AK restriction.</strong><div class="math-display boxed">$$k^{\alpha+\eta-1}=k^0=1\quad\Longrightarrow\quad g_c=\frac{\alpha A_0N^\eta-\rho}{\varepsilon}$$</div></div></div><div class="demo-step"><div class="step-num">2</div><div class="step-body"><strong>Read this as the economy’s balanced growth rate.</strong><p>In this case, output per person is $y=A_0N^\eta k$. On the balanced growth path, consumption and capital grow together, so output has the same growth rate. With fixed $N$, aggregate and per-person growth rates also coincide. This is the economy’s common growth rate $g$.</p></div></div></div><div class="reading-block"><h4>What determines growth?</h4><p>The numerator compares the private return $\alpha A_0N^\eta$ with impatience $\rho$.</p></div><div class="reading-grid"><div class="reading-tile"><h4>Productivity · $A_0$</h4><p>A larger baseline productivity $A_0$ raises growth.</p></div><div class="reading-tile"><h4>Economy size · $N$</h4><p>With positive externalities, a larger $N$ raises the return through $N^\eta$.</p></div><div class="reading-tile"><h4>Impatience · $\rho$</h4><p>Greater impatience lowers growth.</p></div><div class="reading-tile"><h4>Consumption response · $1/\varepsilon$</h4><p>The factor $1/\varepsilon$ determines how strongly consumption growth responds to the return–impatience difference; when that difference is positive, a larger $\varepsilon$ lowers the positive growth rate.</p></div></div><div class="definition-strip"><h4>The AK restriction</h4><p>The parameters $\alpha$ and $\eta$ must satisfy $\alpha+\eta=1$ in this case.</p></div><div class="takeaway"><h4>No automatic catch-up</h4><p>Initial capital does not appear in this growth-rate expression. A country does not grow faster simply because it starts with less capital. Countries with the same parameters have the same growth rate, rather than a catch-up mechanism driven by their initial capital gap. This is what “no cross-country convergence” means in the AK model.</p></div></section>
+<h2 class="course-part">Private incentives and public intervention</h2>
+<section class="concept-card blue-top" id="centralized"><div class="section-header"><span class="section-label">Planner</span><h3>Growth in the centralized economy</h3></div><div class="reading-block"><h4>The planner’s perspective</h4><p>A <strong>benevolent central planner</strong> chooses consumption and investment for the economy as a whole. Unlike the private decision-maker, the planner takes account of all production externalities: aggregate accumulation changes both the direct capital input and the common productivity term.</p></div><div class="math-display boxed">$$\dot K=A_0N^{1-\alpha}K^{\alpha+\eta}-C$$</div><p>Here $C$ is total consumption. The resources not consumed become additional aggregate capital. The corresponding growth expression is:</p><div class="math-display boxed">$$g^*=\frac{A_0(\alpha+\eta)N^\eta k^{\alpha+\eta-1}-\rho}{\varepsilon}$$</div><p>The star marks the centralized outcome, and $k=K/N$ as before.</p><div class="takeaway"><h4>Social return versus private return</h4><p>The return coefficient is now $\alpha+\eta$, whereas private agents take account only of $\alpha$. The additional term reflects the external productivity effect included by the planner.</p></div><p>Before imposing the AK restriction, this expression depends on $k$ and need not be constant.</p><p>In the AK case, $\alpha+\eta=1$, the centralized growth rate is:</p><div class="math-display boxed">$$g^*=\frac{A_0N^\eta-\rho}{\varepsilon}>g$$</div><div class="reading-block"><h4>Why policy enters the model</h4><p>With the positive externality considered here, the planner values investment more highly and chooses a higher growth rate. The difference between the two outcomes motivates the next question: can taxes and subsidies make private incentives reflect the return taken into account by the planner?</p></div></section>
+<section class="concept-card amber-top" id="subsidy"><div class="section-header"><span class="section-label">Policy</span><h3>Taxes and subsidies: implementing centralized growth</h3></div><div class="reading-block"><h4>The policy design problem</h4><p>Consider a <strong>poll tax</strong>, a fixed amount $t$ paid by each household, and a subsidy to each producer equal to $\tau f(k)$, a fraction $\tau$ of its production. The task is to find a system that lets the decentralized economy reach the centralized growth rate.</p></div><div class="definition-strip"><h4>Keep the notation distinct</h4><p>In the worked answer, write the poll tax as $T$ to distinguish it from the time variable $t$. Here $\tau$ is a <em>subsidy rate</em>; in the public-spending extension below, the same symbol will instead denote a tax rate.</p></div><button type="button" class="toggle-btn" aria-expanded="false" aria-controls="demo-subsidy" onclick="toggle(this,'demo-subsidy')"><span class="toggle-label">Show worked answer: subsidy and balanced budget</span><span class="arrow" aria-hidden="true">▾</span></button><div class="collapsible" id="demo-subsidy"><div class="demo-step"><div class="step-num">1</div><div class="step-body"><strong>Write the private accumulation equation.</strong><div class="math-display boxed">$$\dot k=(1+\tau)\bar A k^\alpha-c-T$$</div><p>The producer receives its output plus the subsidy, while the household pays the fixed tax. Because the individual treats $T$ and $\bar A$ as given, the marginal return entering its Euler equation is $(1+\tau)\alpha\bar A k^{\alpha-1}$.</p></div></div><div class="demo-step"><div class="step-num">2</div><div class="step-body"><strong>Match the return in the AK case.</strong><div class="math-display boxed">$$g_\tau=\frac{(1+\tau)\alpha A_0N^\eta-\rho}{\varepsilon}$$</div><p>To obtain $g_\tau=g^*$, choose the subsidy so that $(1+\tau)\alpha=1$:</p><div class="math-display boxed">$$\tau=\frac{1-\alpha}{\alpha}=\frac{\eta}{\alpha}$$</div></div></div><div class="demo-step"><div class="step-num">3</div><div class="step-body"><strong>Finance the subsidy with the poll tax.</strong><p>In the symmetric economy, a balanced public budget requires total taxes to equal total subsidies:</p><div class="math-display boxed">$$NT=\tau Y\quad\Longrightarrow\quad T=\tau y=\tau\bar A k^\alpha$$</div><p>The tax amount may change over time as production changes, but each household takes it as a fixed payment when making its own marginal decision. Tax revenue finances the subsidy; the subsidy raises the private return to investment. One must therefore take the private derivative before imposing the aggregate budget identity.</p></div></div></div></section>
+<section class="concept-card green-top" id="findings"><div class="section-header"><span class="section-label">Key takeaways</span><h3>The AK model: essential results</h3></div><div class="result-row"><h4>At the firm level</h4><p>The model is based on <strong>production externalities</strong>. At the level of an individual firm, capital has decreasing marginal returns: holding the productivity environment fixed, successive additions to the firm’s capital generate smaller additions to its output.</p></div><div class="result-row"><h4>At the economy level</h4><p>At the aggregate level, capital accumulation also improves that productivity environment. Under the AK restriction $\alpha+\eta=1$, this external effect exactly offsets decreasing marginal returns at the firm level. Aggregate capital then has <strong>constant marginal returns</strong>, removing the source of declining growth emphasized in the Solow model.</p></div><div class="result-row"><h4>Growth and policy</h4><p>The AK model delivers a constant growth rate and <strong>no cross-country convergence</strong>. The decentralized equilibrium also performs less well than the centralized equilibrium, which takes externalities into account. This leaves a role for public intervention through taxes and subsidies. </p></div></section>
+<h2 class="course-part">Public spending and growth</h2>
+<section class="concept-card green-top" id="public"><div class="section-header"><span class="section-label">Extension</span><h3>Public spending as a production externality</h3></div><p>The extension changes the source of the production externality. Output per capita now depends on private capital per capita $k$ and government expenditure per capita $\gamma$:</p><div class="math-display boxed">$$y=Ak^\alpha\gamma^{1-\alpha}$$</div><div class="reading-block"><h4>The productive role of public expenditure</h4><p>The coefficient $A$ describes productivity in this extension. Public expenditure enters production with exponent $1-\alpha$. An individual takes $\gamma$ as given when choosing consumption and capital, even though public expenditure is financed by taxes on production.</p></div><div class="math-display boxed">$$\gamma=\tau y,\qquad u(c)=\frac{c^{1-\varepsilon}-1}{1-\varepsilon}$$</div><div class="reading-block"><h4>Financing and the allocation problem</h4><p>The government taxes a fraction $\tau$ of production and spends the resulting revenue. Thus $\gamma=\tau y$ is the <strong>balanced-budget condition</strong>, expressed per capita. Preferences retain the constant intertemporal elasticity $1/\varepsilon$. The exercise compares the growth rate chosen privately with the one achieved by a planner who accounts for the productive role and resource cost of public spending.</p></div></section>
+<section class="exo-card" id="exercise"><div class="exo-label">✎ Application</div><h3 class="exo-title">Public spending — exercise and worked solutions</h3><p>Use the production function, balanced budget and preferences above to compare private decisions with the planner’s allocation.</p><ol class="exo-q-list"><li class="exo-q"><span class="exo-num">1.</span><span class="exo-text">Write the capital accumulation equation in the decentralized economy, where individuals take $\gamma$ as given and do not see the link between their taxes and public expenditure.</span></li><li class="exo-q"><span class="exo-num">2.</span><span class="exo-text">What is the growth rate of consumption? Show that it depends on $\gamma/k$.</span></li><li class="exo-q"><span class="exo-num">3.</span><span class="exo-text">Is there a level of $\gamma/k$ that maximizes the decentralized growth rate?</span></li><li class="exo-q"><span class="exo-num">4.</span><span class="exo-text">Write the benevolent central planner’s capital accumulation equation and programme.</span></li><li class="exo-q"><span class="exo-num">5.</span><span class="exo-text">What growth rate does the central planner achieve? Compare it with the maximum decentralized growth rate and comment.</span></li></ol>
+<button type="button" class="toggle-btn" aria-expanded="false" aria-controls="correction-1" onclick="toggle(this,'correction-1')"><span class="toggle-label">Show correction 1: decentralized accumulation</span><span class="arrow" aria-hidden="true">▾</span></button><div class="collapsible" id="correction-1"><p>Tax payments are $\tau y$. Output available to the household after tax is therefore $(1-\tau)y$. Deducting consumption gives the capital accumulation equation:</p><div class="math-display boxed">$$\dot k=(1-\tau)Ak^\alpha\gamma^{1-\alpha}-c$$</div><p>At the aggregate symmetric equilibrium, the government budget also implies $\dot k=y-\gamma-c$. However, for the private optimization problem, $\tau$ and $\gamma$ are taken as given. The individual does not choose public expenditure when choosing its capital.</p></div>
+<button type="button" class="toggle-btn" aria-expanded="false" aria-controls="correction-2" onclick="toggle(this,'correction-2')"><span class="toggle-label">Show correction 2: consumption growth</span><span class="arrow" aria-hidden="true">▾</span></button><div class="collapsible" id="correction-2"><div class="demo-step"><div class="step-num">1</div><div class="step-body"><strong>Apply the private optimality conditions.</strong><div class="math-display boxed">$$\mathcal H=u(c)+\lambda\left[(1-\tau)Ak^\alpha\gamma^{1-\alpha}-c\right]$$</div><div class="math-display boxed">$$\lambda=c^{-\varepsilon},\qquad \frac{\dot\lambda}{\lambda}=\rho-(1-\tau)\alpha A k^{\alpha-1}\gamma^{1-\alpha}$$</div><p>Use $\dot\lambda/\lambda=-\varepsilon\dot c/c$, as in the earlier consumption-growth calculation.</p></div></div><div class="demo-step"><div class="step-num">2</div><div class="step-body"><strong>Express the return using the public-spending-to-capital ratio.</strong><p>Since $k^{\alpha-1}\gamma^{1-\alpha}=(\gamma/k)^{1-\alpha}$, the requested rate is:</p><div class="math-display boxed">$$g_c=\frac{(1-\tau)\alpha A(\gamma/k)^{1-\alpha}-\rho}{\varepsilon}$$</div><p>Public spending contributes to the productive return, while the tax leaves the household only the fraction $1-\tau$ of that return.</p></div></div></div>
+<button type="button" class="toggle-btn" aria-expanded="false" aria-controls="correction-3" onclick="toggle(this,'correction-3')"><span class="toggle-label">Show correction 3: maximize decentralized growth</span><span class="arrow" aria-hidden="true">▾</span></button><div class="collapsible" id="correction-3"><div class="demo-step"><div class="step-num">1</div><div class="step-body"><strong>Impose the government budget after the private calculation.</strong><p>Write $x=\gamma/k$. Divide production and the budget condition by $k$:</p><div class="math-display boxed">$$\frac{y}{k}=Ax^{1-\alpha},\qquad x=\tau Ax^{1-\alpha}$$</div><p>For positive public expenditure this gives $\tau=x^\alpha/A$. The tax rate and spending ratio cannot be varied independently when the budget must balance. Substitute this relationship into the private growth rate:</p><div class="math-display boxed">$$g_D(x)=\frac{\alpha\left(Ax^{1-\alpha}-x\right)-\rho}{\varepsilon}$$</div></div></div><div class="demo-step"><div class="step-num">2</div><div class="step-body"><strong>Find the maximizing ratio.</strong><div class="math-display boxed">$$g_D\prime(x)=\frac{\alpha}{\varepsilon}\left[A(1-\alpha)x^{-\alpha}-1\right]=0$$</div><div class="math-display boxed">$$x_D=\left[A(1-\alpha)\right]^{1/\alpha},\qquad \tau_D=\frac{x_D^\alpha}{A}=1-\alpha$$</div><p>This is a maximum: for $x&gt;0$ and $0&lt;\alpha&lt;1$, the second derivative is negative:</p><div class="math-display boxed">$$g_D\prime\prime(x)=-\frac{\alpha^2 A(1-\alpha)}{\varepsilon}x^{-\alpha-1}<0$$</div></div></div><div class="demo-step"><div class="step-num">3</div><div class="step-body"><strong>Evaluate the maximum growth rate.</strong><p>The first-order condition gives $Ax_D^{1-\alpha}=x_D/(1-\alpha)$. Hence $Ax_D^{1-\alpha}-x_D=\alpha x_D/(1-\alpha)$, and:</p><div class="math-display boxed">$$g_D^{\max}=\frac{\dfrac{\alpha^2}{1-\alpha}\left[A(1-\alpha)\right]^{1/\alpha}-\rho}{\varepsilon}$$</div></div></div></div>
+<button type="button" class="toggle-btn" aria-expanded="false" aria-controls="correction-4" onclick="toggle(this,'correction-4')"><span class="toggle-label">Show correction 4: the planner’s programme</span><span class="arrow" aria-hidden="true">▾</span></button><div class="collapsible" id="correction-4"><p>The planner chooses consumption and public expenditure together. Public spending contributes to output, but it also uses resources that cannot be consumed or invested. Its resource constraint and objective are:</p><div class="math-display boxed">$$\dot k=Ak^\alpha\gamma^{1-\alpha}-\gamma-c$$</div><div class="math-display boxed">$$\max_{\{c(t),\gamma(t)\}}\int_0^\infty\frac{c(t)^{1-\varepsilon}-1}{1-\varepsilon}e^{-\rho t}\,dt$$</div><p>The programme is subject to that accumulation equation and a given initial capital stock $k(0)=k_0$, with positive consumption and nonnegative capital and public spending. The current-value Hamiltonian used to answer the next question is:</p><div class="math-display boxed">$$\mathcal H=u(c)+\lambda\left[Ak^\alpha\gamma^{1-\alpha}-\gamma-c\right]$$</div></div>
+<button type="button" class="toggle-btn" aria-expanded="false" aria-controls="correction-5" onclick="toggle(this,'correction-5')"><span class="toggle-label">Show correction 5: centralized growth and comparison</span><span class="arrow" aria-hidden="true">▾</span></button><div class="collapsible" id="correction-5"><div class="demo-step"><div class="step-num">1</div><div class="step-body"><strong>Choose public expenditure.</strong><p>The condition on $\gamma$ balances its marginal contribution to output against its unit resource cost:</p><div class="math-display boxed">$$\frac{\partial\mathcal H}{\partial\gamma}=\lambda\left[(1-\alpha)Ak^\alpha\gamma^{-\alpha}-1\right]=0$$</div><div class="math-display boxed">$$x_P\equiv\frac{\gamma}{k}=\left[A(1-\alpha)\right]^{1/\alpha}=x_D$$</div><p>The planner chooses the same spending-to-capital ratio as the one maximizing decentralized growth.</p></div></div><div class="demo-step"><div class="step-num">2</div><div class="step-body"><strong>Compute the planner’s consumption-growth rate.</strong><div class="math-display boxed">$$\lambda=c^{-\varepsilon},\qquad \frac{\dot\lambda}{\lambda}=\rho-\alpha A(\gamma/k)^{1-\alpha}$$</div><p>Combining these conditions gives $g_P=[\alpha Ax_P^{1-\alpha}-\rho]/\varepsilon$. Using $Ax_P^{1-\alpha}=x_P/(1-\alpha)$:</p><div class="math-display boxed">$$g_P=\frac{\dfrac{\alpha}{1-\alpha}\left[A(1-\alpha)\right]^{1/\alpha}-\rho}{\varepsilon}$$</div><p>With this constant ratio, this is the common growth rate on the planner’s balanced growth path.</p></div></div><div class="demo-step"><div class="step-num">3</div><div class="step-body"><strong>Compare the two outcomes.</strong><div class="math-display boxed">$$g_P-g_D^{\max}=\frac{\alpha}{\varepsilon}\left[A(1-\alpha)\right]^{1/\alpha}>0$$</div><p>The public-spending ratio is the same in the two solutions, but the growth rates differ. Private agents take public expenditure as given and receive only the after-tax marginal return to their capital. The planner chooses public expenditure jointly with consumption and accounts for its role in aggregate production. Even the tax rate that maximizes decentralized growth therefore leaves that growth rate below the planner’s rate.</p></div></div></div>
+</section>
+</div></div>
+<script>
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('main-wrap').classList.toggle('expanded');
+  document.querySelector('.topbar-toggle').setAttribute('aria-expanded', String(document.getElementById('sidebar').classList.contains('open')));
+}
+function toggle(btn,id){
+  const box = document.getElementById(id);
+  const isOpen = box.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.setAttribute('aria-expanded', String(isOpen));
+  const label = btn.querySelector('.toggle-label');
+  label.textContent = label.textContent.replace(/^(Show|Hide)/, isOpen ? 'Hide' : 'Show');
+}
+
+/* ── CHAPTER PROGRESS BAR LOGIC ── */
+function initChapterProgress(){
+  const container = document.getElementById('chapterProgressBar');
+  if(!container) return;
+
+  const cards = Array.from(document.querySelectorAll('.concept-card, .exo-card'));
+  if(cards.length === 0) return;
+
+  container.innerHTML = '';
+  const segments = cards.map((card, idx) => {
+    const seg = document.createElement('div');
+    seg.className = 'progress-segment' + (idx === 0 ? ' active' : '');
+    seg.setAttribute('role', 'button');
+    seg.setAttribute('tabindex', '0');
+    const titleEl = card.querySelector('h3, h2, .section-header');
+    const titleText = titleEl ? titleEl.innerText.replace(/\s+/g, ' ').trim() : `Section ${idx + 1}`;
+    seg.setAttribute('title', titleText);
+    seg.setAttribute('aria-label', titleText);
+    const jump = () => { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+    seg.addEventListener('click', jump);
+    seg.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); jump(); } });
+    container.appendChild(seg);
+    return seg;
+  });
+
+  function updateProgress(){
+    const scrollY = window.scrollY || window.pageYOffset;
+    const windowH = window.innerHeight;
+    const totalH = document.documentElement.scrollHeight;
+    const isAtBottom = (windowH + scrollY) >= (totalH - 50);
+
+    if(isAtBottom){
+      segments.forEach(seg => { seg.className = 'progress-segment completed'; });
+      return;
+    }
+
+    let activeIdx = 0;
+    for(let i = 0; i < cards.length; i++){
+      const rect = cards[i].getBoundingClientRect();
+      if(rect.top <= 160){
+        activeIdx = i;
+      }
+    }
+
+    segments.forEach((seg, idx) => {
+      if(idx < activeIdx){
+        seg.className = 'progress-segment completed';
+      } else if(idx === activeIdx){
+        seg.className = 'progress-segment active';
+      } else {
+        seg.className = 'progress-segment';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  updateProgress();
+}
+
+if (window.matchMedia('(max-width: 900px)').matches) toggleSidebar();
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initChapterProgress);
+} else {
+  initChapterProgress();
+}
+
+</script>
+</body>
+</html>
