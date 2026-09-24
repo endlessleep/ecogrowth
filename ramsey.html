@@ -787,7 +787,10 @@ body {
       </div>
 
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        The dynamic optimisation problem for the household (with $\varepsilon \neq 1$) is:
+        We are looking for the <strong>optimal consumption path</strong>: how much to consume now and at each future date, given the initial capital stock and the capital accumulation equation. The household evaluates this path using its preference parameters: $\rho$ determines how future utility is discounted, while $\varepsilon$ determines the curvature of utility and the intertemporal elasticity of substitution $1/\varepsilon$.
+      </p>
+      <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
+        Consumption must therefore satisfy both the household’s preferences and the economy’s resource constraint. For $\varepsilon\ne1$, the programme is:
       </p>
 
       <div class="math-display boxed">
@@ -808,7 +811,7 @@ body {
 
       <p style="color:var(--text-2);font-size:0.9rem;line-height:1.65;">
         • Notice that the expression inside the brackets is exactly $\mathbf{\dfrac{dk(t)}{dt}}$.<br>
-        • $\lambda$ is the <strong>multiplier / shadow value of capital</strong>: it measures the marginal value of having an additional unit of capital per effective worker today for future utility.
+        • $\lambda$ is the <strong>shadow price of capital</strong>: the value, in units of utility, of an additional unit of capital per effective worker. It is the multiplier attached to the accumulation equation, not a price quoted in money.
       </p>
 
       <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:14px;">
@@ -827,7 +830,13 @@ body {
           <p>Differentiating explicitly:</p>
           $$\frac{\partial \mathcal{H}}{\partial c} = c^{-\varepsilon} - \lambda = 0$$
           <div class="math-display boxed" style="margin:6px 0;">$$\boxed{\lambda = c^{-\varepsilon}}$$</div>
-          <p><strong>Economic Interpretation:</strong> The marginal utility of consumption $c^{-\varepsilon}$ must equal the shadow value $\lambda$ of capital. If consumption gave more utility than saving, the household would consume more; if capital had a higher shadow value, it would consume less.</p>
+          <div class="key-note" style="margin-top:12px;">
+            <strong>One unit consumed or one unit invested</strong>
+            <p style="margin-top:6px;">At a given capital stock, investing one more unit requires reducing current consumption by one unit: consumption enters the accumulation equation with a minus sign. The marginal utility forgone is $u'(c)$; the value of the additional investment is $\lambda$.</p>
+            <p style="margin-top:6px;">At the optimum, these two values must be equal. <strong>The shadow price of capital equals the marginal utility of consumption:</strong></p>
+            <div class="math-display">$$\lambda=u'(c)=c^{-\varepsilon}$$</div>
+            <p>If the two values differed, a marginal reallocation between consumption and investment would improve the household’s objective. This equality is the condition on the <strong>control variable $c$</strong>.</p>
+          </div>
         </div>
       </div>
 
@@ -853,7 +862,13 @@ body {
           <div class="math-display boxed-blue" style="margin:6px 0;">
             $$\boxed{\rho\lambda = \lambda\left[\alpha k^{\alpha-1} - (n + \delta + g_A)\right] + \frac{d\lambda(t)}{dt}}$$
           </div>
-          <p><strong>Economic Interpretation:</strong> The required rate of return on saving ($\rho\lambda$) must equal the economic dividend from capital ($\lambda \times \text{net marginal product}$) plus the capital gain or loss on the shadow price ($\dfrac{d\lambda(t)}{dt}$).</p>
+          <div class="key-note blue" style="margin-top:12px;">
+            <strong>The return on capital must match the required return</strong>
+            <p style="margin-top:6px;">Divide the capital condition by $\lambda$ to express it as a rate of return:</p>
+            <div class="math-display boxed-blue">$$\underbrace{\frac{1}{\lambda}\frac{\partial\mathcal H}{\partial k}}_{\text{net productive return}}+\underbrace{\frac{1}{\lambda}\frac{d\lambda(t)}{dt}}_{\text{change in the shadow price}}=\underbrace{\rho}_{\text{required return}}$$</div>
+            <p>The first term is the net contribution of capital to production, $\alpha k^{\alpha-1}-(n+\delta+g_A)$. The second is the proportional change in its shadow price: a gain if $\lambda$ rises, a loss if it falls.</p>
+            <p style="margin-top:6px;">At the optimum, the total return on an additional unit of capital must equal the household’s required rate of return, its <strong>rate of time preference $\rho$</strong>. This is the condition on the <strong>state variable $k$</strong>. Here “return” includes both the productive return and the change in the value of capital.</p>
+          </div>
         </div>
       </div>
 
@@ -865,7 +880,16 @@ body {
           <div class="math-display boxed-amber" style="margin:6px 0;">
             $$\boxed{\lim_{t \to \infty} e^{-\rho t}\,\lambda\,k = 0}$$
           </div>
-          <p><strong>Economic Interpretation:</strong> The discounted shadow value of leftover capital cannot remain strictly positive forever. Households must not over-accumulate capital endlessly and leave valuable resources unconsumed as time goes to infinity.</p>
+          <div class="key-note amber" style="margin-top:12px;">
+            <strong>The discounted value of remaining capital tends to zero</strong>
+            <p style="margin-top:6px;">The product $\lambda k$ is the shadow value of the remaining capital stock, and $e^{-\rho t}$ discounts that value to the present. Over the infinite horizon, this discounted value must tend to zero: the household must not leave resources with a positive terminal discounted value unconsumed.</p>
+            <p style="margin-top:6px;"><strong>This does not mean that $k$ itself must tend to zero.</strong> The condition concerns $e^{-\rho t}\lambda k$. The requirement that physical capital cannot be negative is a feasibility restriction, $k\ge0$, rather than a separate conclusion of the transversality condition.</p>
+          </div>
+          <div class="key-note purple" style="margin-top:12px;">
+            <strong>What about initial consumption $c_0$?</strong>
+            <p style="margin-top:6px;">Initial capital $k(0)$ is given, but initial consumption is a choice. The Euler equation describes how consumption changes; it does not, by itself, fix the starting level $c_0$.</p>
+            <p style="margin-top:6px;">The transversality condition helps select the consumption path, and therefore its initial value, jointly with the accumulation equation and the given initial capital stock. It is not a standalone formula for calculating $c_0$. Finding steady-state capital and consumption below does not yet give initial consumption for an economy that starts away from that steady state.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -956,7 +980,7 @@ body {
       </p>
 
       <div class="math-display boxed" style="font-size:1.05rem;">
-        $$\boxed{g_c = 0 \iff \frac{dc}{dt} = 0 \qquad \text{and} \qquad \frac{dk}{dt} = 0}$$
+        $$\boxed{\text{Steady state:}\quad g_c=0\ \left(\frac{dc(t)}{dt}=0\right)\quad\text{and}\quad\frac{dk(t)}{dt}=0}$$
       </div>
 
       <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:8px;">
@@ -977,6 +1001,10 @@ body {
 
       <div class="math-display boxed-blue">
         $$\boxed{k^* = \left[\frac{\alpha}{\rho + n + \delta + g_A}\right]^{\frac{1}{1-\alpha}}}$$
+      </div>
+      <div class="key-note purple">
+        <strong>At which capital level does consumption stop growing?</strong>
+        <p style="margin-top:6px;">This $k^*$ is the level of capital per effective worker for which the Euler equation gives $g_c=0$. At that capital level, consumption <strong>per effective worker</strong> has zero instantaneous growth. To remain at a steady state, capital must also stop changing; the accumulation equation below supplies the corresponding $c^*$.</p>
       </div>
 
       <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:8px;">
@@ -1002,6 +1030,9 @@ body {
           • <strong>Solow Golden Rule:</strong> $f'(k^{**}) = n + \delta + g_A$<br>
           • <strong>Ramsey Steady State:</strong> $f'(k^*) = \rho + n + \delta + g_A$
         </p>
+        <div class="math-display">$$k^*=\left[\frac{\alpha}{\rho+n+\delta+g_A}\right]^{\frac{1}{1-\alpha}}\qquad\text{(Ramsey)}$$</div>
+        <div class="math-display">$$k^{**}=\left[\frac{\alpha}{n+\delta+g_A}\right]^{\frac{1}{1-\alpha}}\qquad\text{(Solow Golden Rule, }s=\alpha\text{)}$$</div>
+        <p style="margin-top:6px;">The difference is the additional $\rho$ in the Ramsey denominator. With $\rho>0$, the household discounts future utility, so its optimal steady-state capital is below the Golden Rule level.</p>
         <p style="margin-top:6px;">
           Since households are impatient ($\rho > 0$), we have:
           $$f'(k^*) > f'(k^{**})$$
