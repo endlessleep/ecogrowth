@@ -704,26 +704,26 @@ body {
           <div class="step-num">1</div>
           <div class="step-body">
             <strong>Aggregate accumulation equation:</strong>
-            Total output is split between consumption $C$ and gross investment $I$: $Y = C + I$. Net aggregate capital accumulation equals gross investment minus depreciation:
-            $$\frac{dK}{dt} = I - \delta K = Y - C - \delta K$$
+            Total output is split between consumption $C(t)$ and gross investment $I(t)$: $Y(t) = C(t) + I(t)$. Net aggregate capital accumulation equals gross investment minus depreciation:
+            $$\frac{dK(t)}{dt} = I(t) - \delta K(t) = Y(t) - C(t) - \delta K(t)$$
           </div>
         </div>
         <div class="demo-step">
           <div class="step-num">2</div>
           <div class="step-body">
-            <strong>Differentiating $k = \dfrac{K}{AL}$ with respect to time using the quotient rule:</strong>
-            $$\frac{dk}{dt} = \frac{\frac{dK}{dt}(AL) - K\frac{d(AL)}{dt}}{(AL)^2} = \frac{1}{AL}\frac{dK}{dt} - \frac{K}{AL}\left(\frac{1}{AL}\frac{d(AL)}{dt}\right)$$
-            Since $\dfrac{1}{AL}\dfrac{d(AL)}{dt} = \dfrac{1}{A}\dfrac{dA}{dt} + \dfrac{1}{L}\dfrac{dL}{dt} = g_A + n$:
-            $$\frac{dk}{dt} = \frac{1}{AL}\frac{dK}{dt} - (n + g_A)k$$
+            <strong>Differentiating $k(t) = \dfrac{K(t)}{A(t)L(t)}$ with respect to time using the quotient rule:</strong>
+            $$\frac{dk(t)}{dt} = \frac{\frac{dK(t)}{dt}(A(t)L(t)) - K(t)\frac{d(A(t)L(t))}{dt}}{(A(t)L(t))^2} = \frac{1}{A(t)L(t)}\frac{dK(t)}{dt} - \frac{K(t)}{A(t)L(t)}\left(\frac{1}{A(t)L(t)}\frac{d(A(t)L(t))}{dt}\right)$$
+            Since $\dfrac{1}{A(t)L(t)}\dfrac{d(A(t)L(t))}{dt} = \dfrac{1}{A(t)}\dfrac{dA(t)}{dt} + \dfrac{1}{L(t)}\dfrac{dL(t)}{dt} = g_A + n$:
+            $$\frac{dk(t)}{dt} = \frac{1}{A(t)L(t)}\frac{dK(t)}{dt} - (n + g_A)k(t)$$
           </div>
         </div>
         <div class="demo-step">
           <div class="step-num">3</div>
           <div class="step-body">
-            <strong>Substitute $\dfrac{dK}{dt} = Y - C - \delta K$:</strong>
-            $$\frac{dk}{dt} = \frac{Y - C - \delta K}{AL} - (n + g_A)k = \frac{Y}{AL} - \frac{C}{AL} - \delta k - (n + g_A)k$$
-            Since $\dfrac{Y}{AL} = k^\alpha$ and $\dfrac{C}{AL} = c$:
-            $$\boxed{\frac{dk}{dt} = k^\alpha - c - (n + \delta + g_A)k}$$
+            <strong>Substitute $\dfrac{dK(t)}{dt} = Y(t) - C(t) - \delta K(t)$:</strong>
+            $$\frac{dk(t)}{dt} = \frac{Y(t) - C(t) - \delta K(t)}{A(t)L(t)} - (n + g_A)k(t) = \frac{Y(t)}{A(t)L(t)} - \frac{C(t)}{A(t)L(t)} - \delta k(t) - (n + g_A)k(t)$$
+            Since $\dfrac{Y(t)}{A(t)L(t)} = k(t)^\alpha$ and $\dfrac{C(t)}{A(t)L(t)} = c(t)$:
+            $$\boxed{\frac{dk(t)}{dt} = k(t)^\alpha - c(t) - (n + \delta + g_A)k(t)}$$
           </div>
         </div>
       </div>
@@ -791,7 +791,7 @@ body {
       </p>
 
       <div class="math-display boxed">
-        $$\max_{\{c(t)\}} \quad \int_0^\infty \left[\frac{c(t)^{1-\varepsilon}-1}{1-\varepsilon}\right] e^{-\rho t}\,dt \qquad \text{subject to: } \frac{dk}{dt} = k(t)^\alpha - c(t) - (n + \delta + g_A)k(t)$$
+        $$\max_{\{c(t)\}} \quad \int_0^\infty \left[\frac{c(t)^{1-\varepsilon}-1}{1-\varepsilon}\right] e^{-\rho t}\,dt \qquad \text{subject to: } \frac{dk(t)}{dt} = k(t)^\alpha - c(t) - (n + \delta + g_A)k(t)$$
       </div>
 
       <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:4px;">
@@ -799,15 +799,15 @@ body {
       </p>
 
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        We set up the Hamiltonian by adding the instantaneous utility and the product of the multiplier $\lambda(t)$ with the capital accumulation rate $\dfrac{dk}{dt}$:
+        We set up the Hamiltonian by adding the instantaneous utility and the product of the multiplier $\lambda(t)$ with the capital accumulation rate $\dfrac{dk(t)}{dt}$:
       </p>
 
       <div class="math-display boxed" style="font-size:1.05rem;">
-        $$\boxed{\mathcal{H} = \frac{c^{1-\varepsilon}-1}{1-\varepsilon} + \lambda\left[k^\alpha - c - (n + \delta + g_A)k\right]}$$
+        $$\boxed{\mathcal{H} = \frac{c(t)^{1-\varepsilon}-1}{1-\varepsilon} + \lambda(t)\left[k(t)^\alpha - c(t) - (n + \delta + g_A)k(t)\right]}$$
       </div>
 
       <p style="color:var(--text-2);font-size:0.9rem;line-height:1.65;">
-        • Notice that the expression inside the brackets is exactly $\mathbf{\dfrac{dk}{dt}}$.<br>
+        • Notice that the expression inside the brackets is exactly $\mathbf{\dfrac{dk(t)}{dt}}$.<br>
         • $\lambda(t)$ is the <strong>multiplier / shadow value of capital</strong>: it measures the marginal value of having an additional unit of capital per effective worker today for future utility.
       </p>
 
@@ -819,15 +819,15 @@ body {
       <div class="demo-step" style="border-left:3px solid var(--green);">
         <div class="step-num" style="background:var(--green-muted);color:var(--green-bright);border-color:var(--green-border);">1</div>
         <div class="step-body">
-          <strong style="color:var(--green-bright);font-size:0.95rem;">TYPE 1 — First-Order Condition on the CONTROL VARIABLE $c$:</strong>
+          <strong style="color:var(--green-bright);font-size:0.95rem;">TYPE 1 — First-Order Condition on the CONTROL VARIABLE $c(t)$:</strong>
           <p style="margin-top:4px;">
-            Since $c$ is chosen freely at every instant, we set the derivative of $\mathcal{H}$ with respect to $c$ to zero:
+            Since $c(t)$ is chosen freely at every instant, we set the derivative of $\mathcal{H}$ with respect to $c(t)$ to zero:
           </p>
-          <div class="math-display" style="margin:6px 0;">$$\frac{\partial \mathcal{H}}{\partial c} = 0$$</div>
+          <div class="math-display" style="margin:6px 0;">$$\frac{\partial \mathcal{H}}{\partial c(t)} = 0$$</div>
           <p>Differentiating explicitly:</p>
-          $$\frac{\partial \mathcal{H}}{\partial c} = c^{-\varepsilon} - \lambda = 0$$
-          <div class="math-display boxed" style="margin:6px 0;">$$\boxed{\lambda = c^{-\varepsilon}}$$</div>
-          <p><strong>Economic Interpretation:</strong> The marginal utility of consumption $c^{-\varepsilon}$ must equal the shadow value $\lambda$ of capital. If consumption gave more utility than saving, the household would consume more; if capital had a higher shadow value, it would consume less.</p>
+          $$\frac{\partial \mathcal{H}}{\partial c(t)} = c(t)^{-\varepsilon} - \lambda(t) = 0$$
+          <div class="math-display boxed" style="margin:6px 0;">$$\boxed{\lambda(t) = c(t)^{-\varepsilon}}$$</div>
+          <p><strong>Economic Interpretation:</strong> The marginal utility of consumption $c(t)^{-\varepsilon}$ must equal the shadow value $\lambda(t)$ of capital. If consumption gave more utility than saving, the household would consume more; if capital had a higher shadow value, it would consume less.</p>
         </div>
       </div>
 
@@ -835,25 +835,25 @@ body {
       <div class="demo-step" style="border-left:3px solid var(--blue-bright);margin-top:10px;">
         <div class="step-num" style="background:var(--blue-muted);color:var(--blue-bright);border-color:var(--blue-border);">2</div>
         <div class="step-body">
-          <strong style="color:var(--blue-bright);font-size:0.95rem;">TYPE 2 — Dynamic Condition on the STATE VARIABLE $k$:</strong>
+          <strong style="color:var(--blue-bright);font-size:0.95rem;">TYPE 2 — Dynamic Condition on the STATE VARIABLE $k(t)$:</strong>
           <p style="margin-top:4px;color:var(--amber-bright);font-weight:700;">
-            ⚠️ Do NOT set $\dfrac{\partial \mathcal{H}}{\partial k} = 0$!
+            ⚠️ Do NOT set $\dfrac{\partial \mathcal{H}}{\partial k(t)} = 0$!
           </p>
           <p style="margin-top:4px;">
-            Because $k$ is a <strong>state variable</strong> (its level is predetermined and evolves over time), its optimality condition is <strong>dynamic</strong> and describes how the shadow value $\lambda(t)$ changes over time:
+            Because $k(t)$ is a <strong>state variable</strong> (its level is predetermined and evolves over time), its optimality condition is <strong>dynamic</strong> and describes how the shadow value $\lambda(t)$ changes over time:
           </p>
-          <div class="math-display" style="margin:6px 0;">$$\frac{d\lambda}{dt} = \rho\lambda - \frac{\partial \mathcal{H}}{\partial k}$$</div>
-          <p>First, compute the partial derivative of $\mathcal{H}$ with respect to $k$:</p>
-          $$\frac{\partial \mathcal{H}}{\partial k} = \lambda\left[\alpha k^{\alpha-1} - (n + \delta + g_A)\right]$$
+          <div class="math-display" style="margin:6px 0;">$$\frac{d\lambda(t)}{dt} = \rho\lambda(t) - \frac{\partial \mathcal{H}}{\partial k(t)}$$</div>
+          <p>First, compute the partial derivative of $\mathcal{H}$ with respect to $k(t)$:</p>
+          $$\frac{\partial \mathcal{H}}{\partial k(t)} = \lambda(t)\left[\alpha k(t)^{\alpha-1} - (n + \delta + g_A)\right]$$
           <p>Substituting into the dynamic state-variable condition gives:</p>
           <div class="math-display" style="margin:6px 0;">
-            $$\frac{d\lambda}{dt} = \rho\lambda - \lambda\left[\alpha k^{\alpha-1} - (n + \delta + g_A)\right]$$
+            $$\frac{d\lambda(t)}{dt} = \rho\lambda(t) - \lambda(t)\left[\alpha k(t)^{\alpha-1} - (n + \delta + g_A)\right]$$
           </div>
           <p>or equivalently written as:</p>
           <div class="math-display boxed-blue" style="margin:6px 0;">
-            $$\boxed{\rho\lambda = \lambda\left[\alpha k^{\alpha-1} - (n + \delta + g_A)\right] + \frac{d\lambda}{dt}}$$
+            $$\boxed{\rho\lambda(t) = \lambda(t)\left[\alpha k(t)^{\alpha-1} - (n + \delta + g_A)\right] + \frac{d\lambda(t)}{dt}}$$
           </div>
-          <p><strong>Economic Interpretation:</strong> The required rate of return on saving ($\rho\lambda$) must equal the economic dividend from capital ($\lambda \times \text{net marginal product}$) plus the capital gain or loss on the shadow price ($\dfrac{d\lambda}{dt}$).</p>
+          <p><strong>Economic Interpretation:</strong> The required rate of return on saving ($\rho\lambda(t)$) must equal the economic dividend from capital ($\lambda(t) \times \text{net marginal product}$) plus the capital gain or loss on the shadow price ($\dfrac{d\lambda(t)}{dt}$).</p>
         </div>
       </div>
 
@@ -878,11 +878,11 @@ body {
       </div>
 
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        By combining the control-variable condition $\lambda = c^{-\varepsilon}$ and the state-variable condition, we derive the <strong>Ramsey Euler Equation</strong> governing optimal consumption growth.
+        By combining the control-variable condition $\lambda(t) = c(t)^{-\varepsilon}$ and the state-variable condition, we derive the <strong>Ramsey Euler Equation</strong> governing optimal consumption growth.
       </p>
 
       <div class="math-display boxed-purple" style="font-size:1.1rem;">
-        $$\boxed{g_c \equiv \frac{1}{c}\frac{dc}{dt} = \frac{1}{\varepsilon}\left[\alpha k^{\alpha-1} - \rho - n - \delta - g_A\right]}$$
+        $$\boxed{g_c \equiv \frac{1}{c(t)}\frac{dc(t)}{dt} = \frac{1}{\varepsilon}\left[\alpha k(t)^{\alpha-1} - \rho - n - \delta - g_A\right]}$$
       </div>
 
       <button class="toggle-btn" onclick="toggle(this,'demo-euler-derivation')">
@@ -893,14 +893,14 @@ body {
           <div class="step-num">1</div>
           <div class="step-body">
             <strong>General derivation:</strong>
-            From the control condition, $\lambda = u'(c)$. Differentiating both sides with respect to time $t$:
-            $$\frac{d\lambda}{dt} = u''(c)\frac{dc}{dt}$$
-            Substitute this into the state-variable equation $\rho\lambda = \lambda\left[f'(k) - (n + \delta + g_A)\right] + \dfrac{d\lambda}{dt}$:
-            $$\rho\lambda = \lambda\left[f'(k) - (n + \delta + g_A)\right] + u''(c)\frac{dc}{dt}$$
-            Dividing both sides by $\lambda = u'(c)$:
-            $$\rho = f'(k) - (n + \delta + g_A) + \frac{u''(c)}{u'(c)}\frac{dc}{dt}$$
+            From the control condition, $\lambda(t) = u'(c(t))$. Differentiating both sides with respect to time $t$:
+            $$\frac{d\lambda(t)}{dt} = u''(c(t))\frac{dc(t)}{dt}$$
+            Substitute this into the state-variable equation $\rho\lambda(t) = \lambda(t)\left[f'(k(t)) - (n + \delta + g_A)\right] + \dfrac{d\lambda(t)}{dt}$:
+            $$\rho\lambda(t) = \lambda(t)\left[f'(k(t)) - (n + \delta + g_A)\right] + u''(c(t))\frac{dc(t)}{dt}$$
+            Dividing both sides by $\lambda(t) = u'(c(t))$:
+            $$\rho = f'(k(t)) - (n + \delta + g_A) + \frac{u''(c(t))}{u'(c(t))}\frac{dc(t)}{dt}$$
             Rearranging gives the general Euler equation:
-            $$\frac{u''(c)}{u'(c)}\frac{dc}{dt} = \rho - \left[f'(k) - (n + \delta + g_A)\right]$$
+            $$\frac{u''(c(t))}{u'(c(t))}\frac{dc(t)}{dt} = \rho - \left[f'(k(t)) - (n + \delta + g_A)\right]$$
           </div>
         </div>
 
@@ -909,21 +909,21 @@ body {
           <div class="step-body">
             <strong>Substitute the explicit CRRA derivatives:</strong>
             We know for CRRA utility that:
-            $$u'(c) = c^{-\varepsilon} \quad \text{and} \quad u''(c) = -\varepsilon c^{-\varepsilon-1}$$
-            Therefore the ratio $\dfrac{u''(c)}{u'(c)}$ simplifies neatly:
-            $$\frac{u''(c)}{u'(c)} = \frac{-\varepsilon c^{-\varepsilon-1}}{c^{-\varepsilon}} = -\frac{\varepsilon}{c}$$
+            $$u'(c(t)) = c(t)^{-\varepsilon} \quad \text{and} \quad u''(c(t)) = -\varepsilon c(t)^{-\varepsilon-1}$$
+            Therefore the ratio $\dfrac{u''(c(t))}{u'(c(t))}$ simplifies neatly:
+            $$\frac{u''(c(t))}{u'(c(t))} = \frac{-\varepsilon c(t)^{-\varepsilon-1}}{c(t)^{-\varepsilon}} = -\frac{\varepsilon}{c(t)}$$
           </div>
         </div>
 
         <div class="demo-step">
           <div class="step-num">3</div>
           <div class="step-body">
-            <strong>Substitute into the general equation with $f'(k) = \alpha k^{\alpha-1}$:</strong>
-            $$-\frac{\varepsilon}{c}\frac{dc}{dt} = \rho - \left[\alpha k^{\alpha-1} - (n + \delta + g_A)\right]$$
+            <strong>Substitute into the general equation with $f'(k(t)) = \alpha k(t)^{\alpha-1}$:</strong>
+            $$-\frac{\varepsilon}{c(t)}\frac{dc(t)}{dt} = \rho - \left[\alpha k(t)^{\alpha-1} - (n + \delta + g_A)\right]$$
             Multiply both sides by $-\dfrac{1}{\varepsilon}$:
-            $$\frac{1}{c}\frac{dc}{dt} = \frac{1}{\varepsilon}\left[\alpha k^{\alpha-1} - (n + \delta + g_A) - \rho\right]$$
-            Introducing the growth rate of consumption $g_c \equiv \dfrac{1}{c}\dfrac{dc}{dt}$:
-            $$\boxed{g_c = \frac{1}{\varepsilon}\left[\alpha k^{\alpha-1} - \rho - n - \delta - g_A\right]}$$
+            $$\frac{1}{c(t)}\frac{dc(t)}{dt} = \frac{1}{\varepsilon}\left[\alpha k(t)^{\alpha-1} - (n + \delta + g_A) - \rho\right]$$
+            Introducing the growth rate of consumption $g_c \equiv \dfrac{1}{c(t)}\dfrac{dc(t)}{dt}$:
+            $$\boxed{g_c = \frac{1}{\varepsilon}\left[\alpha k(t)^{\alpha-1} - \rho - n - \delta - g_A\right]}$$
           </div>
         </div>
       </div>
@@ -931,15 +931,15 @@ body {
       <div class="key-note purple" style="margin-top:10px;">
         <strong>Economic Meaning of the Ramsey Euler Equation:</strong>
         <p style="margin-top:6px;">
-          • $\alpha k^{\alpha-1}$ is the <strong>marginal product of capital</strong> ($f'(k)$), representing the gross return to saving.<br>
+          • $\alpha k(t)^{\alpha-1}$ is the <strong>marginal product of capital</strong> ($f'(k(t))$), representing the gross return to saving.<br>
           • $n + \delta + g_A$ are the <strong>break-even terms</strong> that capital must offset.<br>
           • $\rho$ is the <strong>rate of impatience</strong> (psychological cost of waiting).<br>
           • $\dfrac{1}{\varepsilon} = \text{IES}$ is the <strong>intertemporal elasticity of substitution</strong>, determining how strongly consumption growth responds to the net return to saving.
         </p>
         <div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:5px;">
-          <div>• <strong>If $\alpha k^{\alpha-1} - (n + \delta + g_A) > \rho$:</strong> The net return to saving exceeds impatience $\implies \mathbf{g_c > 0}$ (consumption grows over time).</div>
-          <div>• <strong>If $\alpha k^{\alpha-1} - (n + \delta + g_A) = \rho$:</strong> The return exactly equals impatience $\implies \mathbf{g_c = 0}$ (consumption is constant).</div>
-          <div>• <strong>If $\alpha k^{\alpha-1} - (n + \delta + g_A) < \rho$:</strong> The return is below impatience $\implies \mathbf{g_c < 0}$ (consumption declines over time).</div>
+          <div>• <strong>If $\alpha k(t)^{\alpha-1} - (n + \delta + g_A) > \rho$:</strong> The net return to saving exceeds impatience $\implies \mathbf{g_c > 0}$ (consumption grows over time).</div>
+          <div>• <strong>If $\alpha k(t)^{\alpha-1} - (n + \delta + g_A) = \rho$:</strong> The return exactly equals impatience $\implies \mathbf{g_c = 0}$ (consumption is constant).</div>
+          <div>• <strong>If $\alpha k(t)^{\alpha-1} - (n + \delta + g_A) < \rho$:</strong> The return is below impatience $\implies \mathbf{g_c < 0}$ (consumption declines over time).</div>
         </div>
       </div>
     </div>
