@@ -327,37 +327,28 @@ body {
 }
 
 
-/* Ramsey diagrams and classroom shock simulations. */
-.phase-section { scroll-margin-top:80px; gap:20px; }
-.phase-section > p, .phase-section p { font-size:.92rem; line-height:1.75; color:var(--text-2); }
-.phase-section h4 { font-size:.97rem; color:var(--text); margin-bottom:8px; }
+/* Static phase diagrams: show the full adjustment at a glance. */
+.phase-section { scroll-margin-top:80px; gap:18px; }
+.phase-section p, .phase-sequence { font-size:.92rem; line-height:1.7; color:var(--text-2); }
+.phase-section h4 { font-size:.98rem; margin-bottom:8px; color:var(--text); }
 .phase-section strong { color:var(--text); }
-.original-phase { margin:0; }
-.original-phase img { display:block; width:100%; height:auto; background:white; border-radius:10px; }
-.original-phase figcaption, .phase-section .sim-caption { color:var(--text-3); font-size:.8rem; line-height:1.6; margin-top:9px; }
-.phase-legend { display:flex; flex-wrap:wrap; gap:10px 18px; font-size:.78rem; color:var(--text-2); }
-.phase-legend span { display:inline-flex; align-items:center; gap:7px; }
-.phase-legend i { width:20px; height:3px; display:inline-block; background:#cbd5e1; }
-.phase-legend .legend-red { background:#fb7185; }.phase-legend .legend-blue { background:#60a5fa; }.phase-legend .legend-green { background:#34d399; }.phase-legend .legend-path { background:transparent; border-top:2px dashed #cbd5e1; }
-.phase-note { padding:16px 18px; border-radius:10px; background:rgba(255,255,255,.035); border:1px solid var(--border); }
-.phase-note p { margin-top:6px; }
-.phase-step { display:flex; gap:14px; border-top:1px solid var(--border); padding-top:20px; }
-.phase-step > div { min-width:0; flex:1; }
-.phase-step p + p { margin-top:12px; }
-.phase-num { flex:0 0 28px; height:28px; display:grid; place-items:center; border-radius:8px; background:var(--purple-muted); color:var(--purple-bright); font-size:.82rem; font-weight:700; }
+.phase-figure { margin:0; }
+.phase-figure img { display:block; width:100%; height:auto; border-radius:12px; border:1px solid var(--border); }
+.phase-figure figcaption, .phase-section .phase-small { margin-top:8px; color:var(--text-3); font-size:.8rem; line-height:1.55; }
+.phase-rule { padding:0 0 0 16px; border-left:3px solid var(--purple-bright); }
+.phase-rule p+p { margin-top:8px; }
+.red-rule { border-color:#fb7185; }.blue-rule { border-color:#60a5fa; }
 .phase-section .red-text { color:#fb7185; }.phase-section .blue-text { color:#60a5fa; }
-.phase-table-wrap { overflow-x:auto; }.phase-table { min-width:470px; }
-.phase-reading-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }.phase-reading-grid > div { padding:16px; border:1px solid var(--border); border-radius:10px; min-width:0; }
-.simulation { display:flex; flex-direction:column; gap:14px; }
-.phase-chart { border:1px solid var(--border); background:var(--bg-deep); border-radius:12px; overflow:hidden; }
-.phase-chart svg { display:block; width:100%; height:auto; }
-.sim-controls { display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:16px; background:rgba(255,255,255,.025); border-radius:10px; }
-.sim-controls label { width:100%; display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; font-size:.87rem; color:var(--text-2); }
-.sim-controls output { color:var(--green-bright); font-weight:700; }
-.sim-controls input[type=range] { width:100%; accent-color:#34d399; cursor:pointer; }
-.sim-controls p { font-size:.8rem; margin:0; }
-.phase-section .sim-status { font-variant-numeric:tabular-nums; color:var(--green-bright); font-size:.84rem; min-height:3em; }
-@media(max-width:640px) { .phase-reading-grid { grid-template-columns:1fr; } .phase-step { gap:8px; } .phase-section { padding:18px; } .phase-chart { overflow-x:auto; } .phase-chart svg { min-width:560px; } }
+.phase-section .gold-text { color:#fbbf24; }.phase-section .green-text { color:#34d399; }
+.phase-table-wrap { overflow-x:auto; }.phase-table { min-width:430px; }
+.phase-table td:not(:first-child), .phase-table th:not(:first-child) { text-align:center; }
+.phase-sequence { list-style:none; counter-reset:sequence; display:flex; flex-direction:column; gap:13px; padding:0; }
+.phase-sequence li { position:relative; padding-left:36px; }
+.phase-sequence li::before { counter-increment:sequence; content:counter(sequence); position:absolute; left:0; top:2px; width:24px; height:24px; display:grid; place-items:center; border-radius:7px; background:var(--green-muted); color:var(--green-bright); font-weight:700; font-size:.78rem; }
+.phase-details { border:1px solid var(--border); padding:13px 16px; border-radius:10px; }
+.phase-details summary { cursor:pointer; color:var(--text-3); font-size:.85rem; }
+.phase-details p { margin-top:10px; font-size:.84rem; }
+@media(max-width:640px) { .phase-section { padding:18px; } .phase-sequence li { padding-left:32px; } }
 
 /* Keep wide equations and tables scrollable inside the mobile course column. */
 .step-body { min-width:0; }
@@ -1161,79 +1152,43 @@ mjx-container[display="true"] { max-width:100%; overflow-x:auto; overflow-y:hidd
       </table>
     </div>
 
-<!-- Ramsey phase diagram and the two one-off shocks from class -->
+
+<!-- Phase diagram and three classroom comparative-dynamics cases. -->
 <section class="concept-card purple-top phase-section" id="ramsey-phase-diagram">
- <div class="section-header"><span class="section-label">Phase diagram</span><h3>How to draw and read the Ramsey saddle path</h3></div>
- <p>A phase diagram puts <strong>capital per effective worker $k=K/(AL)$ on the horizontal axis</strong> and <strong>consumption per effective worker $c=C/(AL)$ on the vertical axis</strong>. A point describes the economy’s current position; arrows show how that position moves over time.</p>
- <figure class="original-phase"><a href="images/ramsey-phase-original.png" target="_blank" rel="noopener"><img src="images/ramsey-phase-original.png" alt="Original Ramsey phase diagram: red vertical consumption-growth-zero line, blue capital-change-zero curve, four pairs of directional arrows, and a black dashed saddle path."></a><figcaption>Your original class diagram — click to view at full size.</figcaption></figure>
- <div class="phase-legend"><span><i class="legend-red"></i>Red: changes in consumption</span><span><i class="legend-blue"></i>Blue: changes in capital</span><span><i class="legend-path"></i>Dashed path: optimal adjustment</span></div>
- <div class="phase-note"><strong>Read the original labels correctly.</strong><p>The labels “dc/c = 0” and “dk/k = 0” refer to zero growth rates: $(dc(t)/dt)/c=0$ and $(dk(t)/dt)/k=0$. For positive $c$ and $k$, these are equivalent to $dc(t)/dt=0$ and $dk(t)/dt=0$. The handwritten accumulation equation needs the final factor $k$ in $(n+\delta+g_A)k$.</p></div>
- <div class="phase-step"><span class="phase-num">1</span><div><h4>Draw the red vertical line: consumption does not change</h4>
- <div class="math-display boxed-purple">$$g_c=\frac{1}{\varepsilon}\left[\alpha k^{\alpha-1}-(n+\delta+g_A+\rho)\right]$$</div>
- <p>Set $g_c=0$. This fixes a capital level, regardless of the current level of consumption, so the line is vertical:</p>
- <div class="math-display">$$k^*=\left[\frac{\alpha}{n+\delta+g_A+\rho}\right]^{1/(1-\alpha)}$$</div>
- <p><strong class="red-text">To the left: ↑.</strong> Capital is lower and its marginal product is higher, so $g_c>0$ and consumption rises. <strong class="red-text">To the right: ↓.</strong> The marginal product is lower, so $g_c<0$ and consumption falls. Red arrows are therefore vertical.</p></div></div>
- <div class="phase-step"><span class="phase-num">2</span><div><h4>Draw the blue curve: capital does not change</h4>
- <div class="math-display boxed-blue">$$\frac{dk(t)}{dt}=k^\alpha-c-(n+\delta+g_A)k$$</div>
- <p>Set $dk(t)/dt=0$ and isolate consumption. This gives the hump-shaped blue curve:</p>
- <div class="math-display">$$c=k^\alpha-(n+\delta+g_A)k$$</div>
- <p><strong class="blue-text">Below the curve: →.</strong> Consumption leaves enough output to increase capital, so $dk(t)/dt>0$. <strong class="blue-text">Above the curve: ←.</strong> Consumption is higher than the amount consistent with a constant capital stock, so $dk(t)/dt<0$. Blue arrows are therefore horizontal.</p>
- <p>The top of the blue curve is at the Golden Rule capital level $k^{**}$, where $f'(k^{**})=n+\delta+g_A$. It lies to the right of $k^*$ because $\rho>0$. The dashed blue vertical guide under that peak marks $k^{**}$; it is <strong>not</strong> the consumption-growth-zero line.</p></div></div>
- <div class="phase-step"><span class="phase-num">3</span><div><h4>Place the four pairs of arrows</h4>
- <p>For each region, answer two separate questions: <strong>left or right of the red line?</strong> This gives the vertical arrow. <strong>Above or below the blue curve?</strong> This gives the horizontal arrow.</p>
- <div class="phase-table-wrap"><table class="comparison-table phase-table"><thead><tr><th>Position</th><th>Blue: capital</th><th>Red: consumption</th><th>Combined movement</th></tr></thead><tbody>
- <tr><td>Left of red; above blue</td><td class="blue-text">← decreases</td><td class="red-text">↑ increases</td><td>↖</td></tr>
- <tr><td>Left of red; below blue</td><td class="blue-text">→ increases</td><td class="red-text">↑ increases</td><td>↗</td></tr>
- <tr><td>Right of red; above blue</td><td class="blue-text">← decreases</td><td class="red-text">↓ decreases</td><td>↙</td></tr>
- <tr><td>Right of red; below blue</td><td class="blue-text">→ increases</td><td class="red-text">↓ decreases</td><td>↘</td></tr>
- </tbody></table></div></div></div>
- <div class="phase-step"><span class="phase-num">4</span><div><h4>Locate the steady state, then draw the saddle path</h4>
- <p>The red line and blue curve intersect at $E=(k^*,c^*)$. Both capital and consumption stop changing there. The <strong>black dashed curve</strong> in your original diagram is the saddle path: the optimal consumption level associated with each initial capital stock, leading toward $E$ under the model’s optimality and terminal conditions.</p>
- <p>To the left of $E$, this path lies below the blue curve: both $k$ and $c$ rise toward the steady state. To the right, it lies above the blue curve: both fall toward it. Draw the path through $E$ with arrows <strong>toward</strong> the intersection. The four directional regions guide its placement; they do not determine its exact curvature by themselves.</p>
- <div class="key-note purple"><strong>Why initial consumption matters</strong><p>Given $k(0)$, the household chooses $c_0$ on this path. Capital is inherited; consumption can adjust immediately. Satisfying the Euler equation at a point is not enough to guarantee a feasible, optimal infinite-horizon path: the accumulation equation and transversality condition must also hold.</p></div>
- </div></div>
+ <div class="section-header"><span class="section-label">Phase diagram</span><h3>Read the arrows, then draw the saddle path</h3></div>
+ <p><strong>Horizontal axis:</strong> $k=K/(AL)$. <strong>Vertical axis:</strong> $c=C/(AL)$. Each point gives the economy’s position; the arrows tell you where it moves.</p>
+ <figure class="phase-figure"><a href="images/ramsey-phase-original.png" target="_blank" rel="noopener"><img src="images/ramsey-phase-original.png" alt="Original Ramsey diagram with the four red and blue arrow pairs and the black dashed saddle path."></a><figcaption>Your original diagram. Click any graph to enlarge it.</figcaption></figure>
+ <div class="phase-rule red-rule"><h4>1 · Red: does consumption rise or fall?</h4><div class="math-display">$$g_c=0\quad\Longleftrightarrow\quad\alpha k^{\alpha-1}=n+\delta+g_A+\rho$$</div><p>This fixes $k^*$, so draw a <strong>vertical line</strong>. To its left, the marginal product of capital is higher: <strong>consumption rises ↑</strong>. To its right, <strong>consumption falls ↓</strong>.</p></div>
+ <div class="phase-rule blue-rule"><h4>2 · Blue: does capital rise or fall?</h4><div class="math-display">$$\frac{dk(t)}{dt}=0\quad\Longleftrightarrow\quad c=k^\alpha-(n+\delta+g_A)k$$</div><p>Draw the <strong>hump-shaped curve</strong>. Below it, consumption leaves enough resources for capital to grow: <strong>→</strong>. Above it, capital falls: <strong>←</strong>. Its peak is at Golden Rule capital $k^{**}$, to the right of $k^*$; the dashed blue vertical guide marks that peak.</p></div>
+ <div class="phase-table-wrap"><table class="comparison-table phase-table"><thead><tr><th>Position</th><th>Capital</th><th>Consumption</th><th>Direction</th></tr></thead><tbody>
+ <tr><td>Left of red, above blue</td><td class="blue-text">←</td><td class="red-text">↑</td><td>↖</td></tr>
+ <tr><td>Left of red, below blue</td><td class="blue-text">→</td><td class="red-text">↑</td><td>↗</td></tr>
+ <tr><td>Right of red, above blue</td><td class="blue-text">←</td><td class="red-text">↓</td><td>↙</td></tr>
+ <tr><td>Right of red, below blue</td><td class="blue-text">→</td><td class="red-text">↓</td><td>↘</td></tr>
+ </tbody></table></div>
+ <div class="phase-rule"><h4>3 · Black dashed curve: the saddle path</h4><p>The intersection is the steady state $E=(k^*,c^*)$. The saddle path gives the <strong>optimal initial consumption for each inherited capital stock</strong>. Its left branch goes up and right toward $E$; its right branch goes down and left toward $E$.</p><p>When drawing it, use the four arrow pairs to place it on the correct side of the blue curve, and point its arrows <strong>toward $E$</strong>. The arrows guide its shape, not its exact curvature. The optimal path must also satisfy the accumulation equation and transversality condition.</p></div>
+ <p class="phase-small">The original labels “dc/c = 0” and “dk/k = 0” mean zero growth over time. In the accumulation equation, the full replacement term is $(n+\delta+g_A)k$ — including the final $k$.</p>
 </section>
 <section class="concept-card amber-top phase-section" id="ramsey-capital-shock">
- <div class="section-header"><span class="section-label">Simulation 1</span><h3>Half the capital stock is lost</h3></div>
- <p>Start at the steady state. An unexpected, one-off shock destroys half of total capital $K$, while $A$, $L$ and all model parameters stay unchanged. Immediately after the shock:</p>
- <div class="math-display boxed-amber">$$k_{\text{after}}=\frac{K/2}{AL}=\frac{k^*}{2}$$</div>
- <div class="phase-note"><strong>Does the steady state change? No.</strong><p>The shock changes the current capital stock, not $\alpha$, $\rho$, $n$, $\delta$ or $g_A$. Neither zero-change curve moves, and the steady state remains $E=(k^*,c^*)$.</p></div>
- <div class="simulation" data-simulation="capital">
-  <div class="phase-chart" id="capital-chart"></div>
-  <div class="phase-legend"><span><i class="legend-red"></i>dc/dt = 0</span><span><i class="legend-blue"></i>dk/dt = 0</span><span><i class="legend-path"></i>Saddle path</span><span><i class="legend-green"></i>Optimal return</span></div>
-  <div class="sim-controls"><label for="capital-progress">Follow the adjustment <output id="capital-progress-label">0%</output></label><input type="range" id="capital-progress" min="0" max="100" value="0" step="1"><button type="button" class="toggle-btn" id="capital-play">Play adjustment</button><button type="button" class="toggle-btn" id="capital-reset">Reset</button></div>
-  <p class="sim-status" id="capital-status" aria-live="polite"></p>
- </div>
- <div class="phase-reading-grid">
-  <div><h4>1 · The impact</h4><p>The dotted horizontal move from $E$ to $P$ isolates the loss of capital, holding consumption at its old level only as a reference. It is not the optimal post-shock allocation.</p></div>
-  <div><h4>2 · The consumption choice</h4><p>At the new $k^*/2$, consumption adjusts down to $B$, on the unchanged saddle path. The dotted vertical segment shows that choice. $P$ is a graphical decomposition of the shock, not a period during which consumption must stay fixed.</p></div>
-  <div><h4>3 · The transition</h4><p>From $B$, the economy is left of the red line and below the blue curve. Capital accumulates and consumption rises. The green route returns toward the original $E$.</p></div>
-  <div><h4>Optimal and feasible?</h4><p>The loss is an imposed shock, not an optimal decision. The path starting at $B$ is the optimal feasible response to the reduced capital stock. Keeping the old consumption level is not that response. Being above the blue curve means capital falls; it does not, by itself, prove that an allocation is immediately infeasible.</p></div>
- </div>
- <p class="sim-caption">Generated illustration from the chapter’s equations. Axes are normalized by the original steady state: $k/k^*$ and $c/c^*$. The original steady state is therefore at $(1,1)$.</p>
+ <div class="section-header"><span class="section-label">Case 1 · Capital shock</span><h3>Capital is divided by two: the steady state stays put</h3></div>
+ <p>Start at $E$. Half of $K$ is lost, with $A$, $L$ and the parameters unchanged: <strong>$k$ immediately falls from $k^*$ to $k^*/2$.</strong></p>
+ <figure class="phase-figure"><a href="images/ramsey-capital-adjustment.svg" target="_blank" rel="noopener"><img src="images/ramsey-capital-adjustment.svg" alt="Zoom on a capital loss: gold arrows show capital halving and consumption adjusting down to B; a thick green path returns to unchanged E. The red line and blue curve do not move."></a><figcaption>Zoom on the adjustment. <span class="gold-text">Gold: impact and immediate consumption choice.</span> <span class="green-text">Green: subsequent transition.</span></figcaption></figure>
+ <ol class="phase-sequence"><li><strong>The shock moves the position, not the curves.</strong> The formulas for $k^*$ and $c^*$ have not changed.</li><li><strong>Consumption jumps down to $B$.</strong> At the reduced capital stock, the household selects consumption on the same saddle path. The gold elbow separates the capital loss from this choice; it is not a gradual trajectory.</li><li><strong>From $B$ to $E$, capital and consumption increase.</strong> This is the optimal feasible response. Keeping the former consumption level is not the optimal response; being above the blue curve means capital falls, not necessarily that consumption is immediately infeasible.</li></ol>
 </section>
 <section class="concept-card blue-top phase-section" id="ramsey-population-shock">
- <div class="section-header"><span class="section-label">Simulation 2</span><h3>One million additional people — with unchanged population growth</h3></div>
- <p>Interpret the arrival as a one-off increase in the model’s labour force $L$, with no capital brought in and no immediate change in $A$. After the arrival, $L$ again grows at the original rate $n$. This is a <strong>level change in $L$</strong>, not a permanent increase in $n$.</p>
- <div class="math-display boxed-blue">$$L_{\text{after}}=L_{\text{before}}+1{,}000{,}000$$</div>
- <div class="math-display">$$k_{\text{after}}=\frac{K}{A(L_{\text{before}}+1{,}000{,}000)}=k^*\frac{L_{\text{before}}}{L_{\text{before}}+1{,}000{,}000}$$</div>
- <p>The same capital stock is spread over more effective workers, so $k$ falls. The size of this fall depends on the starting labour force. The adjustable value below is an illustration, not a number supplied in the course.</p>
- <div class="simulation" data-simulation="population">
-  <div class="sim-controls population-control"><label for="population-before">Initial labour force <output id="population-before-label">10 million</output></label><input type="range" id="population-before" min="1" max="20" step="1" value="10"><p>One-off arrival: +1 million. The rate $n$ stays fixed.</p></div>
-  <div class="phase-chart" id="population-chart"></div>
-  <div class="phase-legend"><span><i class="legend-red"></i>dc/dt = 0</span><span><i class="legend-blue"></i>dk/dt = 0</span><span><i class="legend-path"></i>Saddle path</span><span><i class="legend-green"></i>Optimal return</span></div>
-  <div class="sim-controls"><label for="population-progress">Follow the adjustment <output id="population-progress-label">0%</output></label><input type="range" id="population-progress" min="0" max="100" step="1" value="0"><button type="button" class="toggle-btn" id="population-play">Play adjustment</button><button type="button" class="toggle-btn" id="population-reset">Reset</button></div>
-  <p class="sim-status" id="population-status" aria-live="polite"></p>
- </div>
- <div class="phase-reading-grid">
-  <div><h4>What changes on impact?</h4><p>$L$ and $AL$ increase, while $K$ is initially fixed. The point moves to a lower $k$. If total consumption $C$ were momentarily held fixed too, $c=C/(AL)$ would fall in the same proportion: this is the dotted reference point $P$.</p></div>
-  <div><h4>What can adjust immediately?</h4><p>Consumption is a choice. At the new capital level, the household selects the saddle-path value at $B$, rather than being required to keep total consumption fixed. The dotted move from $P$ to $B$ separates that choice from the mechanical change in the ratios.</p></div>
-  <div><h4>Does the steady state move?</h4><p>No. Since $n$ and the other parameters are unchanged, the red line, blue curve and saddle path remain in place. The economy returns toward the same $k^*$ and $c^*$.</p></div>
-  <div><h4>A larger economy, the same long-run output per effective worker</h4><p>During the transition, $Y/(AL)=k^\alpha$ differs from its steady-state value. It returns to $(k^*)^\alpha$. Once adjustment is complete, total output $Y$ is larger than in the no-arrival comparison because the economy has more effective workers.</p></div>
- </div>
- <div class="key-note blue"><strong>Why your last handwritten graph is different</strong><p>That graph is labelled “increase in $n$”. A permanent rise in the population growth rate is a parameter change: it moves the red line left and lowers the blue curve, giving a lower steady-state $k$ and $c$. It is therefore not the diagram for a one-off arrival with $n$ unchanged.</p></div>
- <div class="phase-note"><strong>The distinction to remember</strong><p>A shock to the current stock or level moves the economy’s <em>position</em>. A change in a parameter entering the steady-state equations can move the <em>steady state itself</em>. In these two simulations, the position changes and the curves do not.</p></div>
- <p class="sim-caption">Both simulations use the same illustrative parameters: $\alpha=0.35$, $\rho=0.04$, $\varepsilon=2$, $n=0.015$, $\delta=0.04$, $g_A=0.015$. The saddle path is computed from the chapter’s dynamic equations. The slider traces the route; its percentage is not a number of years.</p>
+ <div class="section-header"><span class="section-label">Case 2 · More people, same n</span><h3>A one-off population increase: the steady state stays put</h3></div>
+ <p>One million additional workers arrive without bringing capital. $L$ and $AL$ rise, while $K$ and $A$ are initially unchanged. Afterwards, population grows at the <strong>same rate $n$</strong>.</p>
+ <div class="math-display boxed-blue">$$k_{\text{after}}=k^*\frac{L_{\text{before}}}{L_{\text{before}}+1{,}000{,}000}$$</div>
+ <figure class="phase-figure"><a href="images/ramsey-population-level.svg" target="_blank" rel="noopener"><img src="images/ramsey-population-level.svg" alt="Zoom on a one-off population increase: gold arrows show the fall in per-effective-worker ratios and consumption choosing B; green arrows return toward the same steady state E."></a><figcaption>Illustration: $L$ rises from 10 to 11 million, so $k$ falls to $10/11$ of its initial level. The zoom makes this smaller adjustment visible.</figcaption></figure>
+ <ol class="phase-sequence"><li><strong>$k$ falls because the denominator rises.</strong> If total $C$ were held fixed, $c=C/(AL)$ would initially fall in the same proportion: this is the first gold segment.</li><li><strong>Consumption adjusts to $B$ on the unchanged saddle path.</strong> It is a choice, so total $C$ need not remain fixed. Then $k$ and $c$ rise back toward $E$.</li><li><strong>The economy is larger, but long-run $Y/(AL)$ is unchanged.</strong> Output per effective worker returns to $(k^*)^\alpha$. After the transition, total output is larger than without the arrival because there are more effective workers.</li></ol>
+</section>
+<section class="concept-card purple-top phase-section" id="ramsey-population-growth">
+ <div class="section-header"><span class="section-label">Case 3 · Higher n</span><h3>A permanent rise in population growth: a new steady state</h3></div>
+ <p>This is the other case in your notes: <strong>$n$ itself increases permanently.</strong> There need not be an immediate jump in $L$. The change is in its growth rate, a structural parameter entering both dynamic equations.</p>
+ <figure class="phase-figure"><a href="images/ramsey-population-growth.svg" target="_blank" rel="noopener"><img src="images/ramsey-population-growth.svg" alt="A permanent rise in n: the red line moves left and the blue curve moves down, from dashed old curves to solid new curves. Consumption adjusts at unchanged capital from E zero to B; a green saddle-path transition moves down and left toward the new E one."></a><figcaption><strong>Dashed coloured curves: before.</strong> <strong>Solid coloured curves: after.</strong> Green arrows lead to the new steady state $E_1$.</figcaption></figure>
+ <ol class="phase-sequence"><li><strong>The red line moves left.</strong> A higher $n$ requires a higher marginal product for $g_c=0$, hence a lower $k^*$.</li><li><strong>The blue curve shifts down for every $k>0$.</strong> More output is needed to maintain capital per effective worker: $c=k^\alpha-(n+\delta+g_A)k$ is lower. The intersection moves from $E_0$ to $E_1$, with lower $k^*$ and $c^*$.</li><li><strong>The saddle path changes too.</strong> At the instant of this rate change, capital remains at its inherited level; consumption adjusts to $B$ on the new path. Thereafter both $k$ and $c$ decline toward $E_1$. The immediate jump in consumption is distinct from its subsequent decline.</li></ol>
+ <details class="phase-details"><summary>See the steady-state formulas and graph assumptions</summary><div class="math-display">$$k^*=\left[\frac{\alpha}{n+\delta+g_A+\rho}\right]^{1/(1-\alpha)},\qquad c^*=(k^*)^\alpha-(n+\delta+g_A)k^*$$</div><p>All generated graphs are numerical illustrations, not estimated values from the course. They use $\alpha=0.35$, $\rho=0.04$, $\varepsilon=2$, $\delta=0.04$, $g_A=0.015$. Initially $n=0.015$; in case 3 it rises permanently to $0.035$. With this calibration, the immediate consumption adjustment at $B$ is slightly upward; long-run consumption is lower.</p><p>Axes are divided by the initial steady-state values and zoomed around the adjustment; they do not start at zero. The saddle paths are computed from the chapter’s equations.</p></details>
+ <div class="key-note purple"><strong>The conclusion from class</strong><p>A change in the current stock or population level moves the economy’s <em>position</em>. For the steady state itself to change, a <strong>structural parameter entering the steady-state equations</strong> must change. Here, a one-off increase in $L$ leaves $E$ unchanged; a permanent increase in $n$ moves it.</p></div>
 </section>
 
   </div><!-- end main-content -->
@@ -1319,7 +1274,5 @@ if(document.readyState === 'loading'){
 }
 
 </script>
-<script src="js/ramsey-saddle-data.js"></script>
-<script src="js/ramsey-simulations.js"></script>
 </body>
 </html>
