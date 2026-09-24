@@ -378,7 +378,7 @@ body {
     <div class="page-title-block">
       <div class="page-label">Chapter 1b — Neoclassical Growth Model</div>
       <h1>The Ramsey Model</h1>
-      <p>Endogenous saving, CRRA utility, the Hamiltonian, and optimal consumption dynamics.</p>
+      <p>Endogenous saving, preferences, the Hamiltonian, and optimal consumption dynamics.</p>
     </div>
 
     <!-- ═══ CARD 1: MOTIVATION ═══ -->
@@ -431,7 +431,7 @@ body {
       </div>
     </div>
 
-    <!-- ═══ CARD 2: INSTANTANEOUS UTILITY & CRRA ═══ -->
+    <!-- ═══ CARD 2: INSTANTANEOUS UTILITY ═══ -->
     <div class="concept-card purple-top">
       <div class="section-header">
         <span class="section-label" style="background:var(--purple-muted);color:var(--purple-bright);border-color:var(--purple-border);">Part 1 / 4</span>
@@ -444,11 +444,11 @@ body {
       <div class="math-display boxed-purple">$$c = \frac{C}{AL}$$</div>
 
       <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:4px;">
-        The CRRA (Constant Relative Risk Aversion) Utility Function
+        The Instantaneous Utility Function
       </p>
 
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        In the Ramsey model, the instantaneous utility function takes the standard <strong>CRRA functional form</strong>:
+        In the Ramsey model, the <strong>instantaneous utility function</strong> is:
       </p>
 
       <div class="math-display boxed-purple" style="font-size:1.05rem;">
@@ -554,7 +554,7 @@ body {
           <text x="50" y="32" fill="#34d399" font-size="11" font-family="Outfit">slope → ∞</text>
         </svg>
         <span style="font-size:0.8rem;color:var(--text-3);font-style:italic;">
-          The CRRA instantaneous utility function $u(c)$ is strictly increasing ($u'(c) > 0$) and strictly concave ($u''(c) < 0$).
+          The instantaneous utility function $u(c)$ is strictly increasing ($u'(c) > 0$) and strictly concave ($u''(c) < 0$).
         </span>
       </div>
     </div>
@@ -600,11 +600,11 @@ body {
       </div>
 
       <p style="color:var(--text-3);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:12px;">
-        Substituting the Explicit CRRA Utility Function into $W$
+        Substituting the Utility Function into $W$
       </p>
 
       <p style="color:var(--text-2);font-size:0.92rem;line-height:1.65;">
-        Substituting the explicit CRRA form gives the actual intertemporal objective function used in the dynamic problem:
+        Substituting this utility function gives the intertemporal objective used in the dynamic problem:
       </p>
 
       <div class="math-display boxed-blue" style="font-size:1.05rem;">
@@ -931,8 +931,8 @@ body {
         <div class="demo-step">
           <div class="step-num">2</div>
           <div class="step-body">
-            <strong>Substitute the explicit CRRA derivatives:</strong>
-            We know for CRRA utility that:
+            <strong>Substitute the derivatives of the utility function:</strong>
+            For the utility function used here:
             $$u'(c) = c^{-\varepsilon} \quad \text{and} \quad u''(c) = -\varepsilon c^{-\varepsilon-1}$$
             Therefore the ratio $\dfrac{u''(c)}{u'(c)}$ simplifies neatly:
             $$\frac{u''(c)}{u'(c)} = \frac{-\varepsilon c^{-\varepsilon-1}}{c^{-\varepsilon}} = -\frac{\varepsilon}{c}$$
